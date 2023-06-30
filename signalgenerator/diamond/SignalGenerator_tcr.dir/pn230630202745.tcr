@@ -1,0 +1,19 @@
+#Start recording tcl command: 6/30/2023 14:53:52
+#Project Location: C:/Users/Reinhard/Documents/GitHub/LumaCode/signalgenerator/diamond; Project name: SignalGenerator
+prj_project new -name "SignalGenerator" -impl "impl1" -dev LCMXO2-1200HC-5SG32C -synthesis "synplify"
+prj_project save
+prj_src add "C:/Users/Reinhard/Documents/GitHub/LumaCode/signalgenerator/diamond/source/SignalGenerator.vhd"
+prj_src add "C:/Users/Reinhard/Documents/GitHub/LumaCode/signalgenerator/diamond/PLL_21_375.vhd"
+prj_run Map -impl impl1 -task MapTrace
+prj_run Export -impl impl1 -task Jedecgen
+prj_run Export -impl impl1 -task Jedecgen
+prj_run Export -impl impl1 -task Jedecgen
+prj_run Export -impl impl1 -task Jedecgen
+prj_run Export -impl impl1 -task Jedecgen
+prj_run Export -impl impl1 -task Jedecgen
+prj_run Export -impl impl1 -task Jedecgen
+prj_run Export -impl impl1 -task Jedecgen
+prj_run Export -impl impl1 -task Jedecgen
+prj_run Export -impl impl1 -task Jedecgen
+prj_run Export -impl impl1 -task Jedecgen
+#Stop recording: 6/30/2023 20:27:45

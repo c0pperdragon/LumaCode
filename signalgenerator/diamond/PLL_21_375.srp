@@ -1,0 +1,26 @@
+SCUBA, Version Diamond (64-bit) 3.12.1.454
+Fri Jun 30 15:31:07 2023
+
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+Copyright (c) 1995 AT&T Corp.   All rights reserved.
+Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+Copyright (c) 2001 Agere Systems   All rights reserved.
+Copyright (c) 2002-2020 Lattice Semiconductor Corporation,  All rights reserved.
+
+    Issued command   : C:\lscc\diamond\3.12\ispfpga\bin\nt64\scuba.exe -w -n PLL_21_375 -lang vhdl -synth synplify -arch xo2c00 -type pll -fin 80.0 -fclkop 21.375 -fclkop_tol 5.0 -trimp 0 -phasep 0 -trimp_r -phase_cntl STATIC -fb_mode 1 
+    Circuit name     : PLL_21_375
+    Module type      : pll
+    Module Version   : 5.7
+    Ports            : 
+	Inputs       : CLKI
+	Outputs      : CLKOP
+    I/O buffer       : not inserted
+    EDIF output      : PLL_21_375.edn
+    VHDL output      : PLL_21_375.vhd
+    VHDL template    : PLL_21_375_tmpl.vhd
+    VHDL purpose     : for synthesis and simulation
+    Bus notation     : big endian
+    Report output    : PLL_21_375.srp
+    Element Usage    :
+        EHXPLLJ : 1
+    Estimated Resource Usage:
