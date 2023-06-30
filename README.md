@@ -3,4 +3,4 @@ Definition of the "LumaCode" signal standard and documentation of various implem
 
 * [Documentation wiki](https://github.com/c0pperdragon/LumaCode/wiki)
 * [Issue tracking](https://github.com/c0pperdragon/LumaCode/issues)
-* [Reference implementation][i8088](signalgenerator)
+* [Reference implementation](signalgenerator)
