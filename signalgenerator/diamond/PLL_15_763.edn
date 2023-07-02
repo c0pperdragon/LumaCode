@@ -1,12 +1,12 @@
-(edif PLL_21_375
+(edif PLL_15_763
   (edifVersion 2 0 0)
   (edifLevel 0)
   (keywordMap (keywordLevel 0))
   (status
     (written
-      (timestamp 2023 6 30 15 31 7)
+      (timestamp 2023 7 2 12 59 37)
       (program "SCUBA" (version "Diamond (64-bit) 3.12.1.454"))))
-      (comment "C:\lscc\diamond\3.12\ispfpga\bin\nt64\scuba.exe -w -n PLL_21_375 -lang vhdl -synth synplify -arch xo2c00 -type pll -fin 80.0 -fclkop 21.375 -fclkop_tol 5.0 -trimp 0 -phasep 0 -trimp_r -phase_cntl STATIC -fb_mode 1 ")
+      (comment "C:\lscc\diamond\3.12\ispfpga\bin\nt64\scuba.exe -w -n PLL_15_763 -lang vhdl -synth synplify -arch xo2c00 -type pll -fin 80 -mdiv 8 -ndiv 1 -trimp 0 -phasep 0 -trimp_r -adiv 41 -trims 0 -phases 0 -trims_r -bdiv 26 -phase_cntl STATIC -fb_mode 1 -wb ")
   (library ORCLIB
     (edifLevel 0)
     (technology
@@ -127,14 +127,68 @@
             (direction OUTPUT))
           (port PLLDATO0
             (direction OUTPUT)))))
-    (cell PLL_21_375
+    (cell PLL_15_763
       (cellType GENERIC)
       (view view1
         (viewType NETLIST)
         (interface
           (port CLKI
             (direction INPUT))
+          (port PLLCLK
+            (direction INPUT))
+          (port PLLRST
+            (direction INPUT))
+          (port PLLSTB
+            (direction INPUT))
+          (port PLLWE
+            (direction INPUT))
+          (port (rename PLLDATI0 "PLLDATI(0)")
+            (direction INPUT))
+          (port (rename PLLDATI1 "PLLDATI(1)")
+            (direction INPUT))
+          (port (rename PLLDATI2 "PLLDATI(2)")
+            (direction INPUT))
+          (port (rename PLLDATI3 "PLLDATI(3)")
+            (direction INPUT))
+          (port (rename PLLDATI4 "PLLDATI(4)")
+            (direction INPUT))
+          (port (rename PLLDATI5 "PLLDATI(5)")
+            (direction INPUT))
+          (port (rename PLLDATI6 "PLLDATI(6)")
+            (direction INPUT))
+          (port (rename PLLDATI7 "PLLDATI(7)")
+            (direction INPUT))
+          (port (rename PLLADDR0 "PLLADDR(0)")
+            (direction INPUT))
+          (port (rename PLLADDR1 "PLLADDR(1)")
+            (direction INPUT))
+          (port (rename PLLADDR2 "PLLADDR(2)")
+            (direction INPUT))
+          (port (rename PLLADDR3 "PLLADDR(3)")
+            (direction INPUT))
+          (port (rename PLLADDR4 "PLLADDR(4)")
+            (direction INPUT))
           (port CLKOP
+            (direction OUTPUT))
+          (port CLKOS
+            (direction OUTPUT))
+          (port (rename PLLDATO0 "PLLDATO(0)")
+            (direction OUTPUT))
+          (port (rename PLLDATO1 "PLLDATO(1)")
+            (direction OUTPUT))
+          (port (rename PLLDATO2 "PLLDATO(2)")
+            (direction OUTPUT))
+          (port (rename PLLDATO3 "PLLDATO(3)")
+            (direction OUTPUT))
+          (port (rename PLLDATO4 "PLLDATO(4)")
+            (direction OUTPUT))
+          (port (rename PLLDATO5 "PLLDATO(5)")
+            (direction OUTPUT))
+          (port (rename PLLDATO6 "PLLDATO(6)")
+            (direction OUTPUT))
+          (port (rename PLLDATO7 "PLLDATO(7)")
+            (direction OUTPUT))
+          (port PLLACK
             (direction OUTPUT)))
         (property NGD_DRC_MASK (integer 1))
         (contents
@@ -159,7 +213,7 @@
             (property DPHASE_SOURCE
               (string "DISABLED"))
             (property PLL_USE_WB
-              (string "DISABLED"))
+              (string "ENABLED"))
             (property CLKOS3_FPHASE
               (string "0"))
             (property CLKOS3_CPHASE
@@ -171,17 +225,17 @@
             (property CLKOS_FPHASE
               (string "0"))
             (property CLKOS_CPHASE
-              (string "0"))
+              (string "25"))
             (property CLKOP_FPHASE
               (string "0"))
             (property CLKOP_CPHASE
-              (string "23"))
+              (string "40"))
             (property PLL_LOCK_MODE
               (string "0"))
             (property CLKOS_TRIM_DELAY
               (string "0"))
             (property CLKOS_TRIM_POL
-              (string "FALLING"))
+              (string "RISING"))
             (property CLKOP_TRIM_DELAY
               (string "0"))
             (property CLKOP_TRIM_POL
@@ -206,6 +260,8 @@
               (string "DISABLED"))
             (property CLKOS2_ENABLE
               (string "DISABLED"))
+            (property FREQUENCY_PIN_CLKOS
+              (string "15.769231"))
             (property OUTDIVIDER_MUXB2
               (string "DIVB"))
             (property PREDIVIDER_MUXB1
@@ -213,9 +269,9 @@
             (property VCO_BYPASS_B0
               (string "DISABLED"))
             (property CLKOS_ENABLE
-              (string "DISABLED"))
+              (string "ENABLED"))
             (property FREQUENCY_PIN_CLKOP
-              (string "21.818182"))
+              (string "10.000000"))
             (property OUTDIVIDER_MUXA2
               (string "DIVA"))
             (property PREDIVIDER_MUXA1
@@ -227,7 +283,7 @@
             (property FREQUENCY_PIN_CLKI
               (string "80.000000"))
             (property ICP_CURRENT
-              (string "8"))
+              (string "6"))
             (property LPF_RESISTOR
               (string "8"))
             (property CLKOS3_DIV
@@ -235,13 +291,13 @@
             (property CLKOS2_DIV
               (string "1"))
             (property CLKOS_DIV
-              (string "1"))
+              (string "26"))
             (property CLKOP_DIV
-              (string "24"))
+              (string "41"))
             (property CLKFB_DIV
-              (string "3"))
+              (string "1"))
             (property CLKI_DIV
-              (string "11"))
+              (string "8"))
             (property FEEDBK_PATH
               (string "CLKOP")))
           (net LOCK
@@ -250,23 +306,6 @@
           (net scuba_vlo
             (joined
               (portRef Z (instanceRef scuba_vlo_inst))
-              (portRef PLLADDR4 (instanceRef PLLInst_0))
-              (portRef PLLADDR3 (instanceRef PLLInst_0))
-              (portRef PLLADDR2 (instanceRef PLLInst_0))
-              (portRef PLLADDR1 (instanceRef PLLInst_0))
-              (portRef PLLADDR0 (instanceRef PLLInst_0))
-              (portRef PLLDATI7 (instanceRef PLLInst_0))
-              (portRef PLLDATI6 (instanceRef PLLInst_0))
-              (portRef PLLDATI5 (instanceRef PLLInst_0))
-              (portRef PLLDATI4 (instanceRef PLLInst_0))
-              (portRef PLLDATI3 (instanceRef PLLInst_0))
-              (portRef PLLDATI2 (instanceRef PLLInst_0))
-              (portRef PLLDATI1 (instanceRef PLLInst_0))
-              (portRef PLLDATI0 (instanceRef PLLInst_0))
-              (portRef PLLWE (instanceRef PLLInst_0))
-              (portRef PLLSTB (instanceRef PLLInst_0))
-              (portRef PLLRST (instanceRef PLLInst_0))
-              (portRef PLLCLK (instanceRef PLLInst_0))
               (portRef ENCLKOS3 (instanceRef PLLInst_0))
               (portRef ENCLKOS2 (instanceRef PLLInst_0))
               (portRef ENCLKOS (instanceRef PLLInst_0))
@@ -282,16 +321,124 @@
               (portRef PHASEDIR (instanceRef PLLInst_0))
               (portRef PHASESEL1 (instanceRef PLLInst_0))
               (portRef PHASESEL0 (instanceRef PLLInst_0))))
+          (net PLLACK
+            (joined
+              (portRef PLLACK)
+              (portRef PLLACK (instanceRef PLLInst_0))))
+          (net PLLDATO7
+            (joined
+              (portRef PLLDATO7)
+              (portRef PLLDATO7 (instanceRef PLLInst_0))))
+          (net PLLDATO6
+            (joined
+              (portRef PLLDATO6)
+              (portRef PLLDATO6 (instanceRef PLLInst_0))))
+          (net PLLDATO5
+            (joined
+              (portRef PLLDATO5)
+              (portRef PLLDATO5 (instanceRef PLLInst_0))))
+          (net PLLDATO4
+            (joined
+              (portRef PLLDATO4)
+              (portRef PLLDATO4 (instanceRef PLLInst_0))))
+          (net PLLDATO3
+            (joined
+              (portRef PLLDATO3)
+              (portRef PLLDATO3 (instanceRef PLLInst_0))))
+          (net PLLDATO2
+            (joined
+              (portRef PLLDATO2)
+              (portRef PLLDATO2 (instanceRef PLLInst_0))))
+          (net PLLDATO1
+            (joined
+              (portRef PLLDATO1)
+              (portRef PLLDATO1 (instanceRef PLLInst_0))))
+          (net PLLDATO0
+            (joined
+              (portRef PLLDATO0)
+              (portRef PLLDATO0 (instanceRef PLLInst_0))))
+          (net CLKOS
+            (joined
+              (portRef CLKOS)
+              (portRef CLKOS (instanceRef PLLInst_0))))
           (net CLKOP
             (joined
               (portRef CLKOP)
               (portRef CLKFB (instanceRef PLLInst_0))
               (portRef CLKOP (instanceRef PLLInst_0))))
+          (net PLLADDR4
+            (joined
+              (portRef PLLADDR4)
+              (portRef PLLADDR4 (instanceRef PLLInst_0))))
+          (net PLLADDR3
+            (joined
+              (portRef PLLADDR3)
+              (portRef PLLADDR3 (instanceRef PLLInst_0))))
+          (net PLLADDR2
+            (joined
+              (portRef PLLADDR2)
+              (portRef PLLADDR2 (instanceRef PLLInst_0))))
+          (net PLLADDR1
+            (joined
+              (portRef PLLADDR1)
+              (portRef PLLADDR1 (instanceRef PLLInst_0))))
+          (net PLLADDR0
+            (joined
+              (portRef PLLADDR0)
+              (portRef PLLADDR0 (instanceRef PLLInst_0))))
+          (net PLLDATI7
+            (joined
+              (portRef PLLDATI7)
+              (portRef PLLDATI7 (instanceRef PLLInst_0))))
+          (net PLLDATI6
+            (joined
+              (portRef PLLDATI6)
+              (portRef PLLDATI6 (instanceRef PLLInst_0))))
+          (net PLLDATI5
+            (joined
+              (portRef PLLDATI5)
+              (portRef PLLDATI5 (instanceRef PLLInst_0))))
+          (net PLLDATI4
+            (joined
+              (portRef PLLDATI4)
+              (portRef PLLDATI4 (instanceRef PLLInst_0))))
+          (net PLLDATI3
+            (joined
+              (portRef PLLDATI3)
+              (portRef PLLDATI3 (instanceRef PLLInst_0))))
+          (net PLLDATI2
+            (joined
+              (portRef PLLDATI2)
+              (portRef PLLDATI2 (instanceRef PLLInst_0))))
+          (net PLLDATI1
+            (joined
+              (portRef PLLDATI1)
+              (portRef PLLDATI1 (instanceRef PLLInst_0))))
+          (net PLLDATI0
+            (joined
+              (portRef PLLDATI0)
+              (portRef PLLDATI0 (instanceRef PLLInst_0))))
+          (net PLLWE
+            (joined
+              (portRef PLLWE)
+              (portRef PLLWE (instanceRef PLLInst_0))))
+          (net PLLSTB
+            (joined
+              (portRef PLLSTB)
+              (portRef PLLSTB (instanceRef PLLInst_0))))
+          (net PLLRST
+            (joined
+              (portRef PLLRST)
+              (portRef PLLRST (instanceRef PLLInst_0))))
+          (net PLLCLK
+            (joined
+              (portRef PLLCLK)
+              (portRef PLLCLK (instanceRef PLLInst_0))))
           (net CLKI
             (joined
               (portRef CLKI)
               (portRef CLKI (instanceRef PLLInst_0))))))))
-  (design PLL_21_375
-    (cellRef PLL_21_375
+  (design PLL_15_763
+    (cellRef PLL_15_763
       (libraryRef ORCLIB)))
 )

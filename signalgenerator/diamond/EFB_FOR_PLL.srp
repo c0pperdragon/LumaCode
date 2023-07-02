@@ -1,0 +1,26 @@
+SCUBA, Version Diamond (64-bit) 3.12.1.454
+Sun Jul 02 12:26:27 2023
+
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+Copyright (c) 1995 AT&T Corp.   All rights reserved.
+Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+Copyright (c) 2001 Agere Systems   All rights reserved.
+Copyright (c) 2002-2020 Lattice Semiconductor Corporation,  All rights reserved.
+
+    Issued command   : C:\lscc\diamond\3.12\ispfpga\bin\nt64\scuba.exe -w -n EFB_FOR_PLL -lang vhdl -synth synplify -bus_exp 7 -bb -type efb -arch xo2c00 -freq 50 -pll1 -wb -dev 1200 
+    Circuit name     : EFB_FOR_PLL
+    Module type      : efb
+    Module Version   : 1.2
+    Ports            : 
+	Inputs       : wb_clk_i, wb_rst_i, wb_cyc_i, wb_stb_i, wb_we_i, wb_adr_i[7:0], wb_dat_i[7:0], pll0_bus_i[8:0]
+	Outputs      : wb_dat_o[7:0], wb_ack_o, pll0_bus_o[16:0]
+    I/O buffer       : not inserted
+    EDIF output      : EFB_FOR_PLL.edn
+    VHDL output      : EFB_FOR_PLL.vhd
+    VHDL template    : EFB_FOR_PLL_tmpl.vhd
+    VHDL purpose     : for synthesis and simulation
+    Bus notation     : big endian
+    Report output    : EFB_FOR_PLL.srp
+    Element Usage    :
+            EFB : 1
+    Estimated Resource Usage:

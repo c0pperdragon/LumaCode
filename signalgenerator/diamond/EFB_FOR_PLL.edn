@@ -1,0 +1,643 @@
+(edif EFB_FOR_PLL
+  (edifVersion 2 0 0)
+  (edifLevel 0)
+  (keywordMap (keywordLevel 0))
+  (status
+    (written
+      (timestamp 2023 7 2 12 26 27)
+      (program "SCUBA" (version "Diamond (64-bit) 3.12.1.454"))))
+      (comment "C:\lscc\diamond\3.12\ispfpga\bin\nt64\scuba.exe -w -n EFB_FOR_PLL -lang vhdl -synth synplify -bus_exp 7 -bb -type efb -arch xo2c00 -freq 50 -pll1 -wb -dev 1200 ")
+  (library ORCLIB
+    (edifLevel 0)
+    (technology
+      (numberDefinition))
+    (cell VHI
+      (cellType GENERIC)
+      (view view1
+        (viewType NETLIST)
+        (interface
+          (port Z
+            (direction OUTPUT)))))
+    (cell VLO
+      (cellType GENERIC)
+      (view view1
+        (viewType NETLIST)
+        (interface
+          (port Z
+            (direction OUTPUT)))))
+    (cell EFB
+      (cellType GENERIC)
+      (view view1
+        (viewType NETLIST)
+        (interface
+          (port WBCLKI
+            (direction INPUT))
+          (port WBRSTI
+            (direction INPUT))
+          (port WBCYCI
+            (direction INPUT))
+          (port WBSTBI
+            (direction INPUT))
+          (port WBWEI
+            (direction INPUT))
+          (port WBADRI7
+            (direction INPUT))
+          (port WBADRI6
+            (direction INPUT))
+          (port WBADRI5
+            (direction INPUT))
+          (port WBADRI4
+            (direction INPUT))
+          (port WBADRI3
+            (direction INPUT))
+          (port WBADRI2
+            (direction INPUT))
+          (port WBADRI1
+            (direction INPUT))
+          (port WBADRI0
+            (direction INPUT))
+          (port WBDATI7
+            (direction INPUT))
+          (port WBDATI6
+            (direction INPUT))
+          (port WBDATI5
+            (direction INPUT))
+          (port WBDATI4
+            (direction INPUT))
+          (port WBDATI3
+            (direction INPUT))
+          (port WBDATI2
+            (direction INPUT))
+          (port WBDATI1
+            (direction INPUT))
+          (port WBDATI0
+            (direction INPUT))
+          (port PLL0DATI7
+            (direction INPUT))
+          (port PLL0DATI6
+            (direction INPUT))
+          (port PLL0DATI5
+            (direction INPUT))
+          (port PLL0DATI4
+            (direction INPUT))
+          (port PLL0DATI3
+            (direction INPUT))
+          (port PLL0DATI2
+            (direction INPUT))
+          (port PLL0DATI1
+            (direction INPUT))
+          (port PLL0DATI0
+            (direction INPUT))
+          (port PLL0ACKI
+            (direction INPUT))
+          (port PLL1DATI7
+            (direction INPUT))
+          (port PLL1DATI6
+            (direction INPUT))
+          (port PLL1DATI5
+            (direction INPUT))
+          (port PLL1DATI4
+            (direction INPUT))
+          (port PLL1DATI3
+            (direction INPUT))
+          (port PLL1DATI2
+            (direction INPUT))
+          (port PLL1DATI1
+            (direction INPUT))
+          (port PLL1DATI0
+            (direction INPUT))
+          (port PLL1ACKI
+            (direction INPUT))
+          (port I2C1SCLI
+            (direction INPUT))
+          (port I2C1SDAI
+            (direction INPUT))
+          (port I2C2SCLI
+            (direction INPUT))
+          (port I2C2SDAI
+            (direction INPUT))
+          (port SPISCKI
+            (direction INPUT))
+          (port SPIMISOI
+            (direction INPUT))
+          (port SPIMOSII
+            (direction INPUT))
+          (port SPISCSN
+            (direction INPUT))
+          (port TCCLKI
+            (direction INPUT))
+          (port TCRSTN
+            (direction INPUT))
+          (port TCIC
+            (direction INPUT))
+          (port UFMSN
+            (direction INPUT))
+          (port WBDATO7
+            (direction OUTPUT))
+          (port WBDATO6
+            (direction OUTPUT))
+          (port WBDATO5
+            (direction OUTPUT))
+          (port WBDATO4
+            (direction OUTPUT))
+          (port WBDATO3
+            (direction OUTPUT))
+          (port WBDATO2
+            (direction OUTPUT))
+          (port WBDATO1
+            (direction OUTPUT))
+          (port WBDATO0
+            (direction OUTPUT))
+          (port WBACKO
+            (direction OUTPUT))
+          (port PLLCLKO
+            (direction OUTPUT))
+          (port PLLRSTO
+            (direction OUTPUT))
+          (port PLL0STBO
+            (direction OUTPUT))
+          (port PLL1STBO
+            (direction OUTPUT))
+          (port PLLWEO
+            (direction OUTPUT))
+          (port PLLADRO4
+            (direction OUTPUT))
+          (port PLLADRO3
+            (direction OUTPUT))
+          (port PLLADRO2
+            (direction OUTPUT))
+          (port PLLADRO1
+            (direction OUTPUT))
+          (port PLLADRO0
+            (direction OUTPUT))
+          (port PLLDATO7
+            (direction OUTPUT))
+          (port PLLDATO6
+            (direction OUTPUT))
+          (port PLLDATO5
+            (direction OUTPUT))
+          (port PLLDATO4
+            (direction OUTPUT))
+          (port PLLDATO3
+            (direction OUTPUT))
+          (port PLLDATO2
+            (direction OUTPUT))
+          (port PLLDATO1
+            (direction OUTPUT))
+          (port PLLDATO0
+            (direction OUTPUT))
+          (port I2C1SCLO
+            (direction OUTPUT))
+          (port I2C1SCLOEN
+            (direction OUTPUT))
+          (port I2C1SDAO
+            (direction OUTPUT))
+          (port I2C1SDAOEN
+            (direction OUTPUT))
+          (port I2C2SCLO
+            (direction OUTPUT))
+          (port I2C2SCLOEN
+            (direction OUTPUT))
+          (port I2C2SDAO
+            (direction OUTPUT))
+          (port I2C2SDAOEN
+            (direction OUTPUT))
+          (port I2C1IRQO
+            (direction OUTPUT))
+          (port I2C2IRQO
+            (direction OUTPUT))
+          (port SPISCKO
+            (direction OUTPUT))
+          (port SPISCKEN
+            (direction OUTPUT))
+          (port SPIMISOO
+            (direction OUTPUT))
+          (port SPIMISOEN
+            (direction OUTPUT))
+          (port SPIMOSIO
+            (direction OUTPUT))
+          (port SPIMOSIEN
+            (direction OUTPUT))
+          (port SPIMCSN7
+            (direction OUTPUT))
+          (port SPIMCSN6
+            (direction OUTPUT))
+          (port SPIMCSN5
+            (direction OUTPUT))
+          (port SPIMCSN4
+            (direction OUTPUT))
+          (port SPIMCSN3
+            (direction OUTPUT))
+          (port SPIMCSN2
+            (direction OUTPUT))
+          (port SPIMCSN1
+            (direction OUTPUT))
+          (port SPIMCSN0
+            (direction OUTPUT))
+          (port SPICSNEN
+            (direction OUTPUT))
+          (port SPIIRQO
+            (direction OUTPUT))
+          (port TCINT
+            (direction OUTPUT))
+          (port TCOC
+            (direction OUTPUT))
+          (port WBCUFMIRQ
+            (direction OUTPUT))
+          (port CFGWAKE
+            (direction OUTPUT))
+          (port CFGSTDBY
+            (direction OUTPUT)))))
+    (cell EFB_FOR_PLL
+      (cellType GENERIC)
+      (view view1
+        (viewType NETLIST)
+        (interface
+          (port wb_clk_i
+            (direction INPUT))
+          (port wb_rst_i
+            (direction INPUT))
+          (port wb_cyc_i
+            (direction INPUT))
+          (port wb_stb_i
+            (direction INPUT))
+          (port wb_we_i
+            (direction INPUT))
+          (port (array (rename wb_adr_i "wb_adr_i(7:0)") 8)
+            (direction INPUT))
+          (port (array (rename wb_dat_i "wb_dat_i(7:0)") 8)
+            (direction INPUT))
+          (port (array (rename wb_dat_o "wb_dat_o(7:0)") 8)
+            (direction OUTPUT))
+          (port wb_ack_o
+            (direction OUTPUT))
+          (port (array (rename pll0_bus_i "pll0_bus_i(8:0)") 9)
+            (direction INPUT))
+          (port (array (rename pll0_bus_o "pll0_bus_o(16:0)") 17)
+            (direction OUTPUT)))
+        (property NGD_DRC_MASK (integer 1))
+        (contents
+          (instance scuba_vhi_inst
+            (viewRef view1 
+              (cellRef VHI)))
+          (instance scuba_vlo_inst
+            (viewRef view1 
+              (cellRef VLO)))
+          (instance EFBInst_0
+            (viewRef view1 
+              (cellRef EFB))
+            (property UFM_INIT_FILE_FORMAT
+              (string "HEX"))
+            (property UFM_INIT_FILE_NAME
+              (string "NONE"))
+            (property UFM_INIT_ALL_ZEROS
+              (string "ENABLED"))
+            (property UFM_INIT_START_PAGE
+              (string "0"))
+            (property UFM_INIT_PAGES
+              (string "0"))
+            (property DEV_DENSITY
+              (string "1200L"))
+            (property EFB_UFM
+              (string "DISABLED"))
+            (property TC_ICAPTURE
+              (string "DISABLED"))
+            (property TC_OVERFLOW
+              (string "DISABLED"))
+            (property TC_ICR_INT
+              (string "OFF"))
+            (property TC_OCR_INT
+              (string "OFF"))
+            (property TC_OV_INT
+              (string "OFF"))
+            (property TC_TOP_SEL
+              (string "OFF"))
+            (property TC_RESETN
+              (string "ENABLED"))
+            (property TC_OC_MODE
+              (string "TOGGLE"))
+            (property TC_OCR_SET
+              (string "32767"))
+            (property TC_TOP_SET
+              (string "65535"))
+            (property GSR
+              (string "ENABLED"))
+            (property TC_CCLK_SEL
+              (string "1"))
+            (property TC_MODE
+              (string "CTCM"))
+            (property TC_SCLK_SEL
+              (string "PCLOCK"))
+            (property EFB_TC_PORTMODE
+              (string "WB"))
+            (property EFB_TC
+              (string "DISABLED"))
+            (property SPI_WAKEUP
+              (string "DISABLED"))
+            (property SPI_INTR_RXOVR
+              (string "DISABLED"))
+            (property SPI_INTR_TXOVR
+              (string "DISABLED"))
+            (property SPI_INTR_RXRDY
+              (string "DISABLED"))
+            (property SPI_INTR_TXRDY
+              (string "DISABLED"))
+            (property SPI_SLAVE_HANDSHAKE
+              (string "DISABLED"))
+            (property SPI_PHASE_ADJ
+              (string "DISABLED"))
+            (property SPI_CLK_INV
+              (string "DISABLED"))
+            (property SPI_LSB_FIRST
+              (string "DISABLED"))
+            (property SPI_CLK_DIVIDER
+              (string "1"))
+            (property SPI_MODE
+              (string "MASTER"))
+            (property EFB_SPI
+              (string "DISABLED"))
+            (property I2C2_WAKEUP
+              (string "DISABLED"))
+            (property I2C2_GEN_CALL
+              (string "DISABLED"))
+            (property I2C2_CLK_DIVIDER
+              (string "1"))
+            (property I2C2_BUS_PERF
+              (string "100kHz"))
+            (property I2C2_SLAVE_ADDR
+              (string "0b1000010"))
+            (property I2C2_ADDRESSING
+              (string "7BIT"))
+            (property EFB_I2C2
+              (string "DISABLED"))
+            (property I2C1_WAKEUP
+              (string "DISABLED"))
+            (property I2C1_GEN_CALL
+              (string "DISABLED"))
+            (property I2C1_CLK_DIVIDER
+              (string "1"))
+            (property I2C1_BUS_PERF
+              (string "100kHz"))
+            (property I2C1_SLAVE_ADDR
+              (string "0b1000001"))
+            (property I2C1_ADDRESSING
+              (string "7BIT"))
+            (property EFB_I2C1
+              (string "DISABLED"))
+            (property EFB_WB_CLK_FREQ
+              (string "50.0")))
+          (net scuba_vhi
+            (joined
+              (portRef Z (instanceRef scuba_vhi_inst))
+              (portRef UFMSN (instanceRef EFBInst_0))))
+          (net scuba_vlo
+            (joined
+              (portRef Z (instanceRef scuba_vlo_inst))
+              (portRef PLL1DATI7 (instanceRef EFBInst_0))
+              (portRef PLL1DATI6 (instanceRef EFBInst_0))
+              (portRef PLL1DATI5 (instanceRef EFBInst_0))
+              (portRef PLL1DATI4 (instanceRef EFBInst_0))
+              (portRef PLL1DATI3 (instanceRef EFBInst_0))
+              (portRef PLL1DATI2 (instanceRef EFBInst_0))
+              (portRef PLL1DATI1 (instanceRef EFBInst_0))
+              (portRef PLL1DATI0 (instanceRef EFBInst_0))
+              (portRef PLL1ACKI (instanceRef EFBInst_0))
+              (portRef TCIC (instanceRef EFBInst_0))
+              (portRef TCRSTN (instanceRef EFBInst_0))
+              (portRef TCCLKI (instanceRef EFBInst_0))
+              (portRef SPISCSN (instanceRef EFBInst_0))
+              (portRef SPIMOSII (instanceRef EFBInst_0))
+              (portRef SPIMISOI (instanceRef EFBInst_0))
+              (portRef SPISCKI (instanceRef EFBInst_0))
+              (portRef I2C2SDAI (instanceRef EFBInst_0))
+              (portRef I2C2SCLI (instanceRef EFBInst_0))
+              (portRef I2C1SDAI (instanceRef EFBInst_0))
+              (portRef I2C1SCLI (instanceRef EFBInst_0))))
+          (net pll0_bus_o16
+            (joined
+              (portRef (member pll0_bus_o 0))
+              (portRef PLLCLKO (instanceRef EFBInst_0))))
+          (net pll0_bus_o15
+            (joined
+              (portRef (member pll0_bus_o 1))
+              (portRef PLLRSTO (instanceRef EFBInst_0))))
+          (net pll0_bus_o14
+            (joined
+              (portRef (member pll0_bus_o 2))
+              (portRef PLL0STBO (instanceRef EFBInst_0))))
+          (net pll0_bus_o13
+            (joined
+              (portRef (member pll0_bus_o 3))
+              (portRef PLLWEO (instanceRef EFBInst_0))))
+          (net pll0_bus_o12
+            (joined
+              (portRef (member pll0_bus_o 4))
+              (portRef PLLADRO4 (instanceRef EFBInst_0))))
+          (net pll0_bus_o11
+            (joined
+              (portRef (member pll0_bus_o 5))
+              (portRef PLLADRO3 (instanceRef EFBInst_0))))
+          (net pll0_bus_o10
+            (joined
+              (portRef (member pll0_bus_o 6))
+              (portRef PLLADRO2 (instanceRef EFBInst_0))))
+          (net pll0_bus_o9
+            (joined
+              (portRef (member pll0_bus_o 7))
+              (portRef PLLADRO1 (instanceRef EFBInst_0))))
+          (net pll0_bus_o8
+            (joined
+              (portRef (member pll0_bus_o 8))
+              (portRef PLLADRO0 (instanceRef EFBInst_0))))
+          (net pll0_bus_o7
+            (joined
+              (portRef (member pll0_bus_o 9))
+              (portRef PLLDATO7 (instanceRef EFBInst_0))))
+          (net pll0_bus_o6
+            (joined
+              (portRef (member pll0_bus_o 10))
+              (portRef PLLDATO6 (instanceRef EFBInst_0))))
+          (net pll0_bus_o5
+            (joined
+              (portRef (member pll0_bus_o 11))
+              (portRef PLLDATO5 (instanceRef EFBInst_0))))
+          (net pll0_bus_o4
+            (joined
+              (portRef (member pll0_bus_o 12))
+              (portRef PLLDATO4 (instanceRef EFBInst_0))))
+          (net pll0_bus_o3
+            (joined
+              (portRef (member pll0_bus_o 13))
+              (portRef PLLDATO3 (instanceRef EFBInst_0))))
+          (net pll0_bus_o2
+            (joined
+              (portRef (member pll0_bus_o 14))
+              (portRef PLLDATO2 (instanceRef EFBInst_0))))
+          (net pll0_bus_o1
+            (joined
+              (portRef (member pll0_bus_o 15))
+              (portRef PLLDATO1 (instanceRef EFBInst_0))))
+          (net pll0_bus_o0
+            (joined
+              (portRef (member pll0_bus_o 16))
+              (portRef PLLDATO0 (instanceRef EFBInst_0))))
+          (net pll0_bus_i8
+            (joined
+              (portRef (member pll0_bus_i 0))
+              (portRef PLL0DATI7 (instanceRef EFBInst_0))))
+          (net pll0_bus_i7
+            (joined
+              (portRef (member pll0_bus_i 1))
+              (portRef PLL0DATI6 (instanceRef EFBInst_0))))
+          (net pll0_bus_i6
+            (joined
+              (portRef (member pll0_bus_i 2))
+              (portRef PLL0DATI5 (instanceRef EFBInst_0))))
+          (net pll0_bus_i5
+            (joined
+              (portRef (member pll0_bus_i 3))
+              (portRef PLL0DATI4 (instanceRef EFBInst_0))))
+          (net pll0_bus_i4
+            (joined
+              (portRef (member pll0_bus_i 4))
+              (portRef PLL0DATI3 (instanceRef EFBInst_0))))
+          (net pll0_bus_i3
+            (joined
+              (portRef (member pll0_bus_i 5))
+              (portRef PLL0DATI2 (instanceRef EFBInst_0))))
+          (net pll0_bus_i2
+            (joined
+              (portRef (member pll0_bus_i 6))
+              (portRef PLL0DATI1 (instanceRef EFBInst_0))))
+          (net pll0_bus_i1
+            (joined
+              (portRef (member pll0_bus_i 7))
+              (portRef PLL0DATI0 (instanceRef EFBInst_0))))
+          (net pll0_bus_i0
+            (joined
+              (portRef (member pll0_bus_i 8))
+              (portRef PLL0ACKI (instanceRef EFBInst_0))))
+          (net wb_ack_o
+            (joined
+              (portRef wb_ack_o)
+              (portRef WBACKO (instanceRef EFBInst_0))))
+          (net wb_dat_o7
+            (joined
+              (portRef (member wb_dat_o 0))
+              (portRef WBDATO7 (instanceRef EFBInst_0))))
+          (net wb_dat_o6
+            (joined
+              (portRef (member wb_dat_o 1))
+              (portRef WBDATO6 (instanceRef EFBInst_0))))
+          (net wb_dat_o5
+            (joined
+              (portRef (member wb_dat_o 2))
+              (portRef WBDATO5 (instanceRef EFBInst_0))))
+          (net wb_dat_o4
+            (joined
+              (portRef (member wb_dat_o 3))
+              (portRef WBDATO4 (instanceRef EFBInst_0))))
+          (net wb_dat_o3
+            (joined
+              (portRef (member wb_dat_o 4))
+              (portRef WBDATO3 (instanceRef EFBInst_0))))
+          (net wb_dat_o2
+            (joined
+              (portRef (member wb_dat_o 5))
+              (portRef WBDATO2 (instanceRef EFBInst_0))))
+          (net wb_dat_o1
+            (joined
+              (portRef (member wb_dat_o 6))
+              (portRef WBDATO1 (instanceRef EFBInst_0))))
+          (net wb_dat_o0
+            (joined
+              (portRef (member wb_dat_o 7))
+              (portRef WBDATO0 (instanceRef EFBInst_0))))
+          (net wb_dat_i7
+            (joined
+              (portRef (member wb_dat_i 0))
+              (portRef WBDATI7 (instanceRef EFBInst_0))))
+          (net wb_dat_i6
+            (joined
+              (portRef (member wb_dat_i 1))
+              (portRef WBDATI6 (instanceRef EFBInst_0))))
+          (net wb_dat_i5
+            (joined
+              (portRef (member wb_dat_i 2))
+              (portRef WBDATI5 (instanceRef EFBInst_0))))
+          (net wb_dat_i4
+            (joined
+              (portRef (member wb_dat_i 3))
+              (portRef WBDATI4 (instanceRef EFBInst_0))))
+          (net wb_dat_i3
+            (joined
+              (portRef (member wb_dat_i 4))
+              (portRef WBDATI3 (instanceRef EFBInst_0))))
+          (net wb_dat_i2
+            (joined
+              (portRef (member wb_dat_i 5))
+              (portRef WBDATI2 (instanceRef EFBInst_0))))
+          (net wb_dat_i1
+            (joined
+              (portRef (member wb_dat_i 6))
+              (portRef WBDATI1 (instanceRef EFBInst_0))))
+          (net wb_dat_i0
+            (joined
+              (portRef (member wb_dat_i 7))
+              (portRef WBDATI0 (instanceRef EFBInst_0))))
+          (net wb_adr_i7
+            (joined
+              (portRef (member wb_adr_i 0))
+              (portRef WBADRI7 (instanceRef EFBInst_0))))
+          (net wb_adr_i6
+            (joined
+              (portRef (member wb_adr_i 1))
+              (portRef WBADRI6 (instanceRef EFBInst_0))))
+          (net wb_adr_i5
+            (joined
+              (portRef (member wb_adr_i 2))
+              (portRef WBADRI5 (instanceRef EFBInst_0))))
+          (net wb_adr_i4
+            (joined
+              (portRef (member wb_adr_i 3))
+              (portRef WBADRI4 (instanceRef EFBInst_0))))
+          (net wb_adr_i3
+            (joined
+              (portRef (member wb_adr_i 4))
+              (portRef WBADRI3 (instanceRef EFBInst_0))))
+          (net wb_adr_i2
+            (joined
+              (portRef (member wb_adr_i 5))
+              (portRef WBADRI2 (instanceRef EFBInst_0))))
+          (net wb_adr_i1
+            (joined
+              (portRef (member wb_adr_i 6))
+              (portRef WBADRI1 (instanceRef EFBInst_0))))
+          (net wb_adr_i0
+            (joined
+              (portRef (member wb_adr_i 7))
+              (portRef WBADRI0 (instanceRef EFBInst_0))))
+          (net wb_we_i
+            (joined
+              (portRef wb_we_i)
+              (portRef WBWEI (instanceRef EFBInst_0))))
+          (net wb_stb_i
+            (joined
+              (portRef wb_stb_i)
+              (portRef WBSTBI (instanceRef EFBInst_0))))
+          (net wb_cyc_i
+            (joined
+              (portRef wb_cyc_i)
+              (portRef WBCYCI (instanceRef EFBInst_0))))
+          (net wb_rst_i
+            (joined
+              (portRef wb_rst_i)
+              (portRef WBRSTI (instanceRef EFBInst_0))))
+          (net wb_clk_i
+            (joined
+              (portRef wb_clk_i)
+              (portRef WBCLKI (instanceRef EFBInst_0))))))))
+  (design EFB_FOR_PLL
+    (cellRef EFB_FOR_PLL
+      (libraryRef ORCLIB)))
+)

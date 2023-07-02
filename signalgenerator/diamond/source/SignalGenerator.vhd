@@ -5,14 +5,16 @@ use work.Frequencies.all;
 
 entity SignalGenerator is	
 	port (
-	    -- 80 mhz oscillator input
-		clk80           : in std_logic;
+	    -- reference oscillator input
+		REFCLK          : in std_logic;
 		-- dip switches to select output signal
 		selector        : in std_logic_vector(3 downto 0);
 		-- generated lumacode signals
 		INV_CSYNC       : out std_logic;
 		INV_LUM0        : out std_logic;
-		INV_LUM1        : out std_logic
+		INV_LUM1        : out std_logic;
+		-- debug
+		debug : out std_logic
 	);	
 end entity;
  
@@ -20,8 +22,8 @@ architecture immediate of SignalGenerator is
 
 component ClockGenerator
 	port (
-	    -- 80 mhz oscillator input
-		CLK80           : in std_logic;
+	    -- reference oscillator input
+		REFCLK           : in std_logic;
 		-- selected output frequency
 		frequency       : in t_Frequency;
 		-- generated clock
@@ -33,7 +35,7 @@ signal FREQUENCY : t_Frequency;
 signal CLK : std_logic;
 
 begin
-	clkgen : ClockGenerator PORT MAP ( CLK80 => clk80, frequency => FREQUENCY, CLK => CLK );
+	clkgen : ClockGenerator PORT MAP ( REFCLK => REFCLK, frequency => FREQUENCY, CLK => CLK );
 
 	process (selector)
 	begin
@@ -47,7 +49,8 @@ begin
 		when "0011" => FREQUENCY <= MHZ_14_187;  -- Atari 2600 PAL
 		when "1011" => FREQUENCY <= MHZ_14_318;  -- Ataru 2600 NTSC		
 		when others => FREQUENCY <= MHZ_15_763;  -- C64 PAL
-		end case;
+		end case;		
+		debug <= selector(3) or selector(2) or selector(1) or selector(0);
 	end process;
 	
 	process (CLK)
