@@ -49,8 +49,8 @@ begin
 	begin
 		case selector is 
 		when "1000" => FREQUENCY<=MHZ_16_363; w<=520; h<=262; samples<=2; x1<=122; y1<=40; pattern<=0; syncdelay<=true; -- C64 NTSC		
-		when "0001" => FREQUENCY<=MHZ_21_281; w<=228; h<=312; samples<=6; x1<=50;  y1<=50; pattern<=1; syncdelay<=false; -- Atari 8-bit PAL
-		when "1001" => FREQUENCY<=MHZ_21_477; w<=228; h<=262; samples<=6; x1<=50;  y1<=30; pattern<=1; syncdelay<=false; -- Atari 8-bit NTSC
+		when "0001" => FREQUENCY<=MHZ_21_281; w<=228; h<=312; samples<=6; x1<=46;  y1<=68; pattern<=1; syncdelay<=false; -- Atari 8-bit PAL
+		when "1001" => FREQUENCY<=MHZ_21_477; w<=228; h<=262; samples<=6; x1<=46;  y1<=43; pattern<=1; syncdelay<=false; -- Atari 8-bit NTSC
 		when "0010" => FREQUENCY<=MHZ_8_867;  w<=284; h<=312; samples<=2; x1<=50;  y1<=50; pattern<=2; syncdelay<=false; -- VIC 20 PAL
 		when "1010" => FREQUENCY<=MHZ_8_181;  w<=280; h<=262; samples<=2; x1<=50;  y1<=30; pattern<=2; syncdelay<=false; -- VIC 20 NTSC
 		when "0011" => FREQUENCY<=MHZ_14_187; w<=228; h<=312; samples<=4; x1<=50;  y1<=50; pattern<=3; syncdelay<=false; -- Atari 2600 PAL
@@ -120,20 +120,24 @@ begin
 				when 0 =>  -- C64
 					if x>=x1 and x<x1+320 and y>=y1 and y<y1+200 then 
 						if x>=x1+1 and x<x1+319 and y>=y1+1 and y<y1+199 then  -- inner area
-							if x>=x1+36 and x<x1+36+248 and y>=y1+36 and y<y1+36+128 then -- colored box
+							if x>=x1+10 and x<x1+310 and y>=y1+10 and y<y1+190 then -- colored box
 								outbuffer := std_logic_vector(to_unsigned(c64patterns(((x+y)/16) mod 16),12));
 							end if;
 						else
 							outbuffer := "000000001111";   -- bounding rectangle
 						end if;
 					end if;
-				when 1 =>  -- Atari 8-bit
+				when 1 =>  -- Atari 8-bit 
 					if x>=x1 and x<x1+160 and (y=y1 or y=y1+191) then 
 						outbuffer := "000011111111"; -- top and bottom edge
 					elsif x=x1 and y>=y1 and y<y1+192  then
 						outbuffer := "000011110000"; -- left edge
 					elsif x=x1+159 and y>=y1 and y<y1+192  then
 						outbuffer := "000000001111"; -- right edge
+					elsif x>=x1+5 and x<x1+155 and y>=y1+10 and y<y1+182 then -- colored box
+						outbuffer(11 downto 8) := std_logic_vector(to_unsigned(((y)/8+5) mod 16,4));
+						outbuffer(7 downto 4) := std_logic_vector(to_unsigned(((2*x+y)/16) mod 16,4));
+						outbuffer(3 downto 0) := std_logic_vector(to_unsigned(((2*x+1+y)/16) mod 16,4));
 					end if;
 				when 2 =>  -- VIC 20
 				when 3 =>  -- Atari 2600
