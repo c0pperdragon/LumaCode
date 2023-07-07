@@ -51,8 +51,8 @@ begin
 		when "1000" => FREQUENCY<=MHZ_16_363; w<=520; h<=262; samples<=2; x1<=122; y1<=40; pattern<=0; syncdelay<=true; -- C64 NTSC		
 		when "0001" => FREQUENCY<=MHZ_21_281; w<=228; h<=312; samples<=6; x1<=46;  y1<=68; pattern<=1; syncdelay<=false; -- Atari 8-bit PAL
 		when "1001" => FREQUENCY<=MHZ_21_477; w<=228; h<=262; samples<=6; x1<=46;  y1<=43; pattern<=1; syncdelay<=false; -- Atari 8-bit NTSC
-		when "0010" => FREQUENCY<=MHZ_8_867;  w<=284; h<=312; samples<=2; x1<=50;  y1<=50; pattern<=2; syncdelay<=false; -- VIC 20 PAL
-		when "1010" => FREQUENCY<=MHZ_8_181;  w<=260; h<=261; samples<=2; x1<=50;  y1<=30; pattern<=2; syncdelay<=false; -- VIC 20 NTSC
+		when "0010" => FREQUENCY<=MHZ_8_867;  w<=284; h<=312; samples<=2; x1<=65;  y1<=66; pattern<=2; syncdelay<=true; -- VIC 20 PAL
+		when "1010" => FREQUENCY<=MHZ_8_181;  w<=260; h<=261; samples<=2; x1<=65;  y1<=40; pattern<=2; syncdelay<=true; -- VIC 20 NTSC
 		when "0011" => FREQUENCY<=MHZ_14_187; w<=228; h<=312; samples<=4; x1<=50;  y1<=50; pattern<=3; syncdelay<=false; -- Atari 2600 PAL
 		when "1011" => FREQUENCY<=MHZ_14_318; w<=228; h<=262; samples<=4; x1<=50;  y1<=30; pattern<=3; syncdelay<=false; -- Atari 2600 NTSC		
 		when others => FREQUENCY<=MHZ_15_763; w<=504; h<=312; samples<=2; x1<=122; y1<=66; pattern<=0; syncdelay<=true; -- C64 PAL
@@ -140,6 +140,15 @@ begin
 						outbuffer(3 downto 0) := std_logic_vector(to_unsigned(((2*x+1+y)/16) mod 16,4));
 					end if;
 				when 2 =>  -- VIC 20
+					if x>=x1 and x<x1+176 and y>=y1 and y<y1+184 then 
+						if x>=x1+1 and x<x1+175 and y>=y1+1 and y<y1+183 then  -- inner area
+							if x>=x1+5 and x<x1+171 and y>=y1+10 and y<y1+174 then -- colored box
+								outbuffer := std_logic_vector(to_unsigned(c64patterns(((x+y)/16) mod 16),12));
+							end if;
+						else
+							outbuffer := "000000001111";   -- bounding rectangle
+						end if;
+					end if;
 				when 3 =>  -- Atari 2600
 				when others =>
 				end case;
