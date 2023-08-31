@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BaliProject version="3.2" title="LEDAnimation" device="LCMXO2-1200HC-5SG32C" default_implementation="impl1">
+    <Options/>
+    <Implementation title="impl1" dir="impl1" description="impl1" synthesis="synplify" default_strategy="Strategy1">
+        <Options def_top="LEDAnimation"/>
+        <Source name="source/LEDAnimation.vhd" type="VHDL" type_short="VHDL">
+            <Options top_module="LEDAnimation"/>
+        </Source>
+        <Source name="LEDAnimation.lpf" type="Logic Preference" type_short="LPF">
+            <Options/>
+        </Source>
+    </Implementation>
+    <Strategy name="Strategy1" file="LEDAnimation1.sty"/>
+</BaliProject>
