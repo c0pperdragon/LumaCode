@@ -1,189 +1,0 @@
-<HTML>
-<HEAD><TITLE>Lattice TCL Log</TITLE>
-<STYLE TYPE="text/css">
-<!--
- body,pre{    font-family:'Courier New', monospace;    color: #000000;    font-size:88%;    background-color: #ffffff;}h1 {    font-weight: bold;    margin-top: 24px;    margin-bottom: 10px;    border-bottom: 3px solid #000;    font-size: 1em;}h2 {    font-weight: bold;    margin-top: 18px;    margin-bottom: 5px;    font-size: 0.90em;}h3 {    font-weight: bold;    margin-top: 12px;    margin-bottom: 5px;    font-size: 0.80em;}p {    font-size:78%;}P.Table {    margin-top: 4px;    margin-bottom: 4px;    margin-right: 4px;    margin-left: 4px;}table{    border-width: 1px 1px 1px 1px;    border-style: solid solid solid solid;    border-color: black black black black;    border-collapse: collapse;}th {    font-weight:bold;    padding: 4px;    border-width: 1px 1px 1px 1px;    border-style: solid solid solid solid;    border-color: black black black black;    vertical-align:top;    text-align:left;    font-size:78%;}td {    padding: 4px;    border-width: 1px 1px 1px 1px;    border-style: solid solid solid solid;    border-color: black black black black;    vertical-align:top;    font-size:78%;}a {    color:#013C9A;    text-decoration:none;}a:visited {    color:#013C9A;}a:hover, a:active {    text-decoration:underline;    color:#5BAFD4;}.pass{background-color: #00ff00;}.fail{background-color: #ff0000;}.comment{    font-size: 90%;    font-style: italic;}
--->
-</STYLE>
-</HEAD>
-<PRE><A name="pn230630202745"></A><B><U><big>pn230630202745</big></U></B>
-#Start recording tcl command: 6/30/2023 14:53:52
-#Project Location: C:/Users/Reinhard/Documents/GitHub/LumaCode/signalgenerator/diamond; Project name: SignalGenerator
-prj_project new -name "SignalGenerator" -impl "impl1" -dev LCMXO2-1200HC-5SG32C -synthesis "synplify"
-prj_project save
-prj_src add "C:/Users/Reinhard/Documents/GitHub/LumaCode/signalgenerator/diamond/source/SignalGenerator.vhd"
-prj_src add "C:/Users/Reinhard/Documents/GitHub/LumaCode/signalgenerator/diamond/PLL_21_375.vhd"
-prj_run Map -impl impl1 -task MapTrace
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-#Stop recording: 6/30/2023 20:27:45
-
-
-
-<A name="pn230701121247"></A><B><U><big>pn230701121247</big></U></B>
-#Start recording tcl command: 7/1/2023 11:56:30
-#Project Location: C:/Users/Reinhard/Documents/GitHub/LumaCode/signalgenerator/diamond; Project name: SignalGenerator
-prj_project open "C:/Users/Reinhard/Documents/GitHub/LumaCode/signalgenerator/diamond/SignalGenerator.ldf"
-#Stop recording: 7/1/2023 12:12:47
-
-
-
-<A name="pn230701164143"></A><B><U><big>pn230701164143</big></U></B>
-#Start recording tcl command: 7/1/2023 14:57:37
-#Project Location: C:/Users/Reinhard/Documents/GitHub/LumaCode/signalgenerator/diamond; Project name: SignalGenerator
-prj_project open "C:/Users/Reinhard/Documents/GitHub/LumaCode/signalgenerator/diamond/SignalGenerator.ldf"
-#Stop recording: 7/1/2023 16:41:43
-
-
-
-<A name="pn230702163903"></A><B><U><big>pn230702163903</big></U></B>
-#Start recording tcl command: 7/2/2023 10:35:51
-#Project Location: C:/Users/Reinhard/Documents/GitHub/LumaCode/signalgenerator/diamond; Project name: SignalGenerator
-prj_project open "C:/Users/Reinhard/Documents/GitHub/LumaCode/signalgenerator/diamond/SignalGenerator.ldf"
-prj_src remove "C:/Users/Reinhard/Documents/GitHub/LumaCode/signalgenerator/diamond/PLL_21_375.vhd"
-prj_src add "C:/Users/Reinhard/Documents/GitHub/LumaCode/signalgenerator/diamond/PLL_21_281.ipx"
-prj_src add "C:/Users/Reinhard/Documents/GitHub/LumaCode/signalgenerator/diamond/PLL_21_281.vhd"
-prj_run Export -impl impl1 -task Jedecgen
-prj_src add "C:/Users/Reinhard/Documents/GitHub/LumaCode/signalgenerator/diamond/EFB.ipx"
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_src add "C:/Users/Reinhard/Documents/GitHub/LumaCode/signalgenerator/diamond/EFB.vhd"
-prj_src add "C:/Users/Reinhard/Documents/GitHub/LumaCode/signalgenerator/diamond/EFB_FOR_PLL.ipx"
-prj_src remove "C:/Users/Reinhard/Documents/GitHub/LumaCode/signalgenerator/diamond/EFB.ipx" "C:/Users/Reinhard/Documents/GitHub/LumaCode/signalgenerator/diamond/EFB.vhd"
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_src add "C:/Users/Reinhard/Documents/GitHub/LumaCode/signalgenerator/diamond/PLL_15_763.ipx"
-prj_src remove "C:/Users/Reinhard/Documents/GitHub/LumaCode/signalgenerator/diamond/PLL_21_281.ipx" "C:/Users/Reinhard/Documents/GitHub/LumaCode/signalgenerator/diamond/PLL_21_281.vhd"
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Synthesis -impl impl1 -task Synplify_Synthesis
-prj_run Map -impl impl1 -task MapTrace
-prj_run Map -impl impl1 -task MapTrace
-prj_run Map -impl impl1 -task MapTrace
-prj_src add "C:/Users/Reinhard/Documents/GitHub/LumaCode/signalgenerator/diamond/SignalGenerator.sdc"
-prj_run Map -impl impl1 -task MapTrace
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-#Stop recording: 7/2/2023 16:39:03
-
-
-
-<A name="pn230703133441"></A><B><U><big>pn230703133441</big></U></B>
-#Start recording tcl command: 7/2/2023 22:06:07
-#Project Location: C:/Users/Reinhard/Documents/GitHub/LumaCode/signalgenerator/diamond; Project name: SignalGenerator
-prj_project open "C:/Users/Reinhard/Documents/GitHub/LumaCode/signalgenerator/diamond/SignalGenerator.ldf"
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-#Stop recording: 7/3/2023 13:34:41
-
-
-
-<A name="pn230704134853"></A><B><U><big>pn230704134853</big></U></B>
-#Start recording tcl command: 7/4/2023 13:06:22
-#Project Location: C:/Users/Reinhard/Documents/GitHub/LumaCode/signalgenerator/diamond; Project name: SignalGenerator
-prj_project open "C:/Users/Reinhard/Documents/GitHub/LumaCode/signalgenerator/diamond/SignalGenerator.ldf"
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-prj_run Export -impl impl1 -task Jedecgen
-#Stop recording: 7/4/2023 13:48:53
-
-
-
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-<BR>
-</PRE></FONT>
-</BODY>
-</HTML>
