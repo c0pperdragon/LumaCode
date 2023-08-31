@@ -6,6 +6,7 @@ use machxo2.all;
 
 entity LEDAnimation is	
 	port (
+	    CLK       : in std_logic;
 		D         : out std_logic_vector(7 downto 0);
 		CP        : out std_logic_vector(3 downto 0)
 	);	
@@ -14,23 +15,7 @@ end entity;
 
 architecture immediate of LEDAnimation is
 
-COMPONENT OSCH
-	GENERIC (NOM_FREQ: string);
-	PORT (
-		STDBY:IN std_logic;
-		OSC:OUT std_logic;
-		SEDSTDBY:OUT std_logic
-	);
-END COMPONENT;
-
-signal CLK : std_logic;
-
 begin
-	-- instantiate internal oscillator
-	OSCInst0: OSCH
-	GENERIC MAP( NOM_FREQ => "88.67" )
-	PORT MAP ( STDBY=> '0', OSC => CLK, SEDSTDBY => open );
-
 	-- generate output led animation
 	process (CLK)
 	
@@ -65,7 +50,7 @@ begin
 			if delay>0 then
 				delay:=delay-1;
 			else
-				delay:=30000000;
+				delay := 25000000/2 - 1;
 				anim := (anim+1) mod 32;
 			end if;	
 		end if;
