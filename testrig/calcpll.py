@@ -13,4 +13,5 @@ def calc(target):
                 bestd1 = d1
                 bestdivider = divider
     print ("best for ",target,": ",bestvco,"(",bestd1,") ","/",bestdivider,"=", bestvco/bestdivider);
-calc(71.5909)   
+calc(71.5909)   # Atari 8-bit/2600 NTSC
+calc(88.67236)  # VIC20 PAL
