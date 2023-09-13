@@ -3,7 +3,7 @@
 <ReportView version="2.0">
     <Implement name="impl1">
         <ToolReport id="tooldec" path="" status="0"/>
-        <ToolReport id="toolhle_genhierarchy" path="C:/Users/Reinhard/Documents/GitHub_LumaCode/LumaCode/signalgenerator/diamond/impl1/hdla_gen_hierarchy.html" status="1"/>
+        <ToolReport id="toolhle_genhierarchy" path="C:/Users/Reinhard/Documents/GitHub_LumaCode/LumaCode/lumacode2rgb/diamond/impl1/hdla_gen_hierarchy.html" status="1"/>
         <ToolReport id="toolpio" path="" status="2"/>
         <ToolReport id="toolsso" path="" status="2"/>
     </Implement>

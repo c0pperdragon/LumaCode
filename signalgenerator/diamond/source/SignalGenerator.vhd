@@ -57,9 +57,12 @@ begin
 		when "1011" => FREQUENCY<=MHZ_14_318; w<=228; h<=262; samples<=4; x1<=50;  y1<=30; pattern<=3; syncdelay<=false; -- Atari 2600 NTSC		
 		when others => FREQUENCY<=MHZ_15_763; w<=504; h<=312; samples<=2; x1<=122; y1<=66; pattern<=0; syncdelay<=true; -- C64 PAL
 		end case;		
-		debug <= selector(3) or selector(2) or selector(1) or selector(0);
 	end process;
-	
+	process (CLK)
+	begin
+		debug <= CLK;
+	end process;
+
 	process (CLK)
 	variable x:integer range 0 to 1023 := 0;
 	variable y:integer range 0 to 512 := 0;
