@@ -18,13 +18,15 @@ architecture immediate of Generate14_3MHz is
 component PLL28_6 is
     port (
         CLKI: in  std_logic; 
-        CLKOP: out  std_logic);
+        CLKOS: out  std_logic;
+        CLKOP: out  std_logic
+	);
 end component;
 
 signal CLK28_6: std_logic;
 
 begin
-	pll : PLL28_6 PORT MAP ( CLKI => CLK25, CLKOP => CLK28_6 );
+	pll : PLL28_6 PORT MAP ( CLKI => CLK25, CLKOP => open, CLKOS => CLK28_6 );
 
 	process (CLK28_6)
 	variable x:std_logic := '0';
