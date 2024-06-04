@@ -45,7 +45,7 @@ signal y1 : integer range 0 to 511;
 signal syncdelay : boolean;
 signal syncsimple: boolean;
 type t_pattern is
-      (C64, VIC20, Atari8, Atari2600, TMS, NES, Specy);
+      (C64, VIC20, Atari8, Atari2600, TMS, NES, Speccy);
 signal pattern : t_pattern;
 
 
@@ -99,6 +99,31 @@ begin
 	return '0';
 end logoVIC20;
 
+function logoSpeccy(x,y : integer) return std_logic is
+type logo_t is array(0 to 7) of std_logic_vector(87 downto 0);
+constant logo:logo_t := (
+	"0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+	"0111111001000010000000000011110000000000000000000000000000010000000000000000000000000000",
+	"0000010000100100000000000100000001111000001110000011100000111000000111000100010001101000",
+	"0000100000011000000000000011110001000100010001000100000000010000001000000100010001010100",
+	"0001000000011000000000000000001001000100011110000100000000010000001000000100010001010100",
+	"0010000000100100000000000100001001111000010000000100000000010000001000000100010001010100",
+	"0111111001000010000000000011110001000000001111000011100000001100001000000011100001010100",
+	"0000000000000000000000000000000001000000000000000000000000000000000000000000000000000000"
+);
+begin
+	if x>=0 and x<256 and y>=0 and y<192 then
+		if x>=1 and x<256-1 and y>=1 and y<192-1 then 
+			if x>=8 and x<88+8 and y>=8 and y<8+8 then
+				return logo(y-8)(88+7-x);
+			end if;
+		else
+			return '1';
+		end if;
+	end if;
+	return '0';
+end logoSpeccy;
+
 
 begin
 	clkgen : ClockGenerator PORT MAP ( REFCLK => REFCLK, frequency => FREQUENCY, CLK => CLK );
@@ -109,7 +134,7 @@ begin
 		syncsimple <= false;		
 		case selector is 
 		when "0000" => FREQUENCY<=MHZ_15_763; w<=504; h<=312; samples<=2; x1<=128; y1<=65; sw<=37; pattern<=C64; syncdelay<=true;       -- PAL C64/C128
-		when "0001" => FREQUENCY<=MHZ_14_000; w<=448; h<=312; samples<=2; x1<=128; y1<=65; sw<=37; pattern<=Specy;                       -- PAL ZX Spectrum
+		when "0001" => FREQUENCY<=MHZ_14_000; w<=448; h<=312; samples<=2; x1<=120; y1<=66; sw<=33; pattern<=Speccy;                      -- PAL ZX Spectrum
 		when "0010" => FREQUENCY<=MHZ_8_867;  w<=284; h<=312; samples<=2; x1<=73;  y1<=75; sw<=16; pattern<=VIC20; syncdelay<=true;     -- PAL VIC 20		
 		when "0011" => FREQUENCY<=MHZ_21_281; w<=228; h<=312; samples<=6; x1<=49;  y1<=69; sw<=16; pattern<=Atari8;                      -- PAL Atari 8-bit
 		when "0100" => FREQUENCY<=MHZ_14_187; w<=228; h<=312; samples<=4; x1<=48;  y1<=41; sw<=14; pattern<=Atari2600; syncsimple<=true; -- PAL Atari 2600 50Hz
@@ -118,7 +143,7 @@ begin
 		when "0111" => FREQUENCY<=MHZ_15_961; w<=341; h<=312; samples<=3; x1<=48;  y1<=38; sw<=14; pattern<=NES; syncsimple<=true;       -- PAL NES
 		when "1000" => FREQUENCY<=MHZ_16_363; w<=520; h<=263; samples<=2; x1<=129; y1<=37; sw<=37; pattern<=C64; syncdelay<=true;        -- NTSC C64/C128
 		when "1001" => FREQUENCY<=MHZ_16_363; w<=512; h<=262; samples<=2; x1<=129; y1<=37; sw<=37; pattern<=C64; syncdelay<=true;        -- NTSC C64 6567R56A
-		when "1010" => FREQUENCY<=MHZ_8_181;  w<=260; h<=261; samples<=2; x1<=65;  y1<=40; sw<=16; pattern<=VIC20; syncdelay<=true;      -- NTSC VIC 20
+		when "1010" => FREQUENCY<=MHZ_8_181;  w<=260; h<=261; samples<=2; x1<=71-28; y1<=75-26; sw<=16; pattern<=VIC20;                  -- NTSC VIC 20
 		when "1011" => FREQUENCY<=MHZ_21_477; w<=228; h<=262; samples<=6; x1<=49;  y1<=41; sw<=16; pattern<=Atari8;                      -- NTSC Atari 8-bit		
 		when "1100" => FREQUENCY<=MHZ_14_318; w<=228; h<=312; samples<=4; x1<=48;  y1<=41; sw<=14; pattern<=Atari2600; syncsimple<=true; -- NTSC Atari 2600 50Hz NTSC
 		when "1101" => FREQUENCY<=MHZ_14_318; w<=228; h<=262; samples<=4; x1<=48;  y1<=38; sw<=14; pattern<=Atari2600; syncsimple<=true; -- NTSC Atari 2600 60Hz NTSC
@@ -142,8 +167,11 @@ begin
 	variable tmp_short: integer range 0 to 511;
 	variable tmp_half: integer range 0 to 511;
 	variable y2:integer range 0 to 511;
-	type int_array is array(0 to 15) of integer range 0 to 15;
-	constant c64colors : int_array := (0,15,2,7,3,12,1,11,8,4,13,5,6,14,9,10);
+	type lum_array is array(0 to 15) of std_logic_vector(3 downto 0);
+	constant c64colors : lum_array := ("0000","1111","0010","0111","0011","1100","0001","1011",
+	                                    "1000","0100","1101","0101","0110","1110","1001","1010");
+	constant zxcolors  : lum_array := ("0000","0100","0101","0011","1001","0111","1101","1110",
+	                                    "0001","0010","1000","0110","1100","1010","1011","1111");
 	begin
 		if rising_edge(CLK) then
 			-- generate sync
@@ -205,7 +233,7 @@ begin
 					if logoC64(x-x1,y-y1)='1' then
 						outbuffer(3 downto 0) := "1111"; 
 					elsif x>=x1+16 and x<x1+320-16 and y>=y1+56 and y<y1+56+128 then
-						outbuffer(3 downto 0) := std_logic_vector(to_unsigned(c64colors((y-y1-56)/8),4));	
+						outbuffer(3 downto 0) := c64colors((y-y1-56)/8);	
 					elsif x>=x1 and x<x1+320 and y>=y1 and y<y1+200 then
 						outbuffer(3 downto 0) := "0001";
 					end if;
@@ -213,10 +241,18 @@ begin
 					if logoVIC20(x-x1,y-y1)='1' then
 						outbuffer(3 downto 0) := "1111"; 
 					elsif x>=x1+16 and x<x1+176-16 and y>=y1+40 and y<y1+40+128 then
-						outbuffer(3 downto 0) := std_logic_vector(to_unsigned(c64colors((y-y1-40)/8),4));					
+						outbuffer(3 downto 0) := c64colors((y-y1-40)/8);					
 					elsif x>=x1 and x<x1+176 and y>=y1 and y<y1+184 then
 						outbuffer(3 downto 0) := "0001";
 					end if;
+				when Speccy =>
+					if logoSpeccy(x-x1,y-y1)='1' then
+						outbuffer(3 downto 0) := "1111"; 
+					elsif x>=x1+16 and x<x1+256-16 and y>=y1+48 and y<y1+48+128 then
+						outbuffer(3 downto 0) := zxcolors((y-y1-48)/8);					
+					elsif x>=x1 and x<x1+256 and y>=y1 and y<y1+192 then
+						outbuffer(3 downto 0) := "0100";
+					end if;				
 				when Atari8 => 
 					if x>=x1 and x<x1+160 and (y=y1 or y=y1+191) then 
 						outbuffer := "000011111111"; -- top and bottom edge
@@ -243,7 +279,6 @@ begin
 					end if;
 				when TMS =>
 				when NES =>
-				when Specy =>
 				when others =>
 				end case;
 			end if;
