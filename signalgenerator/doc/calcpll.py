@@ -10,11 +10,15 @@ def calc(target):
                 bestvco = vco
                 bestdivider = divider
     print ("best for ",target,": ",bestvco,"/",bestdivider,"=", bestvco/bestdivider);
+calc(8.181817)
+calc(8.867236)
+calc(10.738635)
+calc(14.000000)
+calc(14.18758)
+calc(14.31818)
 calc(15.763968)
+calc(15.961027)
+calc(16.107954)
 calc(16.363632)
 calc(21.28137)
 calc(21.47727)
-calc(8.867236)
-calc(8.181817)
-calc(14.18758)
-calc(14.31818)

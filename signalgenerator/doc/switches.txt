@@ -1,0 +1,19 @@
+DIP-switch settings for the lumacode signal generator
+
+1      2    3    4
+OFF  OFF  OFF  OFF    PAL C64/C128
+OFF  OFF  OFF   ON    PAL ZX Spectrum
+OFF  OFF   ON  OFF    PAL VIC 20 
+OFF  OFF   ON   ON    PAL Atari 8-bit
+OFF   ON  OFF  OFF    PAL Atari 2600 50 Hz
+OFF   ON  OFF   ON    PAL Atari 2600 60 Hz
+OFF   ON   ON  OFF    PAL TMS99xxA
+OFF   ON   ON   ON    PAL NES
+ ON  OFF  OFF  OFF    NTSC C64/C128
+ ON  OFF  OFF   ON    NTSC C64 6567R56A
+ ON  OFF   ON  OFF    NTSC VIC 20 
+ ON  OFF   ON   ON    NTSC Atari 8-bit      
+ ON   ON  OFF  OFF    NTSC Atari 2600 50 Hz
+ ON   ON  OFF   ON    NTSC Atari 2600 60 Hz
+ ON   ON   ON  OFF    NTSC TMS99xxA
+ ON   ON   ON   ON    NTSC NES
