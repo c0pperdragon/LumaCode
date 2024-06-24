@@ -94,9 +94,8 @@ begin
 end logoVIC20;
 
 function logoSpeccy(x,y : integer) return std_logic is
-type logo_t is array(0 to 7) of std_logic_vector(87 downto 0);
+type logo_t is array(1 to 7) of std_logic_vector(87 downto 0);
 constant logo:logo_t := (
-	"0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
 	"0111111001000010000000000011110000000000000000000000000000010000000000000000000000000000",
 	"0000010000100100000000000100000001111000001110000011100000111000000111000100010001101000",
 	"0000100000011000000000000011110001000100010001000100000000010000001000000100010001010100",
@@ -108,7 +107,7 @@ constant logo:logo_t := (
 begin
 	if x>=0 and x<256 and y>=0 and y<192 then
 		if x>=1 and x<256-1 and y>=1 and y<192-1 then 
-			if x>=8 and x<88+8 and y>=8 and y<8+8 then
+			if x>=8 and x<88+8 and y>=8+1 and y<8+8 then
 				return logo(y-8)(88+7-x);
 			end if;
 		else
@@ -120,9 +119,8 @@ end logoSpeccy;
 
 subtype logvec2 is std_logic_vector(1 downto 0);
 function logoAtari8bit(x,y : integer) return logvec2 is
-type logo_t is array(0 to 6) of std_logic_vector(87 downto 0);
+type logo_t is array(1 to 6) of std_logic_vector(87 downto 0);
 constant logo:logo_t := (
-	"0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
 	"0001100000011000000000000000000000011000000000000011110000000000011000000001100000011000",
 	"0011110001111110001111000111110000000000000000000110011000000000011000000000000001111110",
 	"0110011000011000000001100110011000111000000000000011110001111110011111000011100000011000",
@@ -131,7 +129,7 @@ constant logo:logo_t := (
 	"0110011000001100001111100110000000111100000000000011100000000000011111000011110000001100"
 );
 begin
-	if x>=4 and x<4+44 and y>=8 and y<8+7 then   -- logo itself
+	if x>=4 and x<4+44 and y>=8+1 and y<8+7 then   -- logo itself
 		return logo(y-8)((4+43-x)*2+1 downto (4+43-x)*2 );
 	elsif (y=0 or y=191) and x>=0 and x<160 then -- top or bottom border
 		return "11";
@@ -145,9 +143,8 @@ begin
 end logoAtari8bit;
 
 function logoAtari2600(x,y : integer) return std_logic is
-type logo_t is array(0 to 6) of std_logic_vector(69 downto 0);
+type logo_t is array(1 to 6) of std_logic_vector(69 downto 0);
 constant logo:logo_t := (
-	"0000000000000000000000000000000000000000000000000000000000000000000000",
 	"0001100000110000000000000000001100000000000111100011110001111000111100",
 	"0011110011111100111100111110000000000000001100110110000011001101100110",
 	"0110011000110000000110110011011100000000000001100111110011011101101110",
@@ -156,7 +153,7 @@ constant logo:logo_t := (
 	"0110011000011000111110110000011110000000001111110011110001111000111100"
 );
 begin
-	if x>=4 and x<4+70 and y>=8 and y<8+7 then   -- logo itself
+	if x>=4 and x<4+70 and y>=8+1 and y<8+7 then   -- logo itself
 		return logo(y-8)(4+69-x);
 	elsif (x>=0 and x<160 and y>=0 and y<200) and 
       not (x>=1 and x<159 and y>=1 and y<199) then
@@ -223,16 +220,16 @@ begin
 		when "0001" => FREQUENCY<=MHZ_14_000; w<=448; h<=312; samples<=2; x1<=120; y1<=66; sw<=33; pattern<=Speccy;                      -- 50Hz ZX Spectrum
 		when "0010" => FREQUENCY<=MHZ_8_867;  w<=284; h<=312; samples<=2; x1<=73;  y1<=75; sw<=16; pattern<=VIC20; syncdelay<=1;         -- 50Hz VIC 20		
 		when "0011" => FREQUENCY<=MHZ_21_281; w<=228; h<=312; samples<=6; x1<=49;  y1<=69; sw<=16; pattern<=Atari8;                      -- 50Hz Atari 8-bit
-		when "0100" => FREQUENCY<=MHZ_14_187; w<=228; h<=312; samples<=4; x1<=48;  y1<=41; sw<=14; pattern<=Atari2600; syncsimple<=true; -- 50Hz Atari 2600 PAL
-		when "0101" => FREQUENCY<=MHZ_14_318; w<=228; h<=312; samples<=4; x1<=48;  y1<=41; sw<=14; pattern<=Atari2600; syncsimple<=true; -- 50Hz Atari 2600 NTSC
+		when "0100" => FREQUENCY<=MHZ_14_187; w<=228; h<=312; samples<=4; x1<=48;  y1<=65; sw<=14; pattern<=Atari2600; syncsimple<=true; -- 50Hz Atari 2600 PAL
+		when "0101" => FREQUENCY<=MHZ_14_318; w<=228; h<=312; samples<=4; x1<=48;  y1<=65; sw<=14; pattern<=Atari2600; syncsimple<=true; -- 50Hz Atari 2600 NTSC
 		when "0110" => FREQUENCY<=MHZ_10_738; w<=342; h<=313; samples<=2; x1<=60;  y1<=68; sw<=26; pattern<=TMS; syncsimple<=true;       -- 50Hz TMS99xxA
 		when "0111" => FREQUENCY<=MHZ_15_961; w<=341; h<=312; samples<=3; x1<=63;  y1<=42; sw<=25; pattern<=NES; syncdelay<=2; syncsimple<=true; -- 50Hz NES
-		when "1000" => FREQUENCY<=MHZ_16_363; w<=520; h<=263; samples<=2; x1<=129; y1<=37; sw<=37; pattern<=C64; syncdelay<=1;           -- 60Hz C64/C128
-		when "1001" => FREQUENCY<=MHZ_16_363; w<=512; h<=262; samples<=2; x1<=129; y1<=37; sw<=37; pattern<=C64; syncdelay<=1;           -- 60Hz C64 6567R56A
+		when "1000" => FREQUENCY<=MHZ_16_363; w<=520; h<=263; samples<=2; x1<=129; y1<=41; sw<=37; pattern<=C64; syncdelay<=1;           -- 60Hz C64/C128
+		when "1001" => FREQUENCY<=MHZ_16_363; w<=512; h<=262; samples<=2; x1<=129; y1<=41; sw<=37; pattern<=C64; syncdelay<=1;           -- 60Hz C64 6567R56A
 		when "1010" => FREQUENCY<=MHZ_8_181;  w<=260; h<=261; samples<=2; x1<=71-28; y1<=75-26; sw<=16; pattern<=VIC20;                  --60Hz VIC 20
 		when "1011" => FREQUENCY<=MHZ_21_477; w<=228; h<=262; samples<=6; x1<=49;  y1<=41; sw<=16; pattern<=Atari8;                      -- 60Hz Atari 8-bit		
-		when "1100" => FREQUENCY<=MHZ_14_187; w<=228; h<=262; samples<=4; x1<=48;  y1<=38; sw<=14; pattern<=Atari2600; syncsimple<=true; -- 60Hz Atari 2600 PAL
-		when "1101" => FREQUENCY<=MHZ_14_318; w<=228; h<=262; samples<=4; x1<=48;  y1<=38; sw<=14; pattern<=Atari2600; syncsimple<=true; -- 60Hz Atari 2600 NTSC
+		when "1100" => FREQUENCY<=MHZ_14_187; w<=228; h<=262; samples<=4; x1<=48;  y1<=42; sw<=14; pattern<=Atari2600; syncsimple<=true; -- 60Hz Atari 2600 PAL
+		when "1101" => FREQUENCY<=MHZ_14_318; w<=228; h<=262; samples<=4; x1<=48;  y1<=42; sw<=14; pattern<=Atari2600; syncsimple<=true; -- 60Hz Atari 2600 NTSC
 		when "1110" => FREQUENCY<=MHZ_10_738; w<=342; h<=262; samples<=2; x1<=60;  y1<=43; sw<=26; pattern<=TMS; syncsimple<=true;       -- 60Hz TMS99xxA
 		when others => FREQUENCY<=MHZ_16_108; w<=341; h<=262; samples<=3; x1<=63;  y1<=20; sw<=25; pattern<=NES; syncdelay<=2; syncsimple<=true; -- 60Hz NES
 		end case;
