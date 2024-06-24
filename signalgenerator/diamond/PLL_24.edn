@@ -1,12 +1,12 @@
-(edif PLL_15_763
+(edif PLL_24
   (edifVersion 2 0 0)
   (edifLevel 0)
   (keywordMap (keywordLevel 0))
   (status
     (written
-      (timestamp 2023 7 2 12 59 37)
-      (program "SCUBA" (version "Diamond (64-bit) 3.12.1.454"))))
-      (comment "C:\lscc\diamond\3.12\ispfpga\bin\nt64\scuba.exe -w -n PLL_15_763 -lang vhdl -synth synplify -arch xo2c00 -type pll -fin 80 -mdiv 8 -ndiv 1 -trimp 0 -phasep 0 -trimp_r -adiv 41 -trims 0 -phases 0 -trims_r -bdiv 26 -phase_cntl STATIC -fb_mode 1 -wb ")
+      (timestamp 2024 6 23 16 25 59)
+      (program "SCUBA" (version "Diamond (64-bit) 3.13.0.56.2"))))
+      (comment "C:\lscc\diamond\3.13\ispfpga\bin\nt64\scuba.exe -w -n PLL_24 -lang vhdl -synth synplify -arch xo2c00 -type pll -fin 80 -mdiv 10 -ndiv 1 -trimp 0 -phasep 0 -trimp_r -adiv 66 -trims 0 -phases 0 -trims_r -bdiv 22 -phase_cntl STATIC -fb_mode 1 -wb ")
   (library ORCLIB
     (edifLevel 0)
     (technology
@@ -127,7 +127,7 @@
             (direction OUTPUT))
           (port PLLDATO0
             (direction OUTPUT)))))
-    (cell PLL_15_763
+    (cell PLL_24
       (cellType GENERIC)
       (view view1
         (viewType NETLIST)
@@ -225,11 +225,11 @@
             (property CLKOS_FPHASE
               (string "0"))
             (property CLKOS_CPHASE
-              (string "25"))
+              (string "21"))
             (property CLKOP_FPHASE
               (string "0"))
             (property CLKOP_CPHASE
-              (string "40"))
+              (string "65"))
             (property PLL_LOCK_MODE
               (string "0"))
             (property CLKOS_TRIM_DELAY
@@ -261,7 +261,7 @@
             (property CLKOS2_ENABLE
               (string "DISABLED"))
             (property FREQUENCY_PIN_CLKOS
-              (string "15.769231"))
+              (string "24.000000"))
             (property OUTDIVIDER_MUXB2
               (string "DIVB"))
             (property PREDIVIDER_MUXB1
@@ -271,7 +271,7 @@
             (property CLKOS_ENABLE
               (string "ENABLED"))
             (property FREQUENCY_PIN_CLKOP
-              (string "10.000000"))
+              (string "8.000000"))
             (property OUTDIVIDER_MUXA2
               (string "DIVA"))
             (property PREDIVIDER_MUXA1
@@ -283,7 +283,7 @@
             (property FREQUENCY_PIN_CLKI
               (string "80.000000"))
             (property ICP_CURRENT
-              (string "6"))
+              (string "8"))
             (property LPF_RESISTOR
               (string "8"))
             (property CLKOS3_DIV
@@ -291,13 +291,13 @@
             (property CLKOS2_DIV
               (string "1"))
             (property CLKOS_DIV
-              (string "26"))
+              (string "22"))
             (property CLKOP_DIV
-              (string "41"))
+              (string "66"))
             (property CLKFB_DIV
               (string "1"))
             (property CLKI_DIV
-              (string "8"))
+              (string "10"))
             (property FEEDBK_PATH
               (string "CLKOP")))
           (net LOCK
@@ -438,7 +438,7 @@
             (joined
               (portRef CLKI)
               (portRef CLKI (instanceRef PLLInst_0))))))))
-  (design PLL_15_763
-    (cellRef PLL_15_763
+  (design PLL_24
+    (cellRef PLL_24
       (libraryRef ORCLIB)))
 )

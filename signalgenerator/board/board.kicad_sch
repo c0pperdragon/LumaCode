@@ -6,7 +6,7 @@
 	(paper "A4")
 	(title_block
 		(title "LumaCode Signal Generator")
-		(rev "1")
+		(rev "2")
 	)
 	(lib_symbols
 		(symbol "Connector:Barrel_Jack_Switch"
@@ -1390,7 +1390,7 @@
 				)
 			)
 		)
-		(symbol "Oscillator:ASE-xxxMHz"
+		(symbol "Oscillator:XO53"
 			(pin_names
 				(offset 0.254)
 			)
@@ -1406,7 +1406,7 @@
 					(justify left)
 				)
 			)
-			(property "Value" "ASE-xxxMHz"
+			(property "Value" "XO53"
 				(at 1.27 -6.35 0)
 				(effects
 					(font
@@ -1415,7 +1415,7 @@
 					(justify left)
 				)
 			)
-			(property "Footprint" "Oscillator:Oscillator_SMD_Abracon_ASE-4Pin_3.2x2.5mm"
+			(property "Footprint" "Oscillator:Oscillator_SMD_EuroQuartz_XO53-4Pin_5.0x3.2mm"
 				(at 17.78 -8.89 0)
 				(effects
 					(font
@@ -1424,7 +1424,7 @@
 					(hide yes)
 				)
 			)
-			(property "Datasheet" "http://www.abracon.com/Oscillators/ASV.pdf"
+			(property "Datasheet" "http://cdn-reichelt.de/documents/datenblatt/B400/XO53.pdf"
 				(at -2.54 0 0)
 				(effects
 					(font
@@ -1433,7 +1433,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "3.3V CMOS SMD Crystal Clock Oscillator, Abracon"
+			(property "Description" "Low Power Consumption Clock Oscillator"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1442,7 +1442,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "3.3V CMOS SMD Crystal Clock Oscillator"
+			(property "ki_keywords" "Crystal Clock Oscillator"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1451,7 +1451,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_fp_filters" "Oscillator*SMD*Abracon*ASE*3.2x2.5mm*"
+			(property "ki_fp_filters" "Oscillator*SMD*EuroQuartz*XO53*5.0x3.2mm*"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1460,7 +1460,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "ASE-xxxMHz_0_1"
+			(symbol "XO53_0_1"
 				(rectangle
 					(start -5.08 5.08)
 					(end 5.08 -5.08)
@@ -1474,8 +1474,8 @@
 				)
 				(polyline
 					(pts
-						(xy -1.27 -0.762) (xy -1.016 -0.762) (xy -1.016 0.762) (xy -0.508 0.762) (xy -0.508 -0.762) (xy 0 -0.762)
-						(xy 0 0.762) (xy 0.508 0.762) (xy 0.508 -0.762) (xy 0.762 -0.762)
+						(xy 0.762 -0.762) (xy 0.508 -0.762) (xy 0.508 0.762) (xy 0 0.762) (xy 0 -0.762) (xy -0.508 -0.762)
+						(xy -0.508 0.762) (xy -1.016 0.762) (xy -1.016 -0.762) (xy -1.27 -0.762)
 					)
 					(stroke
 						(width 0)
@@ -1486,7 +1486,7 @@
 					)
 				)
 			)
-			(symbol "ASE-xxxMHz_1_1"
+			(symbol "XO53_1_1"
 				(pin input line
 					(at -7.62 0 0)
 					(length 2.54)
@@ -1544,7 +1544,7 @@
 				(pin power_in line
 					(at 0 7.62 270)
 					(length 2.54)
-					(name "Vdd"
+					(name "V+"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1561,12 +1561,20 @@
 				)
 			)
 		)
-		(symbol "Regulator_Linear:MIC5504-3.3YM5"
+		(symbol "Regulator_Linear:AMS1117-3.3"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "U"
-				(at -7.62 8.89 0)
+				(at -3.81 3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "AMS1117-3.3"
+				(at 0 3.175 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1574,17 +1582,8 @@
 					(justify left)
 				)
 			)
-			(property "Value" "MIC5504-3.3YM5"
-				(at -7.62 6.35 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Footprint" "Package_TO_SOT_SMD:SOT-23-5"
-				(at 0 -10.16 0)
+			(property "Footprint" "Package_TO_SOT_SMD:SOT-223-3_TabPin2"
+				(at 0 5.08 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1592,8 +1591,8 @@
 					(hide yes)
 				)
 			)
-			(property "Datasheet" "http://ww1.microchip.com/downloads/en/DeviceDoc/MIC550X.pdf"
-				(at -6.35 6.35 0)
+			(property "Datasheet" "http://www.advanced-monolithic.com/pdf/ds1117.pdf"
+				(at 2.54 -6.35 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1601,7 +1600,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "300mA Low-dropout Voltage Regulator, Vout 3.3V, Vin up to 5.5V, SOT-23"
+			(property "Description" "1A Low Dropout regulator, positive, 3.3V fixed output, SOT-223"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1610,7 +1609,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "Micrel LDO voltage regulator"
+			(property "ki_keywords" "linear regulator ldo fixed positive"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1619,7 +1618,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_fp_filters" "SOT?23?5*"
+			(property "ki_fp_filters" "SOT?223*TabPin2*"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1628,10 +1627,10 @@
 					(hide yes)
 				)
 			)
-			(symbol "MIC5504-3.3YM5_0_1"
+			(symbol "AMS1117-3.3_0_1"
 				(rectangle
-					(start -7.62 -5.08)
-					(end 7.62 5.08)
+					(start -5.08 -5.08)
+					(end 5.08 1.905)
 					(stroke
 						(width 0.254)
 						(type default)
@@ -1641,11 +1640,11 @@
 					)
 				)
 			)
-			(symbol "MIC5504-3.3YM5_1_1"
+			(symbol "AMS1117-3.3_1_1"
 				(pin power_in line
-					(at -10.16 2.54 0)
+					(at 0 -7.62 90)
 					(length 2.54)
-					(name "VIN"
+					(name "GND"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1660,10 +1659,10 @@
 						)
 					)
 				)
-				(pin power_in line
-					(at 0 -7.62 90)
+				(pin power_out line
+					(at 7.62 0 180)
 					(length 2.54)
-					(name "GND"
+					(name "VO"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1678,10 +1677,10 @@
 						)
 					)
 				)
-				(pin input line
-					(at -10.16 -2.54 0)
+				(pin power_in line
+					(at -7.62 0 0)
 					(length 2.54)
-					(name "EN"
+					(name "VI"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1689,42 +1688,6 @@
 						)
 					)
 					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at 7.62 -2.54 180)
-					(length 2.54) hide
-					(name "NC"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_out line
-					(at 10.16 2.54 180)
-					(length 2.54)
-					(name "VOUT"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2341,18 +2304,6 @@
 		(uuid "13e7c578-5583-4987-a899-5967482d5ba6")
 	)
 	(junction
-		(at 60.96 161.29)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "199fc076-1a34-41d3-a06f-336f9d5095b6")
-	)
-	(junction
-		(at 107.95 172.72)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "202dbdd1-a9da-448c-88db-0babaf7e629d")
-	)
-	(junction
 		(at 68.58 45.72)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2465,12 +2416,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "cde81a47-6087-4cc0-a8d7-ac2e77be9193")
-	)
-	(junction
-		(at 107.95 156.21)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "d015ec6a-2177-4a90-8fd8-2c885dd9a735")
 	)
 	(junction
 		(at 161.29 78.74)
@@ -2614,7 +2559,7 @@
 	)
 	(wire
 		(pts
-			(xy 60.96 165.1) (xy 60.96 161.29)
+			(xy 60.96 156.21) (xy 60.96 165.1)
 		)
 		(stroke
 			(width 0)
@@ -2651,6 +2596,16 @@
 			(type default)
 		)
 		(uuid "2c22419c-1f5f-4cab-af65-b76210983607")
+	)
+	(wire
+		(pts
+			(xy 74.93 163.83) (xy 74.93 172.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2e7140e3-61f3-4431-9c1c-037bcaa53ea5")
 	)
 	(wire
 		(pts
@@ -2724,16 +2679,6 @@
 	)
 	(wire
 		(pts
-			(xy 60.96 161.29) (xy 60.96 156.21)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4723ea4c-39c0-4492-9e9b-62b5f99d71de")
-	)
-	(wire
-		(pts
 			(xy 158.75 104.14) (xy 170.18 104.14)
 		)
 		(stroke
@@ -2781,16 +2726,6 @@
 			(type default)
 		)
 		(uuid "51f13600-5101-4acb-bee3-282a7d73d5bb")
-	)
-	(wire
-		(pts
-			(xy 74.93 172.72) (xy 74.93 166.37)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "52eeb41a-956a-4fe1-a7f8-8702fd7da8f0")
 	)
 	(wire
 		(pts
@@ -2924,6 +2859,16 @@
 	)
 	(wire
 		(pts
+			(xy 82.55 156.21) (xy 88.9 156.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "72bbd45f-63a6-49f5-839d-971369c0f99f")
+	)
+	(wire
+		(pts
 			(xy 140.97 140.97) (xy 140.97 144.78)
 		)
 		(stroke
@@ -2994,16 +2939,6 @@
 	)
 	(wire
 		(pts
-			(xy 60.96 161.29) (xy 64.77 161.29)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "82419703-a364-4c34-9058-efbe4132177e")
-	)
-	(wire
-		(pts
 			(xy 177.8 109.22) (xy 177.8 104.14)
 		)
 		(stroke
@@ -3054,7 +2989,7 @@
 	)
 	(wire
 		(pts
-			(xy 60.96 156.21) (xy 64.77 156.21)
+			(xy 60.96 156.21) (xy 67.31 156.21)
 		)
 		(stroke
 			(width 0)
@@ -3184,16 +3119,6 @@
 	)
 	(wire
 		(pts
-			(xy 119.38 172.72) (xy 119.38 170.18)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b07d822f-ccc5-4c63-ad5c-e9d20608ece7")
-	)
-	(wire
-		(pts
 			(xy 161.29 109.22) (xy 161.29 120.65)
 		)
 		(stroke
@@ -3261,6 +3186,16 @@
 			(type default)
 		)
 		(uuid "bd26126d-b58b-4b97-b61a-95256b29b024")
+	)
+	(wire
+		(pts
+			(xy 71.12 95.25) (xy 71.12 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bd9556b4-bae8-4815-a94e-ea8c630c3a3e")
 	)
 	(wire
 		(pts
@@ -3374,16 +3309,6 @@
 	)
 	(wire
 		(pts
-			(xy 119.38 165.1) (xy 119.38 156.21)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d742575a-257a-4072-a872-52366d6abab4")
-	)
-	(wire
-		(pts
 			(xy 50.8 105.41) (xy 54.61 105.41)
 		)
 		(stroke
@@ -3401,16 +3326,6 @@
 			(type default)
 		)
 		(uuid "dbabfd88-7ce9-4d17-b54f-02f75f8b8b32")
-	)
-	(wire
-		(pts
-			(xy 119.38 156.21) (xy 107.95 156.21)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "dde5d4df-19de-4169-92c6-861eee0ad534")
 	)
 	(wire
 		(pts
@@ -3524,26 +3439,6 @@
 	)
 	(wire
 		(pts
-			(xy 107.95 172.72) (xy 119.38 172.72)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f4bfaddb-86a8-42b6-918e-14378b2882ff")
-	)
-	(wire
-		(pts
-			(xy 85.09 156.21) (xy 88.9 156.21)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f995ea73-c012-45ed-af02-8d5ab73c79f4")
-	)
-	(wire
-		(pts
 			(xy 163.83 96.52) (xy 163.83 114.3)
 		)
 		(stroke
@@ -3551,6 +3446,16 @@
 			(type default)
 		)
 		(uuid "f9f15e82-8e73-4bd6-abba-cff193fc8baa")
+	)
+	(wire
+		(pts
+			(xy 69.85 95.25) (xy 71.12 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fb79e3fd-1a57-413f-87ac-964ad1fae300")
 	)
 	(label "LUM1"
 		(at 130.81 97.79 0)
@@ -3802,77 +3707,6 @@
 	)
 	(symbol
 		(lib_id "Device:C_Small")
-		(at 119.38 167.64 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "2880638e-dac3-423f-84d5-6d7047b4f940")
-		(property "Reference" "C5"
-			(at 121.92 166.3762 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "100nF"
-			(at 121.92 168.9162 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
-			(at 119.38 167.64 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 119.38 167.64 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 119.38 167.64 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "8e279d2b-c20b-4a7d-aa51-19e90dd39be1")
-		)
-		(pin "2"
-			(uuid "82589b33-40e7-4d40-8530-80c56d4d694f")
-		)
-		(instances
-			(project "board"
-				(path "/e1782f1c-048b-4fea-a196-fcc8872a70ee"
-					(reference "C5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C_Small")
 		(at 107.95 167.64 0)
 		(mirror y)
 		(unit 1)
@@ -3898,6 +3732,7 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
@@ -4206,6 +4041,73 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
+		(at 71.12 93.98 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "454960b4-77fa-4fee-a422-8373c67a8963")
+		(property "Reference" "#PWR01"
+			(at 71.12 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3.3V"
+			(at 71.12 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 71.12 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 71.12 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 71.12 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "225d3540-ecb5-408d-989a-e54ac5377886")
+		)
+		(instances
+			(project "board"
+				(path "/e1782f1c-048b-4fea-a196-fcc8872a70ee"
+					(reference "#PWR01")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3.3V")
 		(at 111.76 52.07 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -4265,157 +4167,6 @@
 			(project "board"
 				(path "/e1782f1c-048b-4fea-a196-fcc8872a70ee"
 					(reference "#PWR0104")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Oscillator:ASE-xxxMHz")
-		(at 121.92 63.5 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "4c749a4c-cb6a-49d1-8bd5-a37d88e17875")
-		(property "Reference" "X1"
-			(at 134.62 59.1693 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "ASE-80MHz"
-			(at 134.62 61.7093 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Oscillator:Oscillator_SMD_Abracon_ASE-4Pin_3.2x2.5mm"
-			(at 139.7 72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "http://www.abracon.com/Oscillators/ASV.pdf"
-			(at 119.38 63.5 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 121.92 63.5 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "a6371e69-c253-45e4-be5e-96a9e985b5b1")
-		)
-		(pin "2"
-			(uuid "8a052552-8593-41c5-8cf5-aea7c5259c0a")
-		)
-		(pin "3"
-			(uuid "41bcecbf-2b73-4178-9fa5-081fca921f9e")
-		)
-		(pin "4"
-			(uuid "3233225c-410b-4e80-aaeb-bac7974f6e6c")
-		)
-		(instances
-			(project "board"
-				(path "/e1782f1c-048b-4fea-a196-fcc8872a70ee"
-					(reference "X1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Regulator_Linear:MIC5504-3.3YM5")
-		(at 74.93 158.75 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "6262dbd0-c138-4675-9c82-035de16dc549")
-		(property "Reference" "U1"
-			(at 74.93 148.59 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "MIC5504-3.3YM5"
-			(at 74.93 151.13 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-5"
-			(at 74.93 168.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "http://ww1.microchip.com/downloads/en/DeviceDoc/MIC550X.pdf"
-			(at 68.58 152.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "300mA Low-dropout Voltage Regulator, Vout 3.3V, Vin up to 5.5V, SOT-23"
-			(at 74.93 158.75 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "3"
-			(uuid "2427ebb3-c8d0-4c8a-9643-18b4ba8137cb")
-		)
-		(pin "2"
-			(uuid "503f7714-a000-4151-9de4-e286ec83d6a4")
-		)
-		(pin "4"
-			(uuid "f2b04b42-3f3d-4158-871e-03b6836eaa42")
-		)
-		(pin "1"
-			(uuid "f5408deb-4bd4-4afe-8f74-1e8d70b32a9d")
-		)
-		(pin "5"
-			(uuid "21e86f12-b778-4d31-a8f3-8e80d16b6279")
-		)
-		(instances
-			(project "board"
-				(path "/e1782f1c-048b-4fea-a196-fcc8872a70ee"
-					(reference "U1")
 					(unit 1)
 				)
 			)
@@ -5206,6 +4957,80 @@
 		)
 	)
 	(symbol
+		(lib_id "Oscillator:XO53")
+		(at 121.92 63.5 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b2063ee1-4a05-49be-abe8-51798eac756f")
+		(property "Reference" "X2"
+			(at 130.81 57.1814 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "XO53"
+			(at 130.81 59.7214 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Oscillator:Oscillator_SMD_EuroQuartz_XO53-4Pin_5.0x3.2mm"
+			(at 139.7 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://cdn-reichelt.de/documents/datenblatt/B400/XO53.pdf"
+			(at 119.38 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Low Power Consumption Clock Oscillator"
+			(at 121.92 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "f8ae75d5-2168-4162-9150-31593f7f887b")
+		)
+		(pin "4"
+			(uuid "77e6b354-7cf2-42fb-b3b2-add3a89511b5")
+		)
+		(pin "2"
+			(uuid "88db1e91-6591-4542-bb92-0e0cdf8cb132")
+		)
+		(pin "1"
+			(uuid "5110eaa3-85c1-4fa6-bd81-4d60d785e922")
+		)
+		(instances
+			(project "board"
+				(path "/e1782f1c-048b-4fea-a196-fcc8872a70ee"
+					(reference "X2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 68.58 76.2 0)
 		(unit 1)
@@ -5538,6 +5363,77 @@
 			(project "board"
 				(path "/e1782f1c-048b-4fea-a196-fcc8872a70ee"
 					(reference "JLUM1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Regulator_Linear:AMS1117-3.3")
+		(at 74.93 156.21 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ef9b8ee0-e341-47bd-a83d-ad1118b7682a")
+		(property "Reference" "U1"
+			(at 74.93 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "AMS1117-3.3"
+			(at 74.93 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-223-3_TabPin2"
+			(at 74.93 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.advanced-monolithic.com/pdf/ds1117.pdf"
+			(at 77.47 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "1A Low Dropout regulator, positive, 3.3V fixed output, SOT-223"
+			(at 74.93 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "995363bb-275b-43ee-8ccf-5ee0e44b4d0a")
+		)
+		(pin "3"
+			(uuid "1c8e9cab-6660-4df8-b7ca-f3619268cfc4")
+		)
+		(pin "2"
+			(uuid "0087cc7a-3ee4-440a-99c0-e60677c3e2f3")
+		)
+		(instances
+			(project "board"
+				(path "/e1782f1c-048b-4fea-a196-fcc8872a70ee"
+					(reference "U1")
 					(unit 1)
 				)
 			)

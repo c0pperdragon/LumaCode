@@ -9,7 +9,7 @@ entity ClockGenerator is
 	    -- reference oscillator input
 		REFCLK          : in std_logic;
 		-- selected output frequency
-		frequency       : in t_Frequency;
+		FREQUENCY       : in t_Frequency;
 		-- generated clock
 		CLK             : out std_logic
 	);	
@@ -17,8 +17,7 @@ end entity;
  
 architecture immediate of ClockGenerator is
 
--- 80Mhz -> 15.763 Mhz
-component PLL_15_763     
+component PLL_24     
     port (
         CLKI: in  std_logic; 
         PLLCLK: in  std_logic; 
@@ -60,7 +59,7 @@ signal WB_dat_i : std_logic_vector(7 downto 0);
 signal WB_ack : std_logic; 
 
 begin
-	my_pll : PLL_15_763 PORT MAP ( 
+	my_pll : PLL_24 PORT MAP ( 
 		CLKI => REFCLK,
 		CLKOP => open, 
 		CLKOS => CLK,
@@ -122,18 +121,18 @@ begin
 			elsif reconfiguring=0 then
 				if freq_set /= freq_now or not didinit then
 					case freq_set is 
-					when MHZ_8_181  => diva:=45; divb:=55;
-					when MHZ_8_867  => diva:=47; divb:=53;
-					when MHZ_10_738  => diva:=58; divb:=54;
-					when MHZ_14_000  => diva:=42; divb:=30;
-					when MHZ_14_187 => diva:=61; divb:=43;
-					when MHZ_14_318 => diva:=63; divb:=44;
-					when MHZ_15_763 => diva:=41; divb:=26; 
-					when MHZ_15_961 => diva:=75; divb:=47; 
-					when MHZ_16_108 => diva:=58; divb:=36; 
-					when MHZ_16_363 => diva:=54; divb:=33; 
-					when MHZ_21_281 => diva:=66; divb:=31;
-					when MHZ_21_477 => diva:=58; divb:=27;
+					when MHZ_8_181  => diva:=90; divb:=88;
+					when MHZ_8_867  => diva:=92; divb:=83;
+					when MHZ_10_738 => diva:=98; divb:=73;
+					when MHZ_14_000 => diva:=56; divb:=32;
+					when MHZ_14_187 => diva:=94; divb:=53;
+					when MHZ_14_318 => diva:=68; divb:=38;
+					when MHZ_15_763 => diva:=67; divb:=34; 
+					when MHZ_15_961 => diva:=50; divb:=25; 
+					when MHZ_16_108 => diva:=99; divb:=49; 
+					when MHZ_16_363 => diva:=90; divb:=44; 
+					when MHZ_21_281 => diva:=93; divb:=35;
+					when MHZ_21_477 => diva:=51; divb:=19;
 					when others     => diva:=1; divb:=1;
 					end case;
 					WB_cyc <= '1';            -- start a cycle

@@ -5,36 +5,32 @@ use work.Frequencies.all;
 
 entity SignalGenerator is	
 	port (
-	
 	    -- reference oscillator input
 		REFCLK          : in std_logic;
 		-- dip switches to select output signal
-		selector        : in std_logic_vector(3 downto 0);
+		SELECTION       : in std_logic_vector(3 downto 0);
 		-- generated lumacode signals
 		INV_CSYNC       : out std_logic;
 		INV_LUM0        : out std_logic;
-		INV_LUM1        : out std_logic;
-		-- debug
-		debug : out std_logic
+		INV_LUM1        : out std_logic
 	);	
 end entity;
 
  
 architecture immediate of SignalGenerator is
-
-component ClockGenerator
+component ClockGenerator     
 	port (
 	    -- reference oscillator input
-		REFCLK           : in std_logic;
+		REFCLK          : in std_logic;
 		-- selected output frequency
-		frequency       : in t_Frequency;
+		FREQUENCY       : in t_Frequency;
 		-- generated clock
 		CLK             : out std_logic
-	);	
+	);
 end component;
 
-signal FREQUENCY : t_Frequency;
-signal CLK : std_logic;
+signal FREQUENCY: t_Frequency;
+signal CLK:std_logic;
 
 signal w : integer range 0 to 1023;
 signal h : integer range 0 to 512;
@@ -216,13 +212,13 @@ end logoNES;
 
 
 begin
-	clkgen : ClockGenerator PORT MAP ( REFCLK => REFCLK, frequency => FREQUENCY, CLK => CLK );
+	clkgen: ClockGenerator PORT MAP ( REFCLK, FREQUENCY, CLK );
 
-	process (selector)
+	process (SELECTION)
 	begin
 		syncdelay <= 0;
 		syncsimple <= false;		
-		case selector is 
+		case SELECTION is 
 		when "0000" => FREQUENCY<=MHZ_15_763; w<=504; h<=312; samples<=2; x1<=128; y1<=65; sw<=37; pattern<=C64; syncdelay<=1;          -- 50Hz C64/C128
 		when "0001" => FREQUENCY<=MHZ_14_000; w<=448; h<=312; samples<=2; x1<=120; y1<=66; sw<=33; pattern<=Speccy;                      -- 50Hz ZX Spectrum
 		when "0010" => FREQUENCY<=MHZ_8_867;  w<=284; h<=312; samples<=2; x1<=73;  y1<=75; sw<=16; pattern<=VIC20; syncdelay<=1;         -- 50Hz VIC 20		
@@ -237,17 +233,14 @@ begin
 		when "1011" => FREQUENCY<=MHZ_21_477; w<=228; h<=262; samples<=6; x1<=49;  y1<=41; sw<=16; pattern<=Atari8;                      -- 60Hz Atari 8-bit		
 		when "1100" => FREQUENCY<=MHZ_14_187; w<=228; h<=262; samples<=4; x1<=48;  y1<=38; sw<=14; pattern<=Atari2600; syncsimple<=true; -- 60Hz Atari 2600 PAL
 		when "1101" => FREQUENCY<=MHZ_14_318; w<=228; h<=262; samples<=4; x1<=48;  y1<=38; sw<=14; pattern<=Atari2600; syncsimple<=true; -- 60Hz Atari 2600 NTSC
-		when "1110" => FREQUENCY<=MHZ_10_738; w<=342; h<=262; samples<=2; x1<=60;  y1<=43; sw<=26; pattern<=TMS; syncsimple<=true; -- 60Hz TMS99xxA
-		when others => FREQUENCY<=MHZ_16_108; w<=341; h<=262; samples<=3; x1<=48;  y1<=38; sw<=25; pattern<=NES; syncsimple<=true;      -- 60Hz NES
+		when "1110" => FREQUENCY<=MHZ_10_738; w<=342; h<=262; samples<=2; x1<=60;  y1<=43; sw<=26; pattern<=TMS; syncsimple<=true;       -- 60Hz TMS99xxA
+		when others => FREQUENCY<=MHZ_16_108; w<=341; h<=262; samples<=3; x1<=63;  y1<=20; sw<=25; pattern<=NES; syncdelay<=2; syncsimple<=true; -- 60Hz NES
 		end case;
-	end process;
-	process (CLK)
-	begin
-		debug <= CLK;
 	end process;
 
 
 	process (CLK)
+	variable f:integer range 0 to 1 := 0;
 	variable x:integer range 0 to 1023 := 0;
 	variable y:integer range 0 to 512 := 0;
 	variable s:integer range 0 to 5 := 0;	
@@ -401,7 +394,9 @@ begin
 				s := s+1;
 			else
 				s:=0;
-				if x+1 /= w then
+				if SELECTION="1111" and f=1 and x=200 and y=y1+240 then -- special handling for NES 60 Hz
+					x := 202;				
+				elsif x+1 /= w then
 					x := x+1;
 				else
 					x := 0;
@@ -409,6 +404,7 @@ begin
 						y := y+1;
 					else
 						y := 0;
+						f := (f+1) mod 2;
 					end if;
 				end if;
 			end if; 
