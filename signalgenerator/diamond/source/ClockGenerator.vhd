@@ -128,11 +128,11 @@ begin
 					when MHZ_14_187 => diva:=94; divb:=53;
 					when MHZ_14_318 => diva:=68; divb:=38;
 					when MHZ_15_763 => diva:=67; divb:=34; 
-					when MHZ_15_961 => diva:=50; divb:=25; 
-					when MHZ_16_108 => diva:=99; divb:=49; 
 					when MHZ_16_363 => diva:=90; divb:=44; 
 					when MHZ_21_281 => diva:=93; divb:=35;
 					when MHZ_21_477 => diva:=51; divb:=19;
+					when MHZ_31_922 => diva:=60; divb:=15; 
+					when MHZ_32_216 => diva:=97; divb:=24;		
 					when others     => diva:=1; divb:=1;
 					end case;
 					WB_cyc <= '1';            -- start a cycle

@@ -8,11 +8,11 @@ package Frequencies is
 		MHZ_14_187,      -- PAL Atari 2600 4x pixel clock = 14.18758
 		MHZ_14_318,      -- NTSC Atari 2600 4x pixel clock = 14.31818				
 		MHZ_15_763,      -- PAL C64/C128 2x pixel clock = 15.763968
-		MHZ_15_961,      -- PAL NES 3x pixel clock = 15.961027
-		MHZ_16_108,      -- NTSC NES 3x pixel clock = 16.107954		
 		MHZ_16_363,      -- NTSC C64 2x pixel clock = 16.363632		
 		MHZ_21_281,      -- PAL Atari 8-bit 6x pixel clock = 21.28137
-		MHZ_21_477       -- NTSC Atari 8-bit 6x pixel clock = 21.47727
+		MHZ_21_477,      -- NTSC Atari 8-bit 6x pixel clock = 21.47727
+		MHZ_31_922,      -- PAL NES 6x pixel clock = 31.9220544 
+		MHZ_32_216       -- NTSC NES 6x pixel clock = 32.215908		
 	);
 
 end Frequencies;

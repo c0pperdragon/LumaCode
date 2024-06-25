@@ -38,7 +38,7 @@ signal samples : integer range 0 to 7;
 signal sw : integer range 0 to 63;
 signal x1 : integer range 0 to 511;
 signal y1 : integer range 0 to 511;
-signal syncdelay : integer range 0 to 2;
+signal syncdelay : integer range 0 to 1;
 signal syncsimple: boolean;
 type t_pattern is
       (C64, VIC20, Atari8, Atari2600, TMS, NES, Speccy);
@@ -46,21 +46,21 @@ signal pattern : t_pattern;
 
 
 function logoC64(x,y : integer) return std_logic is
-type logo_t is array(0 to 6) of std_logic_vector(55 downto 0);
+type logo_t is array(0 to 6) of std_logic_vector(54 downto 1);
 constant logo:logo_t := (
-	"00111100001111000000011000000000000110000011110000111100",
-	"01100110011001100000111000000011000110000110011001100110",
-	"01100000011000000001111000000110001110000000011001100110",
-	"01100000011111000110011000001100000110000000110000111100",
-	"01100000011001100111111100011000000110000011000001100110",
-	"01100110011001100000011000110000000110000110000001100110",
-	"00111100001111000000011001100000011111100111111000111100"
+	"011110000111100000001100000000000011000001111000011110",
+	"110011001100110000011100000001100011000011001100110011",
+	"110000001100000000111100000011000111000000001100110011",
+	"110000001111100011001100000110000011000000011000011110",
+	"110000001100110011111110001100000011000001100000110011",
+	"110011001100110000001100011000000011000011000000110011",
+	"011110000111100000001100110000001111110011111100011110"
 );
 begin
 	if x>=0 and x<320 and y>=0 and y<200 then
 		if x>=1 and x<319 and y>=1 and y<199 then 
-			if x>=8 and x<56+8 and y>=8 and y<8+7 then
-				return logo(y-8)(56+7-x);
+			if x>=8+1 and x<=8+54 and y>=8 and y<8+7 then
+				return logo(y-8)(8+1+54-x);
 			end if;
 		else
 			return '1';
@@ -70,21 +70,21 @@ begin
 end logoC64;
 
 function logoVIC20(x,y : integer) return std_logic is
-type logo_t is array(0 to 6) of std_logic_vector(47 downto 0);
+type logo_t is array(0 to 6) of std_logic_vector(46 downto 1);
 constant logo:logo_t := (
-	"010000100001110000011100000000000011110000111100",
-	"010000100000100000100010000000000100001001000010",
-	"010000100000100001000000000000000000001001000110",
-	"001001000000100001000000011111100000110001011010",
-	"001001000000100001000000000000000011000001100010",
-	"000110000000100000100010000000000100000001000010",
-	"000110000001110000011100000000000111111000111100"
+	"1000010000111000001110000000000001111000011110",
+	"1000010000010000010001000000000010000100100001",
+	"1000010000010000100000000000000000000100100011",
+	"0100100000010000100000001111110000011000101101",
+	"0100100000010000100000000000000001100000110001",
+	"0011000000010000010001000000000010000000100001",
+	"0011000000111000001110000000000011111100011110"
 );
 begin
 	if x>=0 and x<176 and y>=0 and y<184 then
 		if x>=1 and x<176-1 and y>=1 and y<184-1 then 
-			if x>=8 and x<48+8 and y>=8 and y<8+7 then
-				return logo(y-8)(48+7-x);
+			if x>=4+1 and x<=4+46 and y>=8 and y<8+7 then
+				return logo(y-8)(4+1+46-x);
 			end if;
 		else
 			return '1';
@@ -94,21 +94,21 @@ begin
 end logoVIC20;
 
 function logoSpeccy(x,y : integer) return std_logic is
-type logo_t is array(1 to 7) of std_logic_vector(87 downto 0);
+type logo_t is array(1 to 7) of std_logic_vector(85 downto 1);
 constant logo:logo_t := (
-	"0111111001000010000000000011110000000000000000000000000000010000000000000000000000000000",
-	"0000010000100100000000000100000001111000001110000011100000111000000111000100010001101000",
-	"0000100000011000000000000011110001000100010001000100000000010000001000000100010001010100",
-	"0001000000011000000000000000001001000100011110000100000000010000001000000100010001010100",
-	"0010000000100100000000000100001001111000010000000100000000010000001000000100010001010100",
-	"0111111001000010000000000011110001000000001111000011100000001100001000000011100001010100",
-	"0000000000000000000000000000000001000000000000000000000000000000000000000000000000000000"
+	"1111110010000100000000000111100000000000000000000000000000100000000000000000000000000",
+	"0000100001001000000000001000000011110000011100000111000001110000001110001000100011010",
+	"0001000000110000000000000111100010001000100010001000000000100000010000001000100010101",
+	"0010000000110000000000000000010010001000111100001000000000100000010000001000100010101",
+	"0100000001001000000000001000010011110000100000001000000000100000010000001000100010101",
+	"1111110010000100000000000111100010000000011110000111000000011000010000000111000010101",
+	"0000000000000000000000000000000010000000000000000000000000000000000000000000000000000"
 );
 begin
 	if x>=0 and x<256 and y>=0 and y<192 then
 		if x>=1 and x<256-1 and y>=1 and y<192-1 then 
-			if x>=8 and x<88+8 and y>=8+1 and y<8+8 then
-				return logo(y-8)(88+7-x);
+			if x>=8+1 and x<=8+85 and y>=8+1 and y<8+8 then
+				return logo(y-8)(8+1+85-x);
 			end if;
 		else
 			return '1';
@@ -129,8 +129,8 @@ constant logo:logo_t := (
 	"0110011000001100001111100110000000111100000000000011100000000000011111000011110000001100"
 );
 begin
-	if x>=4 and x<4+44 and y>=8+1 and y<8+7 then   -- logo itself
-		return logo(y-8)((4+43-x)*2+1 downto (4+43-x)*2 );
+	if x>=4 and x<=4+44 and y>=8+1 and y<8+7 then   -- logo itself
+		return logo(y-8)((4+44-x)*2+1 downto (4+44-x)*2 );
 	elsif (y=0 or y=191) and x>=0 and x<160 then -- top or bottom border
 		return "11";
 	elsif x=0 and (y>=0 and y<192) then -- left border
@@ -143,18 +143,18 @@ begin
 end logoAtari8bit;
 
 function logoAtari2600(x,y : integer) return std_logic is
-type logo_t is array(1 to 6) of std_logic_vector(69 downto 0);
+type logo_t is array(1 to 6) of std_logic_vector(68 downto 1);
 constant logo:logo_t := (
-	"0001100000110000000000000000001100000000000111100011110001111000111100",
-	"0011110011111100111100111110000000000000001100110110000011001101100110",
-	"0110011000110000000110110011011100000000000001100111110011011101101110",
-	"0110011000110000111110110000001100000000000011000110011011101101110110",
-	"0111111000110001100110110000001100000000000110000110011011001101100110",
-	"0110011000011000111110110000011110000000001111110011110001111000111100"
+	"00110000011000000000000000000110000000000011110001111000111100011110",
+	"01111001111110011110011111000000000000000110011011000001100110110011",
+	"11001100011000000011011001101110000000000000110011111001101110110111",
+	"11001100011000011111011000000110000000000001100011001101110110111011",
+	"11111100011000110011011000000110000000000011000011001101100110110011",
+	"11001100001100011111011000001111000000000111111001111000111100011110"
 );
 begin
-	if x>=4 and x<4+70 and y>=8+1 and y<8+7 then   -- logo itself
-		return logo(y-8)(4+69-x);
+	if x>=4+1 and x<=4+68 and y>=8+1 and y<8+7 then   -- logo itself
+		return logo(y-8)(4+68+1-x);
 	elsif (x>=0 and x<160 and y>=0 and y<200) and 
       not (x>=1 and x<159 and y>=1 and y<199) then
 		return '1';
@@ -164,19 +164,19 @@ begin
 end logoAtari2600;
 
 function logoTMS(x,y : integer) return std_logic is
-type logo_t is array(0 to 6) of std_logic_vector(55 downto 0);
+type logo_t is array(0 to 6) of std_logic_vector(52 downto 0);
 constant logo:logo_t := (
-	"11111000100010000111000001110000011100000010000001110000",
-	"00100000110110001000100010001000100010000110000010001000",
-	"00100000101010001000000010001000100010000010000010001000",	
-	"00100000101010000111000001111000011110000010000001110000",
-	"00100000100010000000100000001000000010000010000010001000",
-	"00100000100010001000100000010000000100000010000010001000",
-	"00100000100010000111000011100000111000000111000001110000"
+	"11111000100010000111000001110000011100000010000001110",
+	"00100000110110001000100010001000100010000110000010001",
+	"00100000101010001000000010001000100010000010000010001",	
+	"00100000101010000111000001111000011110000010000001110",
+	"00100000100010000000100000001000000010000010000010001",
+	"00100000100010001000100000010000000100000010000010001",
+	"00100000100010000111000011100000111000000111000001110"
 );
 begin
-	if x>=8 and x<8+56 and y>=8 and y<8+7 then   -- logo itself
-		return logo(y-8)(8+55-x);
+	if x>=8 and x<=8+52 and y>=8 and y<8+7 then   -- logo itself
+		return logo(y-8)(8+52-x);
 	elsif (x>=0 and x<256 and y>=0 and y<192) and 
       not (x>=1 and x<255 and y>=1 and y<191) then
 		return '1';
@@ -186,19 +186,19 @@ begin
 end logoTMS;
 
 function logoNES(x,y : integer) return std_logic is
-type logo_t is array(0 to 6) of std_logic_vector(23 downto 0);
+type logo_t is array(0 to 6) of std_logic_vector(22 downto 0);
 constant logo:logo_t := (
-	"110001101111111001111000",
-	"111001101100000011001100",
-	"111101101100000011000000",	
-	"111111101111110001111100",
-	"110111101100000000000110",
-	"110011101100000011000110",
-	"110001101111111001111100"
+	"11000110111111100111100",
+	"11100110110000001100110",
+	"11110110110000001100000",	
+	"11111110111111000111110",
+	"11011110110000000000011",
+	"11001110110000001100011",
+	"11000110111111100111110"
 );
 begin
-	if x>=8 and x<8+24 and y>=8 and y<8+7 then   -- logo itself
-		return logo(y-8)(8+23-x);
+	if x>=8 and x<=8+22 and y>=8 and y<8+7 then   -- logo itself
+		return logo(y-8)(8+22-x);
 	elsif (x>=0 and x<256 and y>=0 and y<240) and 
       not (x>=1 and x<255 and y>=1 and y<239) then
 		return '1';
@@ -223,7 +223,7 @@ begin
 		when "0100" => FREQUENCY<=MHZ_14_187; w<=228; h<=312; samples<=4; x1<=48;  y1<=65; sw<=14; pattern<=Atari2600; syncsimple<=true; -- 50Hz Atari 2600 PAL
 		when "0101" => FREQUENCY<=MHZ_14_318; w<=228; h<=312; samples<=4; x1<=48;  y1<=65; sw<=14; pattern<=Atari2600; syncsimple<=true; -- 50Hz Atari 2600 NTSC
 		when "0110" => FREQUENCY<=MHZ_10_738; w<=342; h<=313; samples<=2; x1<=60;  y1<=68; sw<=26; pattern<=TMS; syncsimple<=true;       -- 50Hz TMS99xxA
-		when "0111" => FREQUENCY<=MHZ_15_961; w<=341; h<=312; samples<=3; x1<=63;  y1<=42; sw<=25; pattern<=NES; syncdelay<=2; syncsimple<=true; -- 50Hz NES
+		when "0111" => FREQUENCY<=MHZ_31_922; w<=341; h<=312; samples<=6; x1<=63;  y1<=42; sw<=25; pattern<=NES; syncsimple<=true;       -- 50Hz NES
 		when "1000" => FREQUENCY<=MHZ_16_363; w<=520; h<=263; samples<=2; x1<=129; y1<=41; sw<=37; pattern<=C64; syncdelay<=1;           -- 60Hz C64/C128
 		when "1001" => FREQUENCY<=MHZ_16_363; w<=512; h<=262; samples<=2; x1<=129; y1<=41; sw<=37; pattern<=C64; syncdelay<=1;           -- 60Hz C64 6567R56A
 		when "1010" => FREQUENCY<=MHZ_8_181;  w<=260; h<=261; samples<=2; x1<=71-28; y1<=75-26; sw<=16; pattern<=VIC20;                  --60Hz VIC 20
@@ -231,20 +231,18 @@ begin
 		when "1100" => FREQUENCY<=MHZ_14_187; w<=228; h<=262; samples<=4; x1<=48;  y1<=42; sw<=14; pattern<=Atari2600; syncsimple<=true; -- 60Hz Atari 2600 PAL
 		when "1101" => FREQUENCY<=MHZ_14_318; w<=228; h<=262; samples<=4; x1<=48;  y1<=42; sw<=14; pattern<=Atari2600; syncsimple<=true; -- 60Hz Atari 2600 NTSC
 		when "1110" => FREQUENCY<=MHZ_10_738; w<=342; h<=262; samples<=2; x1<=60;  y1<=43; sw<=26; pattern<=TMS; syncsimple<=true;       -- 60Hz TMS99xxA
-		when others => FREQUENCY<=MHZ_16_108; w<=341; h<=262; samples<=3; x1<=63;  y1<=20; sw<=25; pattern<=NES; syncdelay<=2; syncsimple<=true; -- 60Hz NES
+		when others => FREQUENCY<=MHZ_32_216; w<=341; h<=262; samples<=6; x1<=63;  y1<=20; sw<=25; pattern<=NES; syncsimple<=true;       -- 60Hz NES
 		end case;
 	end process;
 
 
 	process (CLK)
-	variable f:integer range 0 to 1 := 0;
 	variable x:integer range 0 to 1023 := 0;
 	variable y:integer range 0 to 512 := 0;
 	variable s:integer range 0 to 5 := 0;	
 	
 	variable csync : std_logic;
 	variable prev_csync: std_logic;
-	variable pprev_csync: std_logic;
 	variable outbuffer: std_logic_vector(11 downto 0);
 	variable tmp_long: integer range 0 to 511;
 	variable tmp_short: integer range 0 to 511;
@@ -341,11 +339,13 @@ begin
 						outbuffer(5 downto 0) := std_logic_vector(to_unsigned(4+(y-y1-96)/32, 6));					
 					end if;
 				end if;
+				outbuffer := outbuffer(5 downto 4) & outbuffer(5 downto 4) 
+				           & outbuffer(3 downto 2) & outbuffer(3 downto 2)
+						   & outbuffer(1 downto 0) & outbuffer(1 downto 0);
 			when others =>
 			end case;
 			
 			-- generate sync
-			pprev_csync := prev_csync;
 			prev_csync := csync;
 			tmp_long := sw;
 			tmp_short := sw/2;
@@ -380,20 +380,20 @@ begin
 			-- sequence out samples and sync
 			INV_LUM0 <= not outbuffer(2*(samples-1-s));
 			INV_LUM1 <= not outbuffer(2*(samples-1-s)+1);
-			case syncdelay is
-				when 0 => INV_CSYNC <= not csync; 
-				when 1 => INV_CSYNC <= not prev_csync;
-				when 2 => INV_CSYNC <= not pprev_csync;
-			end case;
+			if syncdelay=0 then
+				INV_CSYNC <= not csync; 
+			else
+				INV_CSYNC <= not prev_csync;
+			end if;
 			
 			-- progress counters
-			if s+1 /= samples then
+			if SELECTION="1111" and s=0 and x=200 and y=260 then -- skip half pixel for NES 60 Hz
+				s:=4;
+			elsif s+1 /= samples then
 				s := s+1;
 			else
 				s:=0;
-				if SELECTION="1111" and f=1 and x=200 and y=y1+240 then -- special handling for NES 60 Hz
-					x := 202;				
-				elsif x+1 /= w then
+				if x+1 /= w then
 					x := x+1;
 				else
 					x := 0;
@@ -401,7 +401,6 @@ begin
 						y := y+1;
 					else
 						y := 0;
-						f := (f+1) mod 2;
 					end if;
 				end if;
 			end if; 
