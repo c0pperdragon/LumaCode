@@ -223,7 +223,7 @@ begin
 		when "0100" => FREQUENCY<=MHZ_14_187; w<=228; h<=312; samples<=4; x1<=48;  y1<=65; sw<=14; pattern<=Atari2600; syncsimple<=true; -- 50Hz Atari 2600 PAL
 		when "0101" => FREQUENCY<=MHZ_14_318; w<=228; h<=312; samples<=4; x1<=48;  y1<=65; sw<=14; pattern<=Atari2600; syncsimple<=true; -- 50Hz Atari 2600 NTSC
 		when "0110" => FREQUENCY<=MHZ_10_738; w<=342; h<=313; samples<=2; x1<=60;  y1<=68; sw<=26; pattern<=TMS; syncsimple<=true;       -- 50Hz TMS99xxA
-		when "0111" => FREQUENCY<=MHZ_31_922; w<=341; h<=312; samples<=6; x1<=63;  y1<=42; sw<=25; pattern<=NES; syncsimple<=true;       -- 50Hz NES
+		when "0111" => FREQUENCY<=MHZ_31_922; w<=341; h<=312; samples<=6; x1<=66;  y1<=42; sw<=25; pattern<=NES; syncsimple<=true;       -- 50Hz NES
 		when "1000" => FREQUENCY<=MHZ_16_363; w<=520; h<=263; samples<=2; x1<=129; y1<=41; sw<=37; pattern<=C64; syncdelay<=1;           -- 60Hz C64/C128
 		when "1001" => FREQUENCY<=MHZ_16_363; w<=512; h<=262; samples<=2; x1<=129; y1<=41; sw<=37; pattern<=C64; syncdelay<=1;           -- 60Hz C64 6567R56A
 		when "1010" => FREQUENCY<=MHZ_8_181;  w<=260; h<=261; samples<=2; x1<=71-28; y1<=75-26; sw<=16; pattern<=VIC20;                  --60Hz VIC 20
@@ -231,7 +231,7 @@ begin
 		when "1100" => FREQUENCY<=MHZ_14_187; w<=228; h<=262; samples<=4; x1<=48;  y1<=42; sw<=14; pattern<=Atari2600; syncsimple<=true; -- 60Hz Atari 2600 PAL
 		when "1101" => FREQUENCY<=MHZ_14_318; w<=228; h<=262; samples<=4; x1<=48;  y1<=42; sw<=14; pattern<=Atari2600; syncsimple<=true; -- 60Hz Atari 2600 NTSC
 		when "1110" => FREQUENCY<=MHZ_10_738; w<=342; h<=262; samples<=2; x1<=60;  y1<=43; sw<=26; pattern<=TMS; syncsimple<=true;       -- 60Hz TMS99xxA
-		when others => FREQUENCY<=MHZ_32_216; w<=341; h<=262; samples<=6; x1<=63;  y1<=20; sw<=25; pattern<=NES; syncsimple<=true;       -- 60Hz NES
+		when others => FREQUENCY<=MHZ_32_216; w<=341; h<=262; samples<=6; x1<=66;  y1<=20; sw<=25; pattern<=NES; syncsimple<=true;       -- 60Hz NES
 		end case;
 	end process;
 
