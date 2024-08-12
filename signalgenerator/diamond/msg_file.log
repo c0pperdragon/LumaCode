@@ -1,5 +1,5 @@
 SCUBA, Version Diamond (64-bit) 3.13.0.56.2
-Sun Jun 23 16:25:59 2024
+Mon Aug 12 16:18:30 2024
   
 Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
 Copyright (c) 1995 AT&T Corp.   All rights reserved.
@@ -9,7 +9,7 @@ Copyright (c) 2002-2023 Lattice Semiconductor Corporation,  All rights reserved.
   
 BEGIN SCUBA Module Synthesis
   
-    Issued command   : C:\lscc\diamond\3.13\ispfpga\bin\nt64\scuba.exe -w -n PLL_24 -lang vhdl -synth synplify -arch xo2c00 -type pll -fin 80 -mdiv 10 -ndiv 1 -trimp 0 -phasep 0 -trimp_r -adiv 66 -trims 0 -phases 0 -trims_r -bdiv 22 -phase_cntl STATIC -fb_mode 1 -wb 
+    Issued command   : C:\lscc\diamond\3.13\ispfpga\bin\nt64\scuba.exe -w -n PLL_24 -lang vhdl -synth synplify -arch xo2c00 -type pll -fin 24 -mdiv 3 -ndiv 1 -trimp 0 -phasep 0 -trimp_r -adiv 51 -trims 0 -phases 0 -trims_r -bdiv 17 -phase_cntl STATIC -fb_mode 1 -wb 
     Circuit name     : PLL_24
     Module type      : pll
     Module Version   : 5.7

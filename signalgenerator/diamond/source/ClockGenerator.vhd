@@ -33,6 +33,15 @@ component PLL_24
 	);
 end component;
 
+-- clock for wishbone programming
+COMPONENT OSCH
+	GENERIC (NOM_FREQ: string);
+	PORT (
+		STDBY:IN std_logic;
+		OSC:OUT std_logic;
+		SEDSTDBY:OUT std_logic
+	);
+END COMPONENT;
 -- wishbone interface
 component EFB_FOR_PLL     port (
 	    wb_clk_i: in  std_logic; 
@@ -72,6 +81,11 @@ begin
 		PLLDATO => PLL_bus_i(8 downto 1),
 		PLLACK => PLL_bus_i(0)		
 	);
+	
+	OSCInst0: OSCH
+	GENERIC MAP( NOM_FREQ => "2.08" )
+	PORT MAP ( STDBY=> '0', OSC => WB_clk,	SEDSTDBY => open );
+	
 	my_efb : EFB_FOR_PLL PORT MAP (
         wb_clk_i => WB_clk, 
         wb_rst_i => '0', 
@@ -85,24 +99,6 @@ begin
         pll0_bus_i => PLL_bus_i,
         pll0_bus_o => PLL_bus_o	
 	);
-
-	-- divide reference clock down to a safe wishbone clock 
-	process (REFCLK)
-	variable counter:integer range 0 to 7 := 0;
-	begin
-		if rising_edge(REFCLK) then
-			if counter<4 then 
-				WB_clk <= '0';
-			else
-				WB_clk <= '1';
-			end if;
-			if counter=7 then
-				counter:=0;
-			else
-				counter:=counter+1;
-			end if;
-		end if;
-	end process;
 
 	-- monitor the frequency input setting and adjust PLL accordingly
 	process (WB_clk)
@@ -128,6 +124,7 @@ begin
 					when MHZ_14_187 => diva:=94; divb:=53;
 					when MHZ_14_318 => diva:=68; divb:=38;
 					when MHZ_15_763 => diva:=67; divb:=34; 
+					when MHZ_16_000 => diva:=50; divb:=25; 
 					when MHZ_16_363 => diva:=90; divb:=44; 
 					when MHZ_21_281 => diva:=93; divb:=35;
 					when MHZ_21_477 => diva:=51; divb:=19;

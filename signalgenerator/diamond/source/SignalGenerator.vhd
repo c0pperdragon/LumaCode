@@ -8,6 +8,7 @@ entity SignalGenerator is
 	    -- reference oscillator input
 		REFCLK          : in std_logic;
 		-- dip switches to select output signal
+		SEL50HZ         : in std_logic;
 		SELECTION       : in std_logic_vector(3 downto 0);
 		-- generated lumacode signals
 		INV_CSYNC       : out std_logic;
@@ -17,7 +18,9 @@ entity SignalGenerator is
 end entity;
 
  
+ 
 architecture immediate of SignalGenerator is
+
 component ClockGenerator     
 	port (
 	    -- reference oscillator input
@@ -29,21 +32,33 @@ component ClockGenerator
 	);
 end component;
 
+constant C64:integer:=0;
+constant VIC20:integer:=1;
+constant Speccy:integer:=2;
+constant Atari8:integer:=3;
+constant Atari2600:integer:=4;
+constant TMS:integer:=5;
+constant NES:integer:=6;
+constant C128VDC:integer:=7;
+
+constant SERRATED:integer:=0;
+constant SIMPLE:integer:=1;
+constant XORSYNC:integer:=2;
+
 signal FREQUENCY: t_Frequency;
 signal CLK:std_logic;
 
-signal w : integer range 0 to 1023;
+signal w : integer range 0 to 2047;
 signal h : integer range 0 to 512;
 signal samples : integer range 0 to 7;
-signal sw : integer range 0 to 63;
-signal x1 : integer range 0 to 511;
+signal sw : integer range 0 to 127;
+signal x1 : integer range 0 to 1023;
 signal y1 : integer range 0 to 511;
+signal x2 : integer range 0 to 1023;
+signal y2 : integer range 0 to 511;
 signal syncdelay : integer range 0 to 1;
-signal syncsimple: boolean;
-type t_pattern is
-      (C64, VIC20, Atari8, Atari2600, TMS, NES, Speccy);
-signal pattern : t_pattern;
-
+signal synctype:integer range 0 to 3;
+signal pattern : integer range 0 to 7;
 
 function logoC64(x,y : integer) return std_logic is
 type logo_t is array(0 to 6) of std_logic_vector(54 downto 1);
@@ -211,42 +226,50 @@ end logoNES;
 begin
 	clkgen: ClockGenerator PORT MAP ( REFCLK, FREQUENCY, CLK );
 
-	process (SELECTION)
+	process (SELECTION, SEL50HZ)
 	begin
 		syncdelay <= 0;
-		syncsimple <= false;		
-		case SELECTION is 
-		when "0000" => FREQUENCY<=MHZ_15_763; w<=504; h<=312; samples<=2; x1<=128; y1<=65; sw<=37; pattern<=C64; syncdelay<=1;          -- 50Hz C64/C128
-		when "0001" => FREQUENCY<=MHZ_14_000; w<=448; h<=312; samples<=2; x1<=120; y1<=66; sw<=33; pattern<=Speccy;                      -- 50Hz ZX Spectrum
-		when "0010" => FREQUENCY<=MHZ_8_867;  w<=284; h<=312; samples<=2; x1<=73;  y1<=75; sw<=16; pattern<=VIC20; syncdelay<=1;         -- 50Hz VIC 20		
-		when "0011" => FREQUENCY<=MHZ_21_281; w<=228; h<=312; samples<=6; x1<=49;  y1<=69; sw<=16; pattern<=Atari8;                      -- 50Hz Atari 8-bit
-		when "0100" => FREQUENCY<=MHZ_14_187; w<=228; h<=312; samples<=4; x1<=48;  y1<=65; sw<=14; pattern<=Atari2600; syncsimple<=true; -- 50Hz Atari 2600 PAL
-		when "0101" => FREQUENCY<=MHZ_14_318; w<=228; h<=312; samples<=4; x1<=48;  y1<=65; sw<=14; pattern<=Atari2600; syncsimple<=true; -- 50Hz Atari 2600 NTSC
-		when "0110" => FREQUENCY<=MHZ_10_738; w<=342; h<=313; samples<=2; x1<=60;  y1<=68; sw<=26; pattern<=TMS; syncsimple<=true;       -- 50Hz TMS99xxA
-		when "0111" => FREQUENCY<=MHZ_31_922; w<=341; h<=312; samples<=6; x1<=66;  y1<=42; sw<=25; pattern<=NES; syncsimple<=true;       -- 50Hz NES
-		when "1000" => FREQUENCY<=MHZ_16_363; w<=520; h<=263; samples<=2; x1<=129; y1<=41; sw<=37; pattern<=C64; syncdelay<=1;           -- 60Hz C64/C128
-		when "1001" => FREQUENCY<=MHZ_16_363; w<=512; h<=262; samples<=2; x1<=129; y1<=41; sw<=37; pattern<=C64; syncdelay<=1;           -- 60Hz C64 6567R56A
-		when "1010" => FREQUENCY<=MHZ_8_181;  w<=260; h<=261; samples<=2; x1<=71-28; y1<=75-26; sw<=16; pattern<=VIC20;                  --60Hz VIC 20
-		when "1011" => FREQUENCY<=MHZ_21_477; w<=228; h<=262; samples<=6; x1<=49;  y1<=41; sw<=16; pattern<=Atari8;                      -- 60Hz Atari 8-bit		
-		when "1100" => FREQUENCY<=MHZ_14_187; w<=228; h<=262; samples<=4; x1<=48;  y1<=42; sw<=14; pattern<=Atari2600; syncsimple<=true; -- 60Hz Atari 2600 PAL
-		when "1101" => FREQUENCY<=MHZ_14_318; w<=228; h<=262; samples<=4; x1<=48;  y1<=42; sw<=14; pattern<=Atari2600; syncsimple<=true; -- 60Hz Atari 2600 NTSC
-		when "1110" => FREQUENCY<=MHZ_10_738; w<=342; h<=262; samples<=2; x1<=60;  y1<=43; sw<=26; pattern<=TMS; syncsimple<=true;       -- 60Hz TMS99xxA
-		when others => FREQUENCY<=MHZ_32_216; w<=341; h<=262; samples<=6; x1<=66;  y1<=20; sw<=25; pattern<=NES; syncsimple<=true;       -- 60Hz NES
-		end case;
+		if SEL50HZ='1' then
+			case SELECTION is 
+			when "0000" => FREQUENCY<=MHZ_15_763; w<=504; h<=312; samples<=2; x1<=128; y1<=65; x2<=128+320; y2<=65+200; sw<=37; pattern<=C64;      synctype<=SERRATED; syncdelay<=1; -- 50Hz C64/C128
+			--   "0001" unused
+			when "0010" => FREQUENCY<=MHZ_8_867;  w<=284; h<=312; samples<=2; x1<=73;  y1<=75; x2<=73+176; y2<=75+183; sw<=16; pattern<=VIC20;     synctype<=SERRATED; syncdelay<=1; -- 50Hz VIC 20		
+			when "0011" => FREQUENCY<=MHZ_21_281; w<=228; h<=312; samples<=6; x1<=49;  y1<=69; x2<=49+160; y2<=69+192; sw<=16; pattern<=Atari8;    synctype<=SERRATED;  -- 50Hz Atari 8-bit
+			when "0100" => FREQUENCY<=MHZ_14_187; w<=228; h<=312; samples<=4; x1<=48;  y1<=65; x2<=48+160; y2<=65+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 50Hz Atari 2600 PAL
+			when "0101" => FREQUENCY<=MHZ_14_318; w<=228; h<=312; samples<=4; x1<=48;  y1<=65; x2<=48+160; y2<=65+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 50Hz Atari 2600 NTSC
+			when "0110" => FREQUENCY<=MHZ_10_738; w<=342; h<=313; samples<=2; x1<=60;  y1<=68; x2<=60+256; y2<=68+192; sw<=26; pattern<=TMS;       synctype<=SIMPLE;  -- 50Hz TMS99xxA
+			when "0111" => FREQUENCY<=MHZ_14_000; w<=448; h<=312; samples<=2; x1<=120; y1<=66; x2<=120+256; y2<=66+192;sw<=33; pattern<=Speccy;    synctype<=SERRATED;                   -- 50Hz ZX Spectrum
+			when "1111" => FREQUENCY<=MHZ_16_000; w<=1024;h<=312; samples<=1; x1<=265; y1<=66; x2<=265+640; y2<=66+200;sw<=75; pattern<=C128VDC;   synctype<=XORSYNC; -- 50Hz VDC
+			when others => FREQUENCY<=MHZ_31_922; w<=341; h<=312; samples<=6; x1<=66;  y1<=42; x2<=66+256; y2<=42+240; sw<=25; pattern<=NES;       synctype<=SIMPLE;  -- 50Hz NES
+			end case;
+		else
+			case SELECTION is 
+			when "0000" => FREQUENCY<=MHZ_16_363; w<=520; h<=263; samples<=2; x1<=129; y1<=41; x2<=129+320; y2<=41+200; sw<=37; pattern<=C64;      synctype<=SERRATED; syncdelay<=1; -- 60Hz C64/C128
+			when "0001" => FREQUENCY<=MHZ_16_363; w<=512; h<=262; samples<=2; x1<=129; y1<=41; x2<=129+320; y2<=41+200; sw<=37; pattern<=C64;      synctype<=SERRATED; syncdelay<=1; -- 60Hz C64 6567R56A
+			when "0010" => FREQUENCY<=MHZ_8_181;  w<=260; h<=261; samples<=2; x1<=43;  y1<=49; x2<=43+176;  y2<=49+183; sw<=16; pattern<=VIC20;    synctype<=SERRATED; --60Hz VIC 20
+			when "0011" => FREQUENCY<=MHZ_21_477; w<=228; h<=262; samples<=6; x1<=49;  y1<=41; x2<=49+160;  y2<=41+192; sw<=16; pattern<=Atari8;   synctype<=SERRATED; -- 60Hz Atari 8-bit		
+			when "0100" => FREQUENCY<=MHZ_14_187; w<=228; h<=262; samples<=4; x1<=48;  y1<=42; x2<=48+160;  y2<=42+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 60Hz Atari 2600 PAL
+			when "0101" => FREQUENCY<=MHZ_14_318; w<=228; h<=262; samples<=4; x1<=48;  y1<=42; x2<=48+160;  y2<=42+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 60Hz Atari 2600 NTSC
+			when "0110" => FREQUENCY<=MHZ_10_738; w<=342; h<=262; samples<=2; x1<=60;  y1<=43; x2<=60+256;  y2<=43+192; sw<=26; pattern<=TMS;       synctype<=SIMPLE;  -- 60Hz TMS99xxA			
+			--   "0111" unused 
+			when "1111" => FREQUENCY<=MHZ_16_000; w<=1017;h<=262; samples<=1; x1<=265; y1<=66; x2<=265+640; y2<=66+200;sw<=75; pattern<=C128VDC;   synctype<=XORSYNC; -- 50Hz VDC
+			when others => FREQUENCY<=MHZ_32_216; w<=341; h<=262; samples<=6; x1<=66;  y1<=20; x2<=66+256;  y2<=20+240; sw<=25; pattern<=NES;        synctype<=SIMPLE; -- 60Hz NES
+			end case;
+		end if;
 	end process;
 
 
 	process (CLK)
 	variable x:integer range 0 to 1023 := 0;
 	variable y:integer range 0 to 512 := 0;
-	variable s:integer range 0 to 5 := 0;	
+	variable s:integer range 0 to 7 := 0;	
 	
 	variable csync : std_logic;
 	variable prev_csync: std_logic;
 	variable outbuffer: std_logic_vector(11 downto 0);
 	variable tmp_long: integer range 0 to 511;
 	variable tmp_short: integer range 0 to 511;
-	variable tmp_half: integer range 0 to 511;
+	variable tmp_half: integer range 0 to 1023;
 	type lum_array is array(0 to 15) of std_logic_vector(3 downto 0);
 	constant c64colors : lum_array := (
 		"0000","1111","0010","0111","0011","1100","0001","1011",
@@ -261,66 +284,44 @@ begin
 	variable tmp_col:integer range 0 to 63;
 	begin
 		if rising_edge(CLK) then
-			-- create pixel
-			outbuffer := "000000000000";
+			-- create background black and border frame
+			if ((x=x1 or x=x2-1) and (y>=y1 and y<y2))
+            or ((y=y1 or y=y2-1) and (x>=x1 and x<x2)) then
+				outbuffer := "111111111111";
+			else
+				outbuffer := "000000000000";
+			end if;
+			
 			case pattern is
 			when C64 =>
-				if logoC64(x-x1,y-y1)='1' then
-					outbuffer(3 downto 0) := "1111"; 
-				elsif x>=x1+16 and x<x1+320-16 and y>=y1+56 and y<y1+56+128 then
+				if x>=x1+16 and x<x1+320-16 and y>=y1+56 and y<y1+56+128 then
 					outbuffer(3 downto 0) := c64colors((y-y1-56)/8);	
-				elsif x>=x1 and x<x1+320 and y>=y1 and y<y1+200 then
-					outbuffer(3 downto 0) := "0001";
 				end if;
 			when VIC20 => 
-				if logoVIC20(x-x1,y-y1)='1' then
-					outbuffer(3 downto 0) := "1111"; 
-				elsif x>=x1+16 and x<x1+176-16 and y>=y1+40 and y<y1+40+128 then
+				if x>=x1+16 and x<x1+176-16 and y>=y1+40 and y<y1+40+128 then
 					outbuffer(3 downto 0) := c64colors((y-y1-40)/8);					
-				elsif x>=x1 and x<x1+176 and y>=y1 and y<y1+184 then
-					outbuffer(3 downto 0) := "0001";
 				end if;
 			when Speccy =>
-				if logoSpeccy(x-x1,y-y1)='1' then
-					outbuffer(3 downto 0) := "1111"; 
-				elsif x>=x1+16 and x<x1+256-16 and y>=y1+48 and y<y1+48+128 then
+				if x>=x1+16 and x<x1+256-16 and y>=y1+48 and y<y1+48+128 then
 					outbuffer(3 downto 0) := zxcolors((y-y1-48)/8);					
-				elsif x>=x1 and x<x1+256 and y>=y1 and y<y1+192 then
-					outbuffer(3 downto 0) := "0100";
 				end if;				
 			when Atari8 => 
-				tmp_2bit := logoAtari8bit(x-x1,y-y1);
-				if tmp_2bit/="00" then
-					outbuffer(7 downto 4) := tmp_2bit(1) & tmp_2bit(1) & tmp_2bit(1) & tmp_2bit(1); 
-					outbuffer(3 downto 0) := tmp_2bit(0) & tmp_2bit(0) & tmp_2bit(0) & tmp_2bit(0); 
-				elsif x>=x1+16 and x<x1+16+128 and y>=y1+48 and y<y1+48+128 then
+				if x>=x1+16 and x<x1+16+128 and y>=y1+48 and y<y1+48+128 then
 					outbuffer(11 downto 8) := std_logic_vector(to_unsigned((y-y1-48)/8,4));					
 					outbuffer(7 downto 4) := std_logic_vector(to_unsigned((x-x1-16)/8,4));
 					outbuffer(3 downto 0) := std_logic_vector(to_unsigned((x-x1-16)/8,4));
-				elsif x>=x1 and x<x1+160 and y>=y1 and y<y1+192 then
-					outbuffer := "011100000000";
 				end if;				
 			when Atari2600 =>
-				if logoAtari2600(x-x1,y-y1)='1' then
-					outbuffer(7 downto 0) := "00001110"; 
-				elsif x>=x1+16 and x<x1+16+128 and y>=y1+56 and y<y1+56+128 then
+				if x>=x1+16 and x<x1+16+128 and y>=y1+56 and y<y1+56+128 then
 					outbuffer(7 downto 4) := std_logic_vector(to_unsigned((y-y1-56)/8,4));					
 					outbuffer(3 downto 1) := std_logic_vector(to_unsigned((x-x1-16)/16,3));
-				elsif x>=x1 and x<x1+160 and y>=y1 and y<y1+200 then
-					outbuffer(7 downto 0) := "10010000";
 				end if;
 			when TMS =>
-				if logoTMS(x-x1,y-y1)='1' then
-					outbuffer(3 downto 0) := "1111";
-				elsif x>=x1+16 and x<x1+256-16 and y>=y1+48 and y<y1+48+128 then
+				if x>=x1+16 and x<x1+256-16 and y>=y1+48 and y<y1+48+128 then
 					outbuffer(3 downto 0) := tmscolors((y-y1-48)/8);	
-				elsif x>=x1 and x<x1+256 and y>=y1 and y<y1+192 then
-					outbuffer(3 downto 0) := "0001";
 				end if;
 			when NES =>
-				if logoNES(x-x1,y-y1)='1' then
-					outbuffer(5 downto 0) := "110010";
-				elsif y>=y1+96 and y<y1+96+128 then
+				if y>=y1+96 and y<y1+96+128 then
 					if x>=x1+12 and x<x1+12+112 then
 						tmp_col := (x-x1-12)/8 + ((y-y1-96)/8) * 16;
 						if (tmp_col mod 16) >= 14 then
@@ -342,6 +343,14 @@ begin
 				outbuffer := outbuffer(5 downto 4) & outbuffer(5 downto 4) 
 				           & outbuffer(3 downto 2) & outbuffer(3 downto 2)
 						   & outbuffer(1 downto 0) & outbuffer(1 downto 0);
+			when C128VDC =>
+				if x>=x1+32 and x<x2-32 and y>=y1+48 and y<y2-8 then
+					if (x+y) mod 16 < 5 then
+						outbuffer(1 downto 0) := "10";	
+					elsif (x+y) mod 16 < 10 then
+						outbuffer(1 downto 0) := "11";	
+					end if;
+				end if;
 			when others =>
 			end case;
 			
@@ -351,17 +360,14 @@ begin
 			tmp_short := sw/2;
 			tmp_half := w/2;
 			csync := '1';
-			if syncsimple then
-				if y<3 then
-					if x<w-tmp_long then
-						csync:='0';
-					end if;
-				else
-					if x<tmp_long then
-						csync:='0';
-					end if;
+			if synctype=XORSYNC then 
+				if x<tmp_long then
+					csync := '0';
 				end if;
-			else
+				if y<3 then
+					csync := not csync;
+				end if;
+			elsif synctype=SERRATED then
 				if (y=0) and (x<tmp_long or (x>=tmp_half and x<tmp_half+tmp_short)) then                   -- normal sync, short sync
 					csync := '0';
 				elsif (y=1 or y=2) and (x<tmp_short or (x>=tmp_half and x<tmp_half+tmp_short)) then       -- 2x 2 short syncs
@@ -375,6 +381,16 @@ begin
 				elsif (y>=8) and (x<tmp_long) then                                                           -- normal syncs
 					csync := '0';
 				end if;	
+			else
+				if y<3 then
+					if x<w-tmp_long then
+						csync:='0';
+					end if;
+				else
+					if x<tmp_long then
+						csync:='0';
+					end if;
+				end if;
 			end if;
 			
 			-- sequence out samples and sync
@@ -387,17 +403,17 @@ begin
 			end if;
 			
 			-- progress counters
-			if SELECTION="1111" and s=0 and x=200 and y=260 then -- skip half pixel for NES 60 Hz
+			if SEL50HZ='0' and pattern=NES and s=0 and x=200 and y=260 then -- skip half pixel for NES 60 Hz
 				s:=4;
 			elsif s+1 /= samples then
 				s := s+1;
 			else
 				s:=0;
-				if x+1 /= w then
+				if x /= w-1 then
 					x := x+1;
 				else
 					x := 0;
-					if y+1 /= h then
+					if y /= h-1 then
 						y := y+1;
 					else
 						y := 0;

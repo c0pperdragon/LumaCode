@@ -4,9 +4,9 @@
   (keywordMap (keywordLevel 0))
   (status
     (written
-      (timestamp 2024 6 23 16 25 59)
+      (timestamp 2024 8 12 16 18 30)
       (program "SCUBA" (version "Diamond (64-bit) 3.13.0.56.2"))))
-      (comment "C:\lscc\diamond\3.13\ispfpga\bin\nt64\scuba.exe -w -n PLL_24 -lang vhdl -synth synplify -arch xo2c00 -type pll -fin 80 -mdiv 10 -ndiv 1 -trimp 0 -phasep 0 -trimp_r -adiv 66 -trims 0 -phases 0 -trims_r -bdiv 22 -phase_cntl STATIC -fb_mode 1 -wb ")
+      (comment "C:\lscc\diamond\3.13\ispfpga\bin\nt64\scuba.exe -w -n PLL_24 -lang vhdl -synth synplify -arch xo2c00 -type pll -fin 24 -mdiv 3 -ndiv 1 -trimp 0 -phasep 0 -trimp_r -adiv 51 -trims 0 -phases 0 -trims_r -bdiv 17 -phase_cntl STATIC -fb_mode 1 -wb ")
   (library ORCLIB
     (edifLevel 0)
     (technology
@@ -225,11 +225,11 @@
             (property CLKOS_FPHASE
               (string "0"))
             (property CLKOS_CPHASE
-              (string "21"))
+              (string "16"))
             (property CLKOP_FPHASE
               (string "0"))
             (property CLKOP_CPHASE
-              (string "65"))
+              (string "50"))
             (property PLL_LOCK_MODE
               (string "0"))
             (property CLKOS_TRIM_DELAY
@@ -281,9 +281,9 @@
             (property CLKOP_ENABLE
               (string "ENABLED"))
             (property FREQUENCY_PIN_CLKI
-              (string "80.000000"))
+              (string "24.000000"))
             (property ICP_CURRENT
-              (string "8"))
+              (string "6"))
             (property LPF_RESISTOR
               (string "8"))
             (property CLKOS3_DIV
@@ -291,13 +291,13 @@
             (property CLKOS2_DIV
               (string "1"))
             (property CLKOS_DIV
-              (string "22"))
+              (string "17"))
             (property CLKOP_DIV
-              (string "66"))
+              (string "51"))
             (property CLKFB_DIV
               (string "1"))
             (property CLKI_DIV
-              (string "10"))
+              (string "3"))
             (property FEEDBK_PATH
               (string "CLKOP")))
           (net LOCK
