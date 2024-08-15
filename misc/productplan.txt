@@ -1,0 +1,33 @@
+
+RGBtoHDMI devices
+- Mono & Lumacode (RCA cable)
+- Pro (16 pin, 6 pin, 3.5mm audio) with case
+- Case für small RGBtoHDMI
+
+Lumacode sources
+- GTIAdigitizer
+- PPUdigitizer
+- STICdigitizer
+- TEDdigitizer
+- TIAdigitizer
+- TMSdigitizer
+- ULAdigitizer
+- VIC20digitizer
+- VICIIdizer
+- VICIIdizer128
+
+Adapters
+- Atari ST mono to RCA socket
+- C128 VDC mono to RCA socket
+
+Digital cables (to 16-pin connector)
+- DIY digital (no first connector)
+- CGA/EGA/etc. digital DB9
+- Sinclair QL, Spectrum 128, some Apple II with mod (8 way DIN)
+- Apple IIGS, Atari ST digital DB15 (requires mod)
+- Amiga digital DB23 (requires mod)
+
+Analog cables (to 6-pin connector)
+- DIY analog (no first connector)
+- Lumacode (RCA to pin 2 & 4)
+- Amstrad CPC, BBC micro, etc. (6 way DIN)

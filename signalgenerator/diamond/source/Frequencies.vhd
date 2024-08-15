@@ -13,6 +13,7 @@ package Frequencies is
 		MHZ_21_281,      -- PAL Atari 8-bit 6x pixel clock = 21.28137
 		MHZ_21_477,      -- NTSC Atari 8-bit 6x pixel clock = 21.47727
 		MHZ_31_922,      -- PAL NES 6x pixel clock = 31.9220544 
+		MHZ_32_000,      -- Atari ST highres pixel clock
 		MHZ_32_216       -- NTSC NES 6x pixel clock = 32.215908		
 	);
 

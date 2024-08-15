@@ -13,8 +13,11 @@ entity SignalGenerator is
 		-- generated lumacode signals
 		INV_CSYNC       : out std_logic;
 		INV_LUM0        : out std_logic;
-		INV_LUM1        : out std_logic
-	);	
+		INV_LUM1        : out std_logic;
+		-- extra signals for different sync test
+		INV_VSYNC       : out std_logic;
+		INV_HSYNC       : out std_logic
+	);
 end entity;
 
  
@@ -32,6 +35,16 @@ component ClockGenerator
 	);
 end component;
 
+COMPONENT OSCH
+	GENERIC (NOM_FREQ: string);
+	PORT (
+		STDBY:IN std_logic;
+		OSC:OUT std_logic;
+		SEDSTDBY:OUT std_logic
+	);
+END COMPONENT;
+
+
 constant C64:integer:=0;
 constant VIC20:integer:=1;
 constant Speccy:integer:=2;
@@ -40,10 +53,12 @@ constant Atari2600:integer:=4;
 constant TMS:integer:=5;
 constant NES:integer:=6;
 constant C128VDC:integer:=7;
+constant ATARIST:integer:=8;
 
 constant SERRATED:integer:=0;
 constant SIMPLE:integer:=1;
 constant XORSYNC:integer:=2;
+constant ANYSYNC:integer:=3;
 
 signal FREQUENCY: t_Frequency;
 signal CLK:std_logic;
@@ -58,7 +73,7 @@ signal x2 : integer range 0 to 1023;
 signal y2 : integer range 0 to 511;
 signal syncdelay : integer range 0 to 1;
 signal synctype:integer range 0 to 3;
-signal pattern : integer range 0 to 7;
+signal pattern : integer range 0 to 15;
 
 function logoC64(x,y : integer) return std_logic is
 type logo_t is array(0 to 6) of std_logic_vector(54 downto 1);
@@ -225,7 +240,7 @@ end logoNES;
 
 begin
 	clkgen: ClockGenerator PORT MAP ( REFCLK, FREQUENCY, CLK );
-
+		
 	process (SELECTION, SEL50HZ)
 	begin
 		syncdelay <= 0;
@@ -238,8 +253,9 @@ begin
 			when "0100" => FREQUENCY<=MHZ_14_187; w<=228; h<=312; samples<=4; x1<=48;  y1<=65; x2<=48+160; y2<=65+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 50Hz Atari 2600 PAL
 			when "0101" => FREQUENCY<=MHZ_14_318; w<=228; h<=312; samples<=4; x1<=48;  y1<=65; x2<=48+160; y2<=65+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 50Hz Atari 2600 NTSC
 			when "0110" => FREQUENCY<=MHZ_10_738; w<=342; h<=313; samples<=2; x1<=60;  y1<=68; x2<=60+256; y2<=68+192; sw<=26; pattern<=TMS;       synctype<=SIMPLE;  -- 50Hz TMS99xxA
-			when "0111" => FREQUENCY<=MHZ_14_000; w<=448; h<=312; samples<=2; x1<=120; y1<=66; x2<=120+256; y2<=66+192;sw<=33; pattern<=Speccy;    synctype<=SERRATED;                   -- 50Hz ZX Spectrum
-			when "1111" => FREQUENCY<=MHZ_16_000; w<=1024;h<=312; samples<=1; x1<=265; y1<=66; x2<=265+640; y2<=66+200;sw<=75; pattern<=C128VDC;   synctype<=XORSYNC; -- 50Hz VDC
+			when "0111" => FREQUENCY<=MHZ_14_000; w<=448; h<=312; samples<=2; x1<=120; y1<=66; x2<=120+256; y2<=66+192;sw<=33; pattern<=Speccy;    synctype<=SERRATED;-- 50Hz ZX Spectrum
+			when "1000" => FREQUENCY<=MHZ_16_000; w<=1024;h<=312; samples<=1; x1<=265; y1<=66; x2<=265+640; y2<=66+200;sw<=75; pattern<=C128VDC;   synctype<=XORSYNC; -- 50Hz VDC
+			when "1001" => FREQUENCY<=MHZ_32_000; w<=896; h<=501; samples<=1; x1<=190; y1<=80; x2<=190+640; y2<=80+400;sw<=67; pattern<=ATARIST;   synctype<=ANYSYNC; -- 72Hz ATARI ST
 			when others => FREQUENCY<=MHZ_31_922; w<=341; h<=312; samples<=6; x1<=66;  y1<=42; x2<=66+256; y2<=42+240; sw<=25; pattern<=NES;       synctype<=SIMPLE;  -- 50Hz NES
 			end case;
 		else
@@ -252,8 +268,9 @@ begin
 			when "0101" => FREQUENCY<=MHZ_14_318; w<=228; h<=262; samples<=4; x1<=48;  y1<=42; x2<=48+160;  y2<=42+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 60Hz Atari 2600 NTSC
 			when "0110" => FREQUENCY<=MHZ_10_738; w<=342; h<=262; samples<=2; x1<=60;  y1<=43; x2<=60+256;  y2<=43+192; sw<=26; pattern<=TMS;       synctype<=SIMPLE;  -- 60Hz TMS99xxA			
 			--   "0111" unused 
-			when "1111" => FREQUENCY<=MHZ_16_000; w<=1017;h<=262; samples<=1; x1<=265; y1<=66; x2<=265+640; y2<=66+200;sw<=75; pattern<=C128VDC;   synctype<=XORSYNC; -- 50Hz VDC
-			when others => FREQUENCY<=MHZ_32_216; w<=341; h<=262; samples<=6; x1<=66;  y1<=20; x2<=66+256;  y2<=20+240; sw<=25; pattern<=NES;        synctype<=SIMPLE; -- 60Hz NES
+			when "1000" => FREQUENCY<=MHZ_16_000; w<=1016;h<=264; samples<=1; x1<=265; y1<=66; x2<=265+640; y2<=66+200;sw<=75; pattern<=C128VDC;   synctype<=XORSYNC; -- 60Hz VDC
+			when "1001" => FREQUENCY<=MHZ_32_000; w<=896; h<=501; samples<=1; x1<=190; y1<=80; x2<=190+640; y2<=80+400;sw<=67; pattern<=ATARIST;   synctype<=ANYSYNC; -- 72Hz ATARI ST
+			when others => FREQUENCY<=MHZ_32_216; w<=341; h<=262; samples<=6; x1<=66;  y1<=20; x2<=66+256;  y2<=20+240; sw<=25; pattern<=NES;      synctype<=SIMPLE;  -- 60Hz NES
 			end case;
 		end if;
 	end process;
@@ -351,21 +368,31 @@ begin
 						outbuffer(1 downto 0) := "11";	
 					end if;
 				end if;
+			when ATARIST =>
+				if x>=x1+32 and x<x2-32 and y>=y1+48 and y<y2-8 then
+					if (x+y) mod 16 < 8 then
+						outbuffer(1 downto 0) := "00";	
+					elsif (x+y) mod 16 < 10 then
+						outbuffer(1 downto 0) := "11";	
+					end if;
+				end if;
 			when others =>
 			end case;
 			
-			-- generate sync
+			
+			-- generate csync
 			prev_csync := csync;
 			tmp_long := sw;
 			tmp_short := sw/2;
 			tmp_half := w/2;
 			csync := '1';
 			if synctype=XORSYNC then 
-				if x<tmp_long then
+				if x<tmp_long xor y<3 then
 					csync := '0';
 				end if;
-				if y<3 then
-					csync := not csync;
+			elsif synctype=ANYSYNC then 
+				if x<tmp_long or y<3 then
+					csync := '0';
 				end if;
 			elsif synctype=SERRATED then
 				if (y=0) and (x<tmp_long or (x>=tmp_half and x<tmp_half+tmp_short)) then                   -- normal sync, short sync
@@ -393,6 +420,18 @@ begin
 				end if;
 			end if;
 			
+			-- independently generate hsync,vsync
+			if x<tmp_long then
+				INV_HSYNC <= '1';
+			else
+				INV_HSYNC <= '0';
+			end if;
+			if y<3 then
+				INV_VSYNC <= '1';
+			else
+				INV_VSYNC <= '0';
+			end if;
+		
 			-- sequence out samples and sync
 			INV_LUM0 <= not outbuffer(2*(samples-1-s));
 			INV_LUM1 <= not outbuffer(2*(samples-1-s)+1);
@@ -422,5 +461,5 @@ begin
 			end if; 
 		end if;
 	end process;
-
+	
 end immediate;
