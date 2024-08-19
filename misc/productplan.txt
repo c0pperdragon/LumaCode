@@ -21,13 +21,17 @@ Adapters
 - C128 VDC mono to RCA socket
 
 Digital cables (to 16-pin connector)
-- DIY digital (no first connector)
-- CGA/EGA/etc. digital DB9
-- Sinclair QL, Spectrum 128, some Apple II with mod (8 way DIN)
-- Apple IIGS, Atari ST digital DB15 (requires mod)
-- Amiga digital DB23 (requires mod)
+- BBC micro (6 way DIN)  
+- Spectrum 128/+2, Sinclair QL (8 way DIN) 
+- EGA (DB9)
+- Amiga with digital hack (DB23) 
 
 Analog cables (to 6-pin connector)
-- DIY analog (no first connector)
-- Lumacode (RCA to pin 2 & 4)
-- Amstrad CPC, BBC micro, etc. (6 way DIN)
+- Lumacode and Mono (RCA)
+- Amstrad CPC, BBC micro (6 way DIN)
+- Spectrum +2A/3, Sinclair QL (8 way DIN) 
+
+
+Modding:
+For some Apple II - machines, the user can add an 8-pin DIN port
+that is compatible with the cables for the Spectrum 128/+2

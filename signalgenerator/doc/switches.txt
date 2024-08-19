@@ -9,6 +9,8 @@ OFF   ON  OFF  OFF    Atari 2600 PAL
 OFF   ON  OFF   ON    Atari 2600 NTSC
 OFF   ON   ON  OFF    TMS99xxA
 OFF   ON   ON   ON    ZX Spectrum
+ON   OFF  OFF  OFF    C128 VDC monochrome
+ON   OFF  OFF   ON    Atari ST monochrome
 others                NES
 
 When jumper set: 50Hz
