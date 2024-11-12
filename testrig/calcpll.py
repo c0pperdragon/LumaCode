@@ -17,3 +17,4 @@ calc(71.5909)   # Atari 8-bit/2600 NTSC
 calc(88.67236)  # VIC20 PAL
 calc(28.63636)  # 8xNTSC subcarrier (clock generator for VIC 20 PAL)
 calc(106.40685) # NES 4xPAL master clock
+calc(28.636352) # 2 times C16 master clock NTSC

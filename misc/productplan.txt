@@ -12,18 +12,19 @@ Lumacode sources
 - TIAdigitizer
 - TMSdigitizer
 - ULAdigitizer
+- VDPdigitizer
 - VIC20digitizer
 - VICIIdizer
 - VICIIdizer128
 
 Adapters
-- Atari ST mono to RCA socket
 - C128 VDC mono to RCA socket
 
 Digital cables (to 16-pin connector)
 - BBC micro (6 way DIN)  
 - Spectrum 128/+2, Sinclair QL (8 way DIN) 
 - EGA (DB9)
+- Atari ST monochrome
 - Amiga with digital hack (DB23) 
 
 Analog cables (to 6-pin connector)

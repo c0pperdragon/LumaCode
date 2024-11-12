@@ -1,0 +1,26 @@
+SCUBA, Version Diamond (64-bit) 3.13.0.56.2
+Sat Nov 09 17:08:41 2024
+
+Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
+Copyright (c) 1995 AT&T Corp.   All rights reserved.
+Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
+Copyright (c) 2001 Agere Systems   All rights reserved.
+Copyright (c) 2002-2023 Lattice Semiconductor Corporation,  All rights reserved.
+
+    Issued command   : C:\lscc\diamond\3.13\ispfpga\bin\nt64\scuba.exe -w -n PLL_56_81 -lang vhdl -synth synplify -arch xo2c00 -type pll -fin 25 -mdiv 2 -ndiv 1 -trimp 0 -phasep 0 -trimp_r -adiv 50 -trims 0 -phases 0 -trims_r -bdiv 11 -phase_cntl STATIC -fb_mode 1 
+    Circuit name     : PLL_56_81
+    Module type      : pll
+    Module Version   : 5.7
+    Ports            : 
+	Inputs       : CLKI
+	Outputs      : CLKOP, CLKOS
+    I/O buffer       : not inserted
+    EDIF output      : PLL_56_81.edn
+    VHDL output      : PLL_56_81.vhd
+    VHDL template    : PLL_56_81_tmpl.vhd
+    VHDL purpose     : for synthesis and simulation
+    Bus notation     : big endian
+    Report output    : PLL_56_81.srp
+    Element Usage    :
+        EHXPLLJ : 1
+    Estimated Resource Usage:
