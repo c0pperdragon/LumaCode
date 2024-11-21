@@ -1,20 +1,36 @@
-Digital ports
+Digital ports on cable tester
 
-      BBC micro  Spectrum128  EGA    AppleIIGS          
-      (6way DIN) (8way DIN)   (DB9)  (16pin IDC)   
-G0                                   1	           CP1.D1    13
-R0                                   2             CP2.D1    28
-B0                                   3             CP1.D2    14
-G1                                   4             CP2.D2    27
-R1                                   5             CP1.D3    15
-B1                                   6	 	       CP2.D3    26
-GND   5          2            1      7             left GND  20
-G2/I             3            6      8             CP2.D4    25
-R2                            2      9             CP1.D4    16
-B2                            7      10            CP2.D5    24
-R3    1          7            3      11            CP1.D5    17
-HS/CS 4          4            8      12            CP2.D6/D0 23/29
-G3    2          6            4      13            CP1.D6    18
-VS                            9      14            CP2.D7    22
-B3    3          8            5      15            CP1.D7    19
-                                     16
+      Spectrum128  EGA    Pin header
+      (8way DIN)   (DB9)  (16 pin)      
+CS    4                                 CP2.D0      29
+G0                        1             CP0/1.D1    13/3
+R0                        2             CP2.D1      28
+B0                        3             CP0/1.D2    14/4
+G1                        4             CP2.D2      27
+R1                        5             CP0/1.D3    15/5
+B1                        6             CP2.D3      26
+GND   2            1      7             any GND     
+G2/I  3            6      8             CP2.D4      25
+R2                 2      9             CP0/1.D4    16/6
+B2                 7      10            CP2.D5      24
+R3    7            3      11            CP0/1.D5    17/7
+HS                 8      12            CP2.D6      23
+G3    6            4      13            CP0/1.D6    18/8
+VS                 9      14            CP2.D7      22
+B3    8            5      15            CP0/1.D7    19/9
+                          16
+
+
+Analog port on cable tester
+
+      CPC, BBC Micro        
+      (6way DIN)
+R     1                  CP3.D0 (1k)    39
+                       + CP3.D1 (1k)    38
+G     2                  CP3.D2 (2k)    37
+                       + CP3.D3 (1k)    36
+B     3                  CP3.D4 (1k)    35
+                       + CP3.D5 (1k)    34
+CS    4                  CP3.D6         33
+GND   5                  GND            31
+

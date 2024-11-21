@@ -16,8 +16,8 @@ CoreRevision=5.8
 ModuleName=PLL_57
 SourceFormat=VHDL
 ParameterFileVersion=1.0
-Date=11/18/2024
-Time=17:44:17
+Date=11/19/2024
+Time=23:41:16
 
 [Parameters]
 Verilog=0
