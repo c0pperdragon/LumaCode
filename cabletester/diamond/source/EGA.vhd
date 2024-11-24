@@ -124,11 +124,11 @@ begin
 			end if;
 			
 			if phase=0 or phase=1 then 
-				D <= B(3) & G(3) & R(3) & R(2) & R(1) & B(0) & G(0) & "0";			
+				D <= B(3) & G(3) & R(3) & R(2) & R(1) & B(0) & G(0) & (not HS);			
 			elsif phase=2 then
 				D <= VS &  HS & B(2) & G(2) & B(1) &  G(1) & R(0) & CS;
             else			
-				D <= "0" & CS & B(3) & B(3) & G(3) & G(3) & R(3) & R(3);
+				D <= (not VS) & CS & B(3) & B(3) & G(3) & G(3) & R(3) & R(3);
 			end if;
 			
 			if phase<3 then

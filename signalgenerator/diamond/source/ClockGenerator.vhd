@@ -131,6 +131,7 @@ begin
 					when MHZ_31_922 => diva:=60; divb:=15; 
 					when MHZ_32_000 => diva:=60; divb:=15; 
 					when MHZ_32_216 => diva:=97; divb:=24;		
+					when MHZ_24_000 => diva:=51; divb:=17;		
 					when others     => diva:=1; divb:=1;
 					end case;
 					WB_cyc <= '1';            -- start a cycle

@@ -2,6 +2,8 @@ Digital ports on cable tester
 
       Spectrum128  EGA    Pin header
       (8way DIN)   (DB9)  (16 pin)      
+-VS   (1)                               CP3.D7      32
+-HS   (5)                               CP0/1.D0    12/2
 CS    4                                 CP2.D0      29
 G0                        1             CP0/1.D1    13/3
 R0                        2             CP2.D1      28
@@ -33,4 +35,5 @@ B     3                  CP3.D4 (1k)    35
                        + CP3.D5 (1k)    34
 CS    4                  CP3.D6         33
 GND   5                  GND            31
+
 

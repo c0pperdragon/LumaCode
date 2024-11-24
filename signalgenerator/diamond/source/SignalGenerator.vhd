@@ -13,10 +13,7 @@ entity SignalGenerator is
 		-- generated lumacode signals
 		INV_CSYNC       : out std_logic;
 		INV_LUM0        : out std_logic;
-		INV_LUM1        : out std_logic;
-		-- extra signals for different sync test
-		INV_VSYNC       : out std_logic;
-		INV_HSYNC       : out std_logic
+		INV_LUM1        : out std_logic
 	);
 end entity;
 
@@ -420,18 +417,6 @@ begin
 				end if;
 			end if;
 			
-			-- independently generate hsync,vsync
-			if x<tmp_long then
-				INV_HSYNC <= '1';
-			else
-				INV_HSYNC <= '0';
-			end if;
-			if y<3 then
-				INV_VSYNC <= '1';
-			else
-				INV_VSYNC <= '0';
-			end if;
-		
 			-- sequence out samples and sync
 			INV_LUM0 <= not outbuffer(2*(samples-1-s));
 			INV_LUM1 <= not outbuffer(2*(samples-1-s)+1);
