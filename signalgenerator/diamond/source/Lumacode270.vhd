@@ -53,10 +53,10 @@ begin
 	variable totalheight:integer range 0 to 511;
 	begin
 		if SEL50HZ='1' then
-			totalwidth := 528;
-			totalheight := 303;
-			left := 40;
-			top := 31;
+			totalwidth := 500;
+			totalheight := 320;
+			left := 16;
+			top := 43;
 		else
 			totalwidth := 490;
 			totalheight := 273;
@@ -103,7 +103,7 @@ begin
 			
 			-- make sync
 			if SEL50HZ='1' then
-				if x<32 or (y<3 and x<totalwidth-32) then
+				if x<8 or (y<3 and x<totalwidth-8) then
 					INV_CSYNC <= '1';
 				else
 					INV_CSYNC <= '0';

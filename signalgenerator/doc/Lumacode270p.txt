@@ -1,0 +1,24 @@
+1080p-scaleable SD signal (16:9)
+
+Input 50Hz:
+    v sync           3 lines
+    v back porch    40 lines
+    v visible      270 lines
+    v front porch    7 lines
+    v total        320 lines
+
+    h sync           8 pixels (1 us)
+    h back porch     8 pixels (1 us)
+    h visible      480 pixels (60 us)
+    h front porch    4 pixels (0.5 us)
+    h total        500 pixels (62.5 us)
+
+    pixel rate 8 MHz
+    frame rate 50 Hz
+
+Output (CVT-RBv2 1080p 50Hz)
+   v total  1120
+   h total  2000
+   
+   pixel rate  112 MHz
+   frame rate 50 Hz

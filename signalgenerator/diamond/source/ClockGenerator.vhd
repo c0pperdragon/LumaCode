@@ -117,21 +117,26 @@ begin
 			elsif reconfiguring=0 then
 				if freq_set /= freq_now or not didinit then
 					case freq_set is 
+					when MHZ_7_159  => diva:=51; divb:=57;
+					when MHZ_8_000  => diva:=50; divb:=50;
 					when MHZ_8_181  => diva:=90; divb:=88;
 					when MHZ_8_867  => diva:=92; divb:=83;
 					when MHZ_10_738 => diva:=98; divb:=73;
 					when MHZ_14_000 => diva:=56; divb:=32;
+					when MHZ_14_110 => diva:=97; divb:=55;
 					when MHZ_14_187 => diva:=94; divb:=53;
 					when MHZ_14_318 => diva:=68; divb:=38;
 					when MHZ_15_763 => diva:=67; divb:=34; 
+					when MHZ_15_961 => diva:=50; divb:=25;
 					when MHZ_16_000 => diva:=50; divb:=25; 
+					when MHZ_16_108 => diva:=99; divb:=49;
 					when MHZ_16_363 => diva:=90; divb:=44; 
 					when MHZ_21_281 => diva:=93; divb:=35;
 					when MHZ_21_477 => diva:=51; divb:=19;
+					when MHZ_24_000 => diva:=51; divb:=17;		
 					when MHZ_31_922 => diva:=60; divb:=15; 
 					when MHZ_32_000 => diva:=60; divb:=15; 
 					when MHZ_32_216 => diva:=97; divb:=24;		
-					when MHZ_24_000 => diva:=51; divb:=17;		
 					when others     => diva:=1; divb:=1;
 					end case;
 					WB_cyc <= '1';            -- start a cycle
