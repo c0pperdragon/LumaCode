@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<DiamondModule name="TITLES" module="ROM" VendorName="Lattice Semiconductor Corporation" generator="IPexpress" date="2024 11 26 18:43:21.357" version="5.4" type="Module" synthesis="synplify" source_format="VHDL">
+<DiamondModule name="TITLES" module="ROM" VendorName="Lattice Semiconductor Corporation" generator="IPexpress" date="2024 11 27 14:39:34.950" version="5.4" type="Module" synthesis="synplify" source_format="VHDL">
   <Package>
-		<File name="" type="" modified="2024 11 26 18:43:20.589"/>
-		<File name="TITLES.lpc" type="lpc" modified="2024 11 26 18:43:17.124"/>
-		<File name="TITLES.vhd" type="top_level_vhdl" modified="2024 11 26 18:43:17.295"/>
-		<File name="TITLES_tmpl.vhd" type="template_vhdl" modified="2024 11 26 18:43:17.297"/>
-		<File name="c:/users/reinhard/documents/github_lumacode/lumacode/signalgenerator/diamond/source/titles.mem" type="mem" modified="2024 11 26 18:39:59.699"/>
-		<File name="tb_TITLES_tmpl.vhd" type="testbench_vhdl" modified="2024 11 26 18:43:17.301"/>
+		<File name="" type="" modified="2024 11 27 14:39:34.405"/>
+		<File name="TITLES.lpc" type="lpc" modified="2024 11 27 14:39:30.860"/>
+		<File name="TITLES.vhd" type="top_level_vhdl" modified="2024 11 27 14:39:31.059"/>
+		<File name="TITLES_tmpl.vhd" type="template_vhdl" modified="2024 11 27 14:39:31.059"/>
+		<File name="c:/users/reinhard/documents/github_lumacode/lumacode/signalgenerator/diamond/source/titles.mem" type="mem" modified="2024 11 27 14:22:30.979"/>
+		<File name="tb_TITLES_tmpl.vhd" type="testbench_vhdl" modified="2024 11 27 14:39:31.099"/>
   </Package>
 </DiamondModule>

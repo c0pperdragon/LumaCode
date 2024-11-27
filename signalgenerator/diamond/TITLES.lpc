@@ -16,8 +16,8 @@ CoreRevision=5.4
 ModuleName=TITLES
 SourceFormat=VHDL
 ParameterFileVersion=1.0
-Date=11/26/2024
-Time=18:43:17
+Date=11/27/2024
+Time=14:39:30
 
 [Parameters]
 Verilog=0
