@@ -109,7 +109,7 @@ begin
 			when "1010" => FREQUENCY<=MHZ_32_216; w<=341; h<=262; samples<=6; x1<=66;  y1<=20; x2<=66+256;  y2<=20+240; sw<=25; pattern<=NES;       synctype<=SIMPLE;  -- 60Hz NES
 			when "1011" => FREQUENCY<=MHZ_16_108; w<=342; h<=262; samples<=3; x1<=73;  y1<=43; x2<=66+256;  y2<=43+192; sw<=26; pattern<=SMS;       synctype<=SIMPLE;  --  Master System 60Hz
 			when "1100" => FREQUENCY<=MHZ_7_159;  w<=228; h<=262; samples<=2; x1<=48;  y1<=42; x2<=48+160;  y2<=43+192; sw<=14; pattern<=Intelli;   synctype<=SIMPLE;  --  Intellivision 60Hz
-			when others => FREQUENCY<=MHZ_24_000; w<=490; h<=273; samples<=3; x1<=8;   y1<=2;  x2<=8+480;   y2<=2+270;  sw<=4;  pattern<=LC270;     synctype<=SIMPLE;  --  Lumacode270p 60Hz
+			when others => FREQUENCY<=MHZ_24_000; w<=513; h<=312; samples<=3; x1<=30;  y1<=40; x2<=30+480; y2<=40+270; sw<=24;  pattern<=LC270;    synctype<=SIMPLE;  -- Lumacode270p 50Hz 
 			end case;
 		else
 			case SELECTION is 
@@ -126,7 +126,7 @@ begin
 			when "1010" => FREQUENCY<=MHZ_31_922; w<=341; h<=312; samples<=6; x1<=66;  y1<=42; x2<=66+256; y2<=42+240; sw<=25; pattern<=NES;       synctype<=SIMPLE;  -- 50Hz NES
 			when "1011" => FREQUENCY<=MHZ_15_961; w<=342; h<=312; samples<=3; x1<=73;  y1<=43; x2<=66+256; y2<=43+224; sw<=26; pattern<=SMS;       synctype<=SIMPLE;  --  Master System 50Hz
 			when "1100" => FREQUENCY<=MHZ_8_000;  w<=256; h<=312; samples<=2; x1<=60;  y1<=66; x2<=60+160; y2<=66+192; sw<=17; pattern<=Intelli;  synctype<=SIMPLE;  --  Intellivision 50Hz
-			when others => FREQUENCY<=MHZ_24_000; w<=500; h<=320; samples<=3; x1<=16;  y1<=43; x2<=16+480; y2<=43+270; sw<=8;  pattern<=LC270;     synctype<=SIMPLE;  -- Lumacode270p 50Hz 
+			when others => FREQUENCY<=MHZ_24_000; w<=513; h<=312; samples<=3; x1<=30;  y1<=40; x2<=30+480; y2<=40+270; sw<=24;  pattern<=LC270;    synctype<=SIMPLE;  -- Lumacode270p 50Hz 
 			end case;
 		end if;
 	end process;
@@ -136,7 +136,6 @@ begin
 	variable x:integer range 0 to 1023 := 0;
 	variable y:integer range 0 to 512 := 0;
 	variable s:integer range 0 to 7 := 0;	
-	variable prev_s:integer range 0 to 7;
 	
 	variable csync : std_logic;
 	variable prev_csync: std_logic;
@@ -160,14 +159,6 @@ begin
 	variable tmp_col:integer range 0 to 63;
 	begin
 		if rising_edge(CLK) then
-			-- sequence out samples and sync
-			INV_LUM0 <= not outbuffer(2*(samples-1-prev_s));
-			INV_LUM1 <= not outbuffer(2*(samples-1-prev_s)+1);
-			if syncdelay=0 then
-				INV_CSYNC <= not csync; 
-			else
-				INV_CSYNC <= not prev_csync;
-			end if;
 				
 			-- create background black and border frame
 			outbuffer := "00000000000000";
@@ -186,7 +177,7 @@ begin
 					when Atari2600 => 
 						outbuffer := "00000000001111";
 					when NES => 
-						outbuffer := "00000000110010";
+						outbuffer := "00111100001010"; -- 110010
 					when Intelli => 					
 						outbuffer := "00000000000111";
 					when others =>
@@ -285,7 +276,7 @@ begin
 					end case;
 				end if;
 			end if;
-						
+			
 			-- generate csync
 			prev_csync := csync;
 			tmp_long := sw;
@@ -311,7 +302,7 @@ begin
 					csync := '0';
 				end if;	
 			else
-				if y<1 or (y1>3 and y<3) then
+				if y<3 then
 					if x<w-tmp_long then
 						csync:='0';
 					end if;
@@ -322,13 +313,21 @@ begin
 				end if;
 			end if;
 			
+			-- sequence out samples and sync
+			INV_LUM0 <= not outbuffer(2*(samples-1-s));
+			INV_LUM1 <= not outbuffer(2*(samples-1-s)+1);
+			if syncdelay=0 then
+				INV_CSYNC <= not csync; 
+			else
+				INV_CSYNC <= not prev_csync;
+			end if;
+						
 			-- access the titles bitmap
 			titles_address(7) <= SEL50HZ;
 			titles_address(6 downto 3) <= SELECTION; 			
 			titles_address(2 downto 0) <= std_logic_vector(to_unsigned( y-(y1+8), 3));
 			
 			-- progress counters
-			prev_s := s; -- needed for serializing
 			if SEL50HZ='0' and pattern=NES and s=0 and x=200 and y=260 then -- skip half pixel for NES 60 Hz
 				s:=4;
 			elsif s+1 /= samples then

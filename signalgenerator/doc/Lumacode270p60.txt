@@ -1,7 +1,0 @@
-sampling=5,5,5,5,5,5,5,1,1,0,1,1,0,0,1,2,0,2,1,0,60,45,256,256,10,29,256,256
-geometry=8,0,480,270,480,270,2,2,3,2,24000000,1470,4000,273,4,0,0
-palette=RGB6(Lumacode)
-palette_control=10
-overclock_cpu=20
-overclock_core=20
-overclock_sdram=20
