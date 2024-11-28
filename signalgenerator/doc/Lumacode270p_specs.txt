@@ -2,23 +2,16 @@
 
 Input 50Hz:
     v sync           3 lines
-    v back porch    40 lines
+    v back porch    37 lines
     v visible      270 lines
-    v front porch    7 lines
-    v total        320 lines
+    v front porch    2 lines
+    v total        312 lines
 
-    h sync           8 pixels (1 us)
-    h back porch     8 pixels (1 us)
+    h sync          24 pixels (3 us)
+    h back porch     6 pixels (0.75 us)
     h visible      480 pixels (60 us)
-    h front porch    4 pixels (0.5 us)
-    h total        500 pixels (62.5 us)
+    h front porch    3 pixels (0.375 us)
+    h total        513 pixels (64.125 us)
 
     pixel rate 8 MHz
-    frame rate 50 Hz
-
-Output (CVT-RBv2 1080p 50Hz)
-   v total  1120
-   h total  2000
-   
-   pixel rate  112 MHz
-   frame rate 50 Hz
+    frame rate 49.9825 Hz
