@@ -1,0 +1,17 @@
+1080p-scaleable SD signal (16:9)
+
+Input 50Hz:
+    v sync           3 lines
+    v back porch    37 lines
+    v visible      270 lines
+    v front porch    2 lines
+    v total        312 lines
+
+    h sync          24 pixels (3 us)
+    h back porch     6 pixels (0.75 us)
+    h visible      480 pixels (60 us)
+    h front porch    3 pixels (0.375 us)
+    h total        513 pixels (64.125 us)
+
+    pixel rate 8 MHz
+    frame rate 49.9825 Hz
