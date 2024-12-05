@@ -1,16 +1,18 @@
 // Create a Lumacode270p test image.
 // Run on an Attiny1604 with 24MHz, 5V
-// Disable millis() to save flash space
+
+// All output pins are connected to the outgoing lum wire with resistors (see below)
+// this combined signal is pulled to GND with 180 Ohm for correct levels when
+// feeding then into a receiver with 75 Ohm termination (the RGBtoHDMI).
 
 // pin  port   usage
 // 13   PA3    EXTCLK (24 MHz)
-// 11   PA1    CSYNC
-// 9    PB0    LUM0
-// 8    PB1    LUM1
+// 11   PA1    CSYNC    680 Ohm
+// 9    PB0    LUM0    1000 Ohm
+// 8    PB1    LUM1     470 Ohm
 
-PROGMEM const byte picture[256*48+16] = {
+PROGMEM const byte picture[256*48] = {
   #include "picture.h"
-  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0  // to not overrun end
 };
 
 void setup() {
@@ -61,16 +63,18 @@ void setup() {
 #define X6 " out %[portb],r22 \n out %[portb],r24 \n out %[portb],r26 \n"
 #define X7 " out %[portb],r23 \n out %[portb],r24 \n out %[portb],r26 \n"
 
-#define PREP0 " lpm r0,Z+ \n lpm r1,Z+ \n lpm r2,Z+ \n lpm r3,Z+ \n lpm r4,Z+ \n lpm r5,Z+ \n lpm r6,Z+ \n lpm r7,Z+ \n"
-#define PREP1 " lpm r8,Z+ \n lpm r9,Z+ \n lpm r10,Z+\n lpm r11,Z+\n lpm r12,Z+\n lpm r13,Z+\n lpm r14,Z+\n lpm r15,Z+\n"
-#define PREP " lpm r17,Z+ \n push r17 \n"
-#define MONO " pop r17 \n out %[portb],r17 \n lsr r17 \n lsr r17 \n out %[portb],r17 \n lsr r17 \n lsr r17 \n out %[portb],r17 \n lsr r17 \n lsr r17 \n out %[portb],r17 \n" 
+#define PREP0 " lpm r0,Z+ \n lpm r1,Z+ \n lpm r2,Z+ \n lpm r3,Z+ \n lpm r4,Z+ \n lpm r5,Z+ \n"
+#define PREP1 " lpm r6,Z+ \n lpm r7,Z+ \n lpm r8,Z+ \n lpm r9,Z+ \n lpm r10,Z+\n lpm r11,Z+\n"
+#define PREP2 " lpm r12,Z+\n lpm r13,Z+\n lpm r14,Z+\n lpm r15,Z+\n lpm r16,Z+\n"
+#define PREP  " lpm r17,Z+ \n push r17 \n"
+#define MONO17 " nop \n out %[portb],r17 \n lsr r17 \n lsr r17 \n out %[portb],r17 \n lsr r17 \n lsr r17 \n out %[portb],r17 \n lsr r17 \n lsr r17 \n out %[portb],r17 \n" 
+#define MONO  " pop r17 \n out %[portb],r17 \n lsr r17 \n lsr r17 \n out %[portb],r17 \n lsr r17 \n lsr r17 \n out %[portb],r17 \n lsr r17 \n lsr r17 \n out %[portb],r17 \n" 
 
 void loop() {
   __asm__ __volatile__         // AVRxt core
   (
-    " ldi r16,0b00000000  \n"  // line counter
     " ldi r17,0b00000000  \n"  // temporary
+    " ldi r19,0b00000000  \n"  // line counter
     " ldi r20,0b00000000  \n"  // level 0
     " ldi r21,0b00000001  \n"  // level 1
     " ldi r22,0b00000010  \n"  // level 2
@@ -82,22 +86,22 @@ void loop() {
     " mov r31,r29         \n"  // z register for picture address
 
     "framestart:           \n"
-    // 3 vertical syncs (r16 is pre-loaded)
+    // 3 vertical syncs (r19 is pre-loaded)
     "vsync:                \n"   //       1539 each
     " cbi %[porta],1      \n"   // 1
       W1000 W400 W60 W6         // 1466
     " sbi %[porta],1      \n"   // 1
       W60 W8                    // 68
-    " dec r16             \n"   // 1
+    " dec r19             \n"   // 1
     " brne vsync          \n"   // 2
-    " ldi r16,37          \n"   // 0 (use saved cycle)
+    " ldi r19,37          \n"   // 0 (use saved cycle)
     // 37 lines of back porch
     "backporch:            \n"   //       1539 each
       HSYNC                     // 73
       W1000 W400 W60 W3         // 1463
-    " dec r16             \n"   // 1
+    " dec r19             \n"   // 1
     " brne backporch      \n"   // 2
-    " ldi r16,6           \n"   // 0 (use saved cycle)
+    " ldi r19,6           \n"   // 0 (use saved cycle)
     // first line of top decoration
     "top1:                 \n"   //      1539 each
       HSYNC                     // 73
@@ -105,7 +109,9 @@ void loop() {
     " out %[portb],R23    \n"   // 1      
       W20                       // 20     
     " out %[portb],R20    \n"   // 1      
-      W1000 W300 W90 W7         // 1397   
+      W1000 W300 W60 W1         // 1361   
+      PREP0                     // 18
+      PREP1                     // 18
     " out %[portb],R23    \n"   // 1 
       W20                       // 20
     " out %[portb],R20    \n"   // 1 
@@ -122,28 +128,28 @@ void loop() {
       W2                        // 2     
     " out %[portb],R20    \n"   // 1      
       W5                        // 5     
-    " dec r16             \n"   // 1
+    " dec r19             \n"   // 1
     " brne top            \n"   // 2
-    " ldi r16,0           \n"   // 0 (use saved cycle)
+    " ldi r19,0           \n"   // 0 (use saved cycle)
     // 256 lines of content           
     "content:             \n"   //      1539 each
     " cbi %[porta],1      \n"   // 1
+      PREP2                     // 15
       PREP PREP PREP PREP PREP  // 20
       PREP PREP PREP PREP PREP  // 20
-      PREP PREP PREP PREP PREP  // 20
-      PREP                      // 4
-    " mov r24,r16         \n"   // 1
+      PREP PREP PREP PREP       // 16
+    " sbi %[porta],1      \n"   // 1
+    " mov r24,r19         \n"   // 1
     " swap r24            \n"   // 1
     " mov r25,r24         \n"   // 1
     " lsr r24             \n"   // 1
     " lsr r25             \n"   // 1
     " lsr r25             \n"   // 1
     " andi r25,0x02       \n"   // 1
-    " sbi %[porta],1      \n"   // 1
     " mov r26,r25         \n"   // 1
     " ori r26,0x01        \n"   // 1
       PREP PREP PREP PREP PREP  // 20
-      PREP PREP PREP PREP       // 16     // 111
+      PREP PREP PREP            // 12   // 114
       X0 X0 X0 X0 X0 X0 X0 X0 X0 X0 X0 X0 X0 X0 X0 X0 X0 X0 X0 X0 X0 X0 X0 X0 X0 X0 X0 X0 X0 X0 X0 X0  
       X1 X1 X1 X1 X1 X1 X1 X1 X1 X1 X1 X1 X1 X1 X1 X1 X1 X1 X1 X1 X1 X1 X1 X1 X1 X1 X1 X1 X1 X1 X1 X1 
       X2 X2 X2 X2 X2 X2 X2 X2 X2 X2 X2 X2 X2 X2 X2 X2 X2 X2 X2 X2 X2 X2 X2 X2 X2 X2 X2 X2 X2 X2 X2 X2
@@ -154,21 +160,38 @@ void loop() {
       X7 X7 X7 X7 X7 X7 X7 X7 X7 X7 X7 X7 X7 X7 X7 X7 X7 X7 X7 X7 X7 X7 X7 X7 X7 X7 X7 X7 X7 X7 X7 X7  // 768
     " out %[portb],r20    \n"   // 1
       PREP PREP PREP PREP PREP  // 20
-      PREP PREP                 // 8
+      PREP PREP PREP PREP       // 16
+      MONO MONO MONO MONO MONO MONO MONO MONO
+      MONO MONO MONO MONO MONO MONO MONO MONO
+      MONO MONO MONO MONO MONO MONO MONO MONO
+      MONO MONO MONO MONO MONO MONO MONO  // 372
+    " mov r17,r16\n" MONO17     
+    " mov r17,r15\n" MONO17     
+    " mov r17,r14\n" MONO17     
+    " mov r17,r13\n" MONO17     
+    " mov r17,r12\n" MONO17     
+    " mov r17,r11\n" MONO17     
+    " mov r17,r10\n" MONO17     
+    " mov r17,r9 \n" MONO17     
+    " mov r17,r8 \n" MONO17     
+    " mov r17,r7 \n" MONO17     
+    " mov r17,r6 \n" MONO17     
+    " mov r17,r5 \n" MONO17     
+    " mov r17,r4 \n" MONO17     
+    " mov r17,r3 \n" MONO17     
+    " mov r17,r2 \n" MONO17     
+    " mov r17,r1 \n" MONO17     
+    " mov r17,r0 \n" MONO17     // 204
       W2                        // 2
-      MONO MONO MONO MONO MONO MONO MONO MONO
-      MONO MONO MONO MONO MONO MONO MONO MONO
-      MONO MONO MONO MONO MONO MONO MONO MONO
-      MONO MONO MONO MONO MONO MONO MONO MONO  // 384
-      W100 W90 W2               // 192    
     " out %[portb],r20    \n"   // 1
-      PREP0                     // 24
-      PREP1                     // 24
-    " inc r16             \n"   // 1
+      PREP0                     // 18
+      PREP1                     // 18
+      W1                        // 1
+    " inc r19             \n"   // 1
     " breq contentdone    \n"   // 2 (if taken)
     " rjmp content        \n"   // 1 (compensate non-taken branch)
     "contentdone:          \n"   //
-    " ldi r16,6           \n"   // 1 
+    " ldi r19,6           \n"   // 1 
     // 6 lines of bottom decoration
     "bottom:               \n"    //      1539 each
       HSYNC                     // 73
@@ -181,9 +204,9 @@ void loop() {
       W2                        // 2     
     " out %[portb],R20    \n"   // 1      
       W5                        // 5     
-    " dec r16             \n"   // 1
+    " dec r19             \n"   // 1
     " brne bottom         \n"   // 2
-    " ldi r16,3           \n"   // 0 (use saved cycle)
+    " ldi r19,3           \n"   // 0 (use saved cycle)
     // last line of bottom decoration
     "bottom7:              \n"   //      1539 each
       HSYNC                     // 73
