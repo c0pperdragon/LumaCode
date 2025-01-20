@@ -128,7 +128,7 @@ begin
 			elsif phase=2 then
 				D <= VS &  HS & B(2) & G(2) & B(1) &  G(1) & R(0) & CS;
             else			
-				D <= (not VS) & CS & B(3) & B(3) & G(3) & G(3) & R(3) & R(3);
+				D <= (not VS) & CS & B(3) & B(2) & G(3) & G(2) & R(3) & R(2);
 			end if;
 			
 			if phase<3 then
