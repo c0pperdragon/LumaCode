@@ -19,3 +19,4 @@ calc(28.63636)  # 8xNTSC subcarrier (clock generator for VIC 20 PAL)
 calc(106.40685) # NES 4xPAL master clock
 calc(28.636352) # 2 times C16 master clock NTSC
 calc(57.272724) # 4 times AppleIIGS(NTSC) clock
+calc(7.080000)  # 2 times G7000 clock
