@@ -62,7 +62,8 @@ constant Speccy:integer:=7;
 constant NES:integer:=8;
 constant SMS:integer:=9;
 constant Intelli:integer:=10;
-constant LC270:integer:=11;
+constant G7000:integer:=11;
+constant LC270:integer:=12;
 
 constant SERRATED:integer:=0;
 constant SIMPLE:integer:=1;
@@ -108,7 +109,8 @@ begin
 			when "1001" => FREQUENCY<=MHZ_14_110; w<=448; h<=264; samples<=2; x1<=120; y1<=40; x2<=120+256; y2<=40+192; sw<=33; pattern<=Speccy;    synctype<=SERRATED;-- 60Hz ZX Spectrum
 			when "1010" => FREQUENCY<=MHZ_32_216; w<=341; h<=262; samples<=6; x1<=66;  y1<=20; x2<=66+256;  y2<=20+240; sw<=25; pattern<=NES;       synctype<=SIMPLE;  -- 60Hz NES
 			when "1011" => FREQUENCY<=MHZ_16_108; w<=342; h<=262; samples<=3; x1<=73;  y1<=43; x2<=66+256;  y2<=43+192; sw<=26; pattern<=SMS;       synctype<=SIMPLE;  --  Master System 60Hz
-			when "1100" => FREQUENCY<=MHZ_7_159;  w<=228; h<=262; samples<=2; x1<=48;  y1<=42; x2<=48+160;  y2<=43+192; sw<=14; pattern<=Intelli;   synctype<=SIMPLE;  --  Intellivision 60Hz
+			when "1100" => FREQUENCY<=MHZ_7_159;  w<=228; h<=262; samples<=2; x1<=48;  y1<=42; x2<=48+160;  y2<=42+192; sw<=14; pattern<=Intelli;   synctype<=SIMPLE;  --  Intellivision 60Hz
+			when "1101" => FREQUENCY<=MHZ_7_159;  w<=228; h<=262; samples<=2; x1<=48;  y1<=42; x2<=48+160;  y2<=42+192; sw<=14; pattern<=G7000;    synctype<=SIMPLE;  --  Odyssey II 60Hz
 			when others => FREQUENCY<=MHZ_24_000; w<=513; h<=312; samples<=3; x1<=30;  y1<=40; x2<=30+480; y2<=40+270; sw<=24;  pattern<=LC270;    synctype<=SIMPLE;  -- Lumacode270p 50Hz 
 			end case;
 		else
@@ -124,13 +126,13 @@ begin
 			when "1000" => FREQUENCY<=MHZ_10_738; w<=342; h<=313; samples<=2; x1<=60;  y1<=68; x2<=60+256; y2<=68+192; sw<=26; pattern<=TMS;       synctype<=SIMPLE;  -- 50Hz TMS99xxA
 			when "1001" => FREQUENCY<=MHZ_14_000; w<=448; h<=312; samples<=2; x1<=120; y1<=66; x2<=120+256; y2<=66+192;sw<=33; pattern<=Speccy;    synctype<=SERRATED;-- 50Hz ZX Spectrum
 			when "1010" => FREQUENCY<=MHZ_31_922; w<=341; h<=312; samples<=6; x1<=66;  y1<=42; x2<=66+256; y2<=42+240; sw<=25; pattern<=NES;       synctype<=SIMPLE;  -- 50Hz NES
-			when "1011" => FREQUENCY<=MHZ_15_961; w<=342; h<=312; samples<=3; x1<=73;  y1<=43; x2<=66+256; y2<=43+224; sw<=26; pattern<=SMS;       synctype<=SIMPLE;  --  Master System 50Hz
+			when "1011" => FREQUENCY<=MHZ_15_961; w<=342; h<=312; samples<=3; x1<=73;  y1<=43; x2<=66+256; y2<=43+224; sw<=26; pattern<=SMS;       synctype<=SIMPLE;  -- Master System 50Hz
 			when "1100" => FREQUENCY<=MHZ_8_000;  w<=256; h<=312; samples<=2; x1<=60;  y1<=66; x2<=60+160; y2<=66+192; sw<=17; pattern<=Intelli;  synctype<=SIMPLE;  --  Intellivision 50Hz
+			when "1101" => FREQUENCY<=MHZ_7_080;  w<=228; h<=312; samples<=2; x1<=60;  y1<=66; x2<=60+160; y2<=66+192; sw<=17; pattern<=G7000;    synctype<=SIMPLE;  --  G7000 50Hz
 			when others => FREQUENCY<=MHZ_24_000; w<=513; h<=312; samples<=3; x1<=30;  y1<=40; x2<=30+480; y2<=40+270; sw<=24;  pattern<=LC270;    synctype<=SIMPLE;  -- Lumacode270p 50Hz 
 			end case;
 		end if;
 	end process;
-
 
 	process (CLK)
 	variable x:integer range 0 to 1023 := 0;
@@ -257,6 +259,10 @@ begin
 							outbuffer(1 downto 0) := std_logic_vector(to_unsigned( ((cy-56)/16) mod 4, 2));
 						end if;
 					when Intelli =>
+						if cx>=16 and cx<160-16 and cy>=56 and cy<56+128 then
+							outbuffer(3 downto 0) := std_logic_vector(to_unsigned( ((cy-56)/8), 4));	
+						end if;
+					when G7000 =>
 						if cx>=16 and cx<160-16 and cy>=56 and cy<56+128 then
 							outbuffer(3 downto 0) := std_logic_vector(to_unsigned( ((cy-56)/8), 4));	
 						end if;

@@ -12,6 +12,7 @@ def calc(target):
                 bestdivider = divider
     print ("best for ",target,": ",bestvco/8,":",bestdivider,"=", bestvco/bestdivider);
 
+calc(7.080000)
 calc(7.159088)
 calc(8.000000)
 calc(8.181817)

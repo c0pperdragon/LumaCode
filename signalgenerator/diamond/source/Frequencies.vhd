@@ -1,6 +1,7 @@
 package Frequencies is   
 
 	type t_Frequency is (
+	    MHZ_7_080,       -- G7000 2x pixel clock = 7.080000
 	    MHZ_7_159,       -- NTSC Intellivion 2x pixel clock = 7.159088
 	    MHZ_8_000,       -- PAL Intellivion 2x pixel clock = 8.000000
 		MHZ_8_181,       -- NTSC VIC 20 2x pixel clock = 8.181817

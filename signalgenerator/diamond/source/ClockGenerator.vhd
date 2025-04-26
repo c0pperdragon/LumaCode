@@ -117,6 +117,7 @@ begin
 			elsif reconfiguring=0 then
 				if freq_set /= freq_now or not didinit then
 					case freq_set is 
+					when MHZ_7_080  => diva:=77; divb:=87;
 					when MHZ_7_159  => diva:=51; divb:=57;
 					when MHZ_8_000  => diva:=50; divb:=50;
 					when MHZ_8_181  => diva:=90; divb:=88;
