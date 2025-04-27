@@ -134,9 +134,9 @@ begin
 					when MHZ_16_363 => diva:=90; divb:=44; 
 					when MHZ_21_281 => diva:=93; divb:=35;
 					when MHZ_21_477 => diva:=51; divb:=19;
-					when MHZ_24_000 => diva:=51; divb:=17;		
+					when MHZ_24_000 => diva:=51; divb:=17;	
+					when MHZ_28_636 => diva:=68; divb:=19;
 					when MHZ_31_922 => diva:=60; divb:=15; 
-					when MHZ_32_000 => diva:=60; divb:=15; 
 					when MHZ_32_216 => diva:=97; divb:=24;		
 					when others     => diva:=1; divb:=1;
 					end case;

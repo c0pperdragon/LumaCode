@@ -56,7 +56,7 @@ constant VIC20:integer:=1;
 constant C16:integer:=2;
 constant Atari8:integer:=3;
 constant Atari2600:integer:=4;
-constant ATARIST:integer:=5;
+constant Maria:integer:=5;
 constant TMS:integer:=6;
 constant Speccy:integer:=7;
 constant NES:integer:=8;
@@ -102,9 +102,9 @@ begin
 			when "0010" => FREQUENCY<=MHZ_8_181;  w<=260; h<=261; samples<=2; x1<=43;  y1<=49; x2<=43+176;  y2<=49+183; sw<=16; pattern<=VIC20;     synctype<=SERRATED; --60Hz VIC 20
 			when "0011" => FREQUENCY<=MHZ_21_477; w<=456; h<=262; samples<=3; x1<=98;  y1<=40; x2<=98+320;  y2<=40+200; sw<=34; pattern<=C16;       synctype<=SERRATED; --60Hz C16
 			when "0100" => FREQUENCY<=MHZ_21_477; w<=228; h<=262; samples<=6; x1<=49;  y1<=41; x2<=49+160;  y2<=41+192; sw<=16; pattern<=Atari8;    synctype<=SERRATED; -- 60Hz Atari 8-bit		
-			when "0101" => FREQUENCY<=MHZ_14_187; w<=228; h<=262; samples<=4; x1<=48;  y1<=42; x2<=48+160;  y2<=42+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 60Hz Atari 2600 PAL
-			when "0110" => FREQUENCY<=MHZ_14_318; w<=228; h<=262; samples<=4; x1<=48;  y1<=42; x2<=48+160;  y2<=42+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 60Hz Atari 2600 NTSC
-			when "0111" => FREQUENCY<=MHZ_32_000; w<=896; h<=501; samples<=1; x1<=190; y1<=80; x2<=190+640; y2<=80+400; sw<=67; pattern<=ATARIST;   synctype<=ANYSYNC; -- 72Hz ATARI ST
+			when "0101" => FREQUENCY<=MHZ_14_187; w<=228; h<=262; samples<=4; x1<=48;  y1<=42; x2<=48+160;  y2<=42+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 60Hz Atari 2600 PAL speed
+			when "0110" => FREQUENCY<=MHZ_14_318; w<=228; h<=262; samples<=4; x1<=48;  y1<=42; x2<=48+160;  y2<=42+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 60Hz Atari 2600 NTSC speed
+			when "0111" => FREQUENCY<=MHZ_28_636; w<=456; h<=262; samples<=4; x1<=48;  y1<=42; x2<=96+320;  y2<=42+200; sw<=14; pattern<=Maria;     synctype<=SIMPLE;  -- 60Hz Atari 7800
 			when "1000" => FREQUENCY<=MHZ_10_738; w<=342; h<=262; samples<=2; x1<=60;  y1<=43; x2<=60+256;  y2<=43+192; sw<=26; pattern<=TMS;       synctype<=SIMPLE;  -- 60Hz TMS99xxA			
 			when "1001" => FREQUENCY<=MHZ_14_110; w<=448; h<=264; samples<=2; x1<=120; y1<=40; x2<=120+256; y2<=40+192; sw<=33; pattern<=Speccy;    synctype<=SERRATED;-- 60Hz ZX Spectrum
 			when "1010" => FREQUENCY<=MHZ_32_216; w<=341; h<=262; samples<=6; x1<=66;  y1<=20; x2<=66+256;  y2<=20+240; sw<=25; pattern<=NES;       synctype<=SIMPLE;  -- 60Hz NES
@@ -120,9 +120,9 @@ begin
 			when "0010" => FREQUENCY<=MHZ_8_867;  w<=284; h<=312; samples<=2; x1<=73;  y1<=75; x2<=73+176; y2<=75+183; sw<=16; pattern<=VIC20;     synctype<=SERRATED; syncdelay<=1; -- 50Hz VIC 20
 			when "0011" => FREQUENCY<=MHZ_21_281; w<=456; h<=312; samples<=3; x1<=98;  y1<=60; x2<=98+320; y2<=60+200; sw<=34; pattern<=C16;       synctype<=SERRATED; --50Hz C16
 			when "0100" => FREQUENCY<=MHZ_21_281; w<=228; h<=312; samples<=6; x1<=49;  y1<=69; x2<=49+160; y2<=69+192; sw<=16; pattern<=Atari8;    synctype<=SERRATED; -- 50Hz Atari 8-bit
-			when "0101" => FREQUENCY<=MHZ_14_187; w<=228; h<=312; samples<=4; x1<=48;  y1<=65; x2<=48+160; y2<=65+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 50Hz Atari 2600 PAL
-			when "0110" => FREQUENCY<=MHZ_14_318; w<=228; h<=312; samples<=4; x1<=48;  y1<=65; x2<=48+160; y2<=65+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 50Hz Atari 2600 NTSC
-			when "0111" => FREQUENCY<=MHZ_32_000; w<=896; h<=501; samples<=1; x1<=190; y1<=80; x2<=190+640; y2<=80+400;sw<=67; pattern<=ATARIST;   synctype<=ANYSYNC; -- 72Hz ATARI ST
+			when "0101" => FREQUENCY<=MHZ_14_187; w<=228; h<=312; samples<=4; x1<=48;  y1<=65; x2<=48+160; y2<=65+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 50Hz Atari 2600 PAL speed
+			when "0110" => FREQUENCY<=MHZ_14_318; w<=228; h<=312; samples<=4; x1<=48;  y1<=65; x2<=48+160; y2<=65+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 50Hz Atari 2600 NTSC speed
+			when "0111" => FREQUENCY<=MHZ_28_636; w<=456; h<=312; samples<=4; x1<=48;  y1<=65; x2<=96+320; y2<=65+200; sw<=14; pattern<=Maria;     synctype<=SIMPLE;  -- 50Hz Atari 7800 
 			when "1000" => FREQUENCY<=MHZ_10_738; w<=342; h<=313; samples<=2; x1<=60;  y1<=68; x2<=60+256; y2<=68+192; sw<=26; pattern<=TMS;       synctype<=SIMPLE;  -- 50Hz TMS99xxA
 			when "1001" => FREQUENCY<=MHZ_14_000; w<=448; h<=312; samples<=2; x1<=120; y1<=66; x2<=120+256; y2<=66+192;sw<=33; pattern<=Speccy;    synctype<=SERRATED;-- 50Hz ZX Spectrum
 			when "1010" => FREQUENCY<=MHZ_31_922; w<=341; h<=312; samples<=6; x1<=66;  y1<=42; x2<=66+256; y2<=42+240; sw<=25; pattern<=NES;       synctype<=SIMPLE;  -- 50Hz NES
@@ -178,6 +178,8 @@ begin
 						outbuffer := "00000011111111";
 					when Atari2600 => 
 						outbuffer := "00000000001111";
+					when Maria => 
+						outbuffer := "00000000001111";
 					when NES => 
 						outbuffer := "00111100001010"; -- 110010
 					when Intelli => 					
@@ -216,13 +218,10 @@ begin
 							outbuffer(7 downto 4) := std_logic_vector(to_unsigned((cy-56)/8,4));					
 							outbuffer(3 downto 1) := std_logic_vector(to_unsigned((cx-16)/16,3));
 						end if;
-					when ATARIST =>
-						if cx>=32 and cx<640-32 and cy>=48 and cy<400-8 then
-							if (cx+cy) mod 16 < 8 then
-								outbuffer(1 downto 0) := "00";	
-							elsif (cx+cy) mod 16 < 10 then
-								outbuffer(1 downto 0) := "11";	
-							end if;
+					when Maria =>
+						if cx>=32 and cx<32+256 and cy>=56 and cy<56+128 then
+							outbuffer(7 downto 4) := std_logic_vector(to_unsigned((cy-56)/8,4));					
+							outbuffer(3 downto 0) := std_logic_vector(to_unsigned((cx-32)/16,4));
 						end if;
 					when TMS =>
 						if cx>=16 and cx<256-16 and cy>=48 and cy<48+128 then

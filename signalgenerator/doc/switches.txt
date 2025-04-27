@@ -1,17 +1,22 @@
+
 DIP-switch settings for the lumacode signal generator
 
 1      2    3    4
 OFF  OFF  OFF  OFF    C64/C128
-OFF  OFF  OFF   ON    C64 6567R56A
+OFF  OFF  OFF   ON    C64 6567R56A (only 60Hz)
 OFF  OFF   ON  OFF    VIC 20 
-OFF  OFF   ON   ON    Atari 8-bit
-OFF   ON  OFF  OFF    Atari 2600 PAL
-OFF   ON  OFF   ON    Atari 2600 NTSC
-OFF   ON   ON  OFF    TMS99xxA
-OFF   ON   ON   ON    ZX Spectrum
-ON   OFF  OFF  OFF    C128 VDC monochrome
-ON   OFF  OFF   ON    Atari ST monochrome
-others                NES
+OFF  OFF   ON   ON    C16, Plus/4
+OFF   ON  OFF  OFF    Atari 8-bit
+OFF   ON  OFF   ON    Atari 2600 PAL colors
+OFF   ON   ON  OFF    Atari 2600 NTSC colors
+OFF   ON   ON   ON    Atari 7800 
+ON   OFF  OFF  OFF    TMS99xxA
+ON   OFF  OFF   ON    ZX Spectrum (only 50Hz)
+ON   OFF   ON  OFF    NES
+ON   OFF   ON   ON    Sega Master System
+ON    ON  OFF  OFF    Intellivision
+ON    ON  OFF   ON    G7000 or Odyssey II
+others                Lumacode 720p (only 50Hz)
 
 When jumper set: 50Hz
 When not set: 60Hz
