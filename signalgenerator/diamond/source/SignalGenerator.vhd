@@ -67,7 +67,6 @@ constant LC270:integer:=12;
 
 constant SERRATED:integer:=0;
 constant SIMPLE:integer:=1;
-constant ANYSYNC:integer:=3;
 
 signal FREQUENCY: t_Frequency;
 signal CLK:std_logic;
@@ -104,7 +103,7 @@ begin
 			when "0100" => FREQUENCY<=MHZ_21_477; w<=228; h<=262; samples<=6; x1<=49;  y1<=41; x2<=49+160;  y2<=41+192; sw<=16; pattern<=Atari8;    synctype<=SERRATED; -- 60Hz Atari 8-bit		
 			when "0101" => FREQUENCY<=MHZ_14_187; w<=228; h<=262; samples<=4; x1<=48;  y1<=42; x2<=48+160;  y2<=42+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 60Hz Atari 2600 PAL speed
 			when "0110" => FREQUENCY<=MHZ_14_318; w<=228; h<=262; samples<=4; x1<=48;  y1<=42; x2<=48+160;  y2<=42+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 60Hz Atari 2600 NTSC speed
-			when "0111" => FREQUENCY<=MHZ_28_636; w<=456; h<=262; samples<=4; x1<=48;  y1<=42; x2<=96+320;  y2<=42+200; sw<=14; pattern<=Maria;     synctype<=SIMPLE;  -- 60Hz Atari 7800
+			when "0111" => FREQUENCY<=MHZ_21_477; w<=341; h<=263; samples<=4; x1<=16;  y1<=42; x2<=16+320;  y2<=42+200; sw<=10; pattern<=Maria;     synctype<=SIMPLE;  -- 60Hz Atari 7800
 			when "1000" => FREQUENCY<=MHZ_10_738; w<=342; h<=262; samples<=2; x1<=60;  y1<=43; x2<=60+256;  y2<=43+192; sw<=26; pattern<=TMS;       synctype<=SIMPLE;  -- 60Hz TMS99xxA			
 			when "1001" => FREQUENCY<=MHZ_14_110; w<=448; h<=264; samples<=2; x1<=120; y1<=40; x2<=120+256; y2<=40+192; sw<=33; pattern<=Speccy;    synctype<=SERRATED;-- 60Hz ZX Spectrum
 			when "1010" => FREQUENCY<=MHZ_32_216; w<=341; h<=262; samples<=6; x1<=66;  y1<=20; x2<=66+256;  y2<=20+240; sw<=25; pattern<=NES;       synctype<=SIMPLE;  -- 60Hz NES
@@ -122,7 +121,7 @@ begin
 			when "0100" => FREQUENCY<=MHZ_21_281; w<=228; h<=312; samples<=6; x1<=49;  y1<=69; x2<=49+160; y2<=69+192; sw<=16; pattern<=Atari8;    synctype<=SERRATED; -- 50Hz Atari 8-bit
 			when "0101" => FREQUENCY<=MHZ_14_187; w<=228; h<=312; samples<=4; x1<=48;  y1<=65; x2<=48+160; y2<=65+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 50Hz Atari 2600 PAL speed
 			when "0110" => FREQUENCY<=MHZ_14_318; w<=228; h<=312; samples<=4; x1<=48;  y1<=65; x2<=48+160; y2<=65+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 50Hz Atari 2600 NTSC speed
-			when "0111" => FREQUENCY<=MHZ_28_636; w<=456; h<=312; samples<=4; x1<=48;  y1<=65; x2<=96+320; y2<=65+200; sw<=14; pattern<=Maria;     synctype<=SIMPLE;  -- 50Hz Atari 7800 
+			when "0111" => FREQUENCY<=MHZ_21_477; w<=341; h<=313; samples<=4; x1<=16;  y1<=65; x2<=16+320; y2<=65+200; sw<=10; pattern<=Maria;     synctype<=SIMPLE;  -- 50Hz Atari 7800 
 			when "1000" => FREQUENCY<=MHZ_10_738; w<=342; h<=313; samples<=2; x1<=60;  y1<=68; x2<=60+256; y2<=68+192; sw<=26; pattern<=TMS;       synctype<=SIMPLE;  -- 50Hz TMS99xxA
 			when "1001" => FREQUENCY<=MHZ_14_000; w<=448; h<=312; samples<=2; x1<=120; y1<=66; x2<=120+256; y2<=66+192;sw<=33; pattern<=Speccy;    synctype<=SERRATED;-- 50Hz ZX Spectrum
 			when "1010" => FREQUENCY<=MHZ_31_922; w<=341; h<=312; samples<=6; x1<=66;  y1<=42; x2<=66+256; y2<=42+240; sw<=25; pattern<=NES;       synctype<=SIMPLE;  -- 50Hz NES
@@ -182,7 +181,7 @@ begin
 						outbuffer := "00000000001111";
 					when NES => 
 						outbuffer := "00111100001010"; -- 110010
-					when Intelli => 					
+					when Intelli =>
 						outbuffer := "00000000000111";
 					when others =>
 						outbuffer := "11111111111111";
@@ -288,11 +287,7 @@ begin
 			tmp_short := sw/2;
 			tmp_half := w/2;
 			csync := '1';
-			if synctype=ANYSYNC then 
-				if x<tmp_long or y<3 then
-					csync := '0';
-				end if;
-			elsif synctype=SERRATED then
+			if synctype=SERRATED then
 				if (y=0) and (x<tmp_long or (x>=tmp_half and x<tmp_half+tmp_short)) then                   -- normal sync, short sync
 					csync := '0';
 				elsif (y=1 or y=2) and (x<tmp_short or (x>=tmp_half and x<tmp_half+tmp_short)) then       -- 2x 2 short syncs
@@ -335,6 +330,8 @@ begin
 			-- progress counters
 			if SEL50HZ='0' and pattern=NES and s=0 and x=200 and y=260 then -- skip half pixel for NES 60 Hz
 				s:=4;
+			elsif pattern=Maria and s=0 and x=0 then -- skip half pixel every line for Maria
+				s:=3;
 			elsif s+1 /= samples then
 				s := s+1;
 			else
