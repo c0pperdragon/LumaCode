@@ -1,12 +1,12 @@
-(edif PLL_57
+(edif PLL_48
   (edifVersion 2 0 0)
   (edifLevel 0)
   (keywordMap (keywordLevel 0))
   (status
     (written
-      (timestamp 2024 11 19 23 41 16)
+      (timestamp 2025 8 8 17 27 42)
       (program "SCUBA" (version "Diamond (64-bit) 3.13.0.56.2"))))
-      (comment "C:\lscc\diamond\3.13\ispfpga\bin\nt64\scuba.exe -w -n PLL_57 -lang vhdl -synth synplify -arch xo2c00 -type pll -fin 25 -mdiv 2 -ndiv 1 -trimp 0 -phasep 0 -trimp_r -adiv 55 -trims 0 -phases 0 -trims_r -bdiv 12 -phase_cntl STATIC -fb_mode 1 ")
+      (comment "C:\lscc\diamond\3.13\ispfpga\bin\nt64\scuba.exe -w -n PLL_48 -lang vhdl -synth lse -arch xo2c00 -type pll -fin 25 -mdiv 2 -ndiv 1 -trimp 0 -phasep 0 -trimp_r -adiv 39 -trims 0 -phases 0 -trims_r -bdiv 10 -phases2 270 -cdiv 10 -phase_cntl STATIC -fb_mode 1 ")
   (library ORCLIB
     (edifLevel 0)
     (technology
@@ -127,7 +127,7 @@
             (direction OUTPUT))
           (port PLLDATO0
             (direction OUTPUT)))))
-    (cell PLL_57
+    (cell PLL_48
       (cellType GENERIC)
       (view view1
         (viewType NETLIST)
@@ -137,6 +137,8 @@
           (port CLKOP
             (direction OUTPUT))
           (port CLKOS
+            (direction OUTPUT))
+          (port CLKOS2
             (direction OUTPUT)))
         (property NGD_DRC_MASK (integer 1))
         (contents
@@ -167,17 +169,17 @@
             (property CLKOS3_CPHASE
               (string "0"))
             (property CLKOS2_FPHASE
-              (string "0"))
+              (string "4"))
             (property CLKOS2_CPHASE
-              (string "0"))
+              (string "16"))
             (property CLKOS_FPHASE
               (string "0"))
             (property CLKOS_CPHASE
-              (string "11"))
+              (string "9"))
             (property CLKOP_FPHASE
               (string "0"))
             (property CLKOP_CPHASE
-              (string "54"))
+              (string "38"))
             (property PLL_LOCK_MODE
               (string "0"))
             (property CLKOS_TRIM_DELAY
@@ -200,6 +202,8 @@
               (string "DISABLED"))
             (property CLKOS3_ENABLE
               (string "DISABLED"))
+            (property FREQUENCY_PIN_CLKOS2
+              (string "48.750000"))
             (property OUTDIVIDER_MUXC2
               (string "DIVC"))
             (property PREDIVIDER_MUXC1
@@ -207,9 +211,9 @@
             (property VCO_BYPASS_C0
               (string "DISABLED"))
             (property CLKOS2_ENABLE
-              (string "DISABLED"))
+              (string "ENABLED"))
             (property FREQUENCY_PIN_CLKOS
-              (string "57.291667"))
+              (string "48.750000"))
             (property OUTDIVIDER_MUXB2
               (string "DIVB"))
             (property PREDIVIDER_MUXB1
@@ -231,17 +235,17 @@
             (property FREQUENCY_PIN_CLKI
               (string "25.000000"))
             (property ICP_CURRENT
-              (string "10"))
+              (string "7"))
             (property LPF_RESISTOR
               (string "8"))
             (property CLKOS3_DIV
               (string "1"))
             (property CLKOS2_DIV
-              (string "1"))
+              (string "10"))
             (property CLKOS_DIV
-              (string "12"))
+              (string "10"))
             (property CLKOP_DIV
-              (string "55"))
+              (string "39"))
             (property CLKFB_DIV
               (string "1"))
             (property CLKI_DIV
@@ -286,6 +290,10 @@
               (portRef PHASEDIR (instanceRef PLLInst_0))
               (portRef PHASESEL1 (instanceRef PLLInst_0))
               (portRef PHASESEL0 (instanceRef PLLInst_0))))
+          (net CLKOS2
+            (joined
+              (portRef CLKOS2)
+              (portRef CLKOS2 (instanceRef PLLInst_0))))
           (net CLKOS
             (joined
               (portRef CLKOS)
@@ -299,7 +307,7 @@
             (joined
               (portRef CLKI)
               (portRef CLKI (instanceRef PLLInst_0))))))))
-  (design PLL_57
-    (cellRef PLL_57
+  (design PLL_48
+    (cellRef PLL_48
       (libraryRef ORCLIB)))
 )

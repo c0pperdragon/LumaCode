@@ -50,7 +50,7 @@ set Para(install_dir) $env(TOOLRTF)
 set Para(FPGAPath) "[file join $Para(install_dir) ispfpga bin $platformpath]"
 set Para(bin_dir) "[file join $Para(install_dir) bin $platformpath]"
 
-set Para(ModuleName) "PLL_57"
+set Para(ModuleName) "PLL_48"
 set Para(Module) "PLL"
 set Para(libname) machxo2
 set Para(arch_name) xo2c00
@@ -63,50 +63,57 @@ set Para(SpeedGrade) "4"
 set Para(FMax) "100"
 set fdcfile "$Para(sbp_path)/$Para(ModuleName).fdc"
 
-#create response file(*.cmd) for Synpwrap
-proc CreateCmdFile {} {
+#create LSE project file(*.synproj)
+proc CreateSynprojFile {} {
 	global Para
 
-	file mkdir "$Para(sbp_path)/syn_results"
-	if [catch {open $Para(ModuleName).cmd w} rspFile] {
-		puts "Cannot create response file $Para(ModuleName).cmd."
+	if [catch {open $Para(ModuleName).synproj w} synprojFile] {
+		puts "Cannot create LSE project file $Para(ModuleName).synproj."
 		exit -1
 	} else {
-		puts $rspFile "PROJECT: $Para(ModuleName)
-		working_path: \"$Para(sbp_path)/syn_results\"
-		module: $Para(ModuleName)
-		verilog_file_list: \"$Para(sbp_path)/$Para(ModuleName).vhd\"
-		vlog_std_v2001: true
-		constraint_file_name: \"$Para(sbp_path)/$Para(ModuleName).fdc\"
-		suffix_name: edn
-		output_file_name: $Para(ModuleName)
-		write_prf: true
-		disable_io_insertion: true
-		force_gsr: false
-		frequency: $Para(FMax)
-		fanout_limit: 50
-		retiming: false
-		pipe: false
-		part: $Para(PartType)
-		speed_grade: $Para(SpeedGrade)
+		puts $synprojFile "-a \"$Para(tech_syn)\"
+-d $Para(PartType)
+-t $Para(Package)
+-s $Para(SpeedGrade)
+-frequency 200
+-optimization_goal Balanced
+-bram_utilization 100
+-ramstyle auto
+-romstyle auto
+-use_carry_chain 1
+-carry_chain_length 0
+-force_gsr auto
+-resource_sharing 1
+-propagate_constants 1
+-remove_duplicate_regs 1
+-mux_style Auto
+-max_fanout 1000
+-fsm_encoding_style Auto
+-twr_paths 3
+-fix_gated_clocks 1
+-use_io_insertion 0
+-resolve_mixed_drivers 0
+-use_io_reg 1
+
+-lpf 1
+-p $Para(sbp_path)
+-vhd $Para(sbp_path)/$Para(ModuleName).vhd
+-top $Para(ModuleName)
+-ngo \"$Para(sbp_path)/$Para(ModuleName).ngo\"
 		"
-		close $rspFile
+		close $synprojFile
 	}
 }
 
-#synpwrap
-CreateCmdFile
-set synpwrap "$Para(bin_dir)/synpwrap"
-if {[file exists $fdcfile] == 0} {
-	set Para(result) [catch {eval exec $synpwrap -rem -e $Para(ModuleName) -target $Para(tech_syn)} msg]
+#LSE
+CreateSynprojFile
+set ldcfile "$Para(sbp_path)/$Para(ModuleName).ldc"
+set synthesis "$Para(FPGAPath)/synthesis"
+if {[file exists $ldcfile] == 0} {
+	set Para(result) [catch {eval exec $synthesis -f \"$Para(ModuleName).synproj\" -gui} msg]
 } else {
-	set Para(result) [catch {eval exec $synpwrap -rem -e $Para(ModuleName) -target $Para(tech_syn) -fdc $fdcfile} msg]
+	set Para(result) [catch {eval exec $synthesis -f \"$Para(ModuleName).synproj\" -sdc \"$ldcfile\" -gui} msg]
 }
-#puts $msg
-
-#edif2ngd
-set edif2ngd "$Para(FPGAPath)/edif2ngd"
-set Para(result) [catch {eval exec $edif2ngd -l $Para(libname) -d $Para(PartType) -nopropwarn \"syn_results/$Para(ModuleName).edn\" $Para(ModuleName).ngo} msg]
 #puts $msg
 
 #ngdbuild

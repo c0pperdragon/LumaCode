@@ -1,32 +1,39 @@
 Digital ports on cable tester
 
-      Spectrum128  EGA    Pin header
-      (8way DIN)   (DB9)  (16 pin)      
--VS   (1)                               CP3.D7      32
--HS   (5)                               CP0/1.D0    12/2
-CS    4                                 CP2.D0      29
-G0                        1             CP0/1.D1    13/3
-R0                        2             CP2.D1      28
-B0                        3             CP0/1.D2    14/4
-G1                        4             CP2.D2      27
-R1                        5             CP0/1.D3    15/5
-B1                        6             CP2.D3      26
-GND   2            1      7             any GND     
-G2/I  3            6      8             CP2.D4      25
-R2                 2      9             CP0/1.D4    16/6
-B2                 7      10            CP2.D5      24
-R3    7            3      11            CP0/1.D5    17/7
-HS                 8      12            CP2.D6      23
-G3    6            4      13            CP0/1.D6    18/8
-VS                 9      14            CP2.D7      22
-B3    8            5      15            CP0/1.D7    19/9
-                          16
+      EGA
+      (DB9)              port           test rig
+GND   1                  GND            1
+R0    2                  CP0.D4         6
+R1    3                  CP0.D5         7
+G0    6                  CP0.D0         2
+G1    4                  CP0.D6         8
+B0    7                  CP0.D1         3
+B1    5                  CP0.D7         9
+HS    8                  CP0.D2         4
+VS    9                  CP0.D3         5
+                          
+      Spectrum 
+      (8way DIN)         port           test rig      
+GND   1                  GND            21                    
+R     7                  CP2.D2         27
+G     6                  CP2.D6         23
+B     8                  CP2.D4         25
+CS    4                  CP2.D7         22
+
+      Atari ST
+      (13way DIN)        port           test rig
+Audio  1                 TRRS jack
+Detect 4                 LED -> 5V      11
+HS     9                 CP2.D5         24
+Mono   11                CP2.D3         26
+VS     12                CP2.D1         28
+GND    13                GND            20
 
 
 Analog port on cable tester
 
       CPC, BBC Micro        
-      (6way DIN)
+      (6way DIN)         port           test rig
 R     1                  CP3.D0 (2k)    39
                        + CP3.D1 (1k)    38
 G     2                  CP3.D2 (2k)    37

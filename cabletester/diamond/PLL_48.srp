@@ -1,5 +1,5 @@
 SCUBA, Version Diamond (64-bit) 3.13.0.56.2
-Tue Nov 19 23:41:16 2024
+Fri Aug 08 17:27:42 2025
 
 Copyright (c) 1991-1994 by NeoCAD Inc. All rights reserved.
 Copyright (c) 1995 AT&T Corp.   All rights reserved.
@@ -7,20 +7,20 @@ Copyright (c) 1995-2001 Lucent Technologies Inc.  All rights reserved.
 Copyright (c) 2001 Agere Systems   All rights reserved.
 Copyright (c) 2002-2023 Lattice Semiconductor Corporation,  All rights reserved.
 
-    Issued command   : C:\lscc\diamond\3.13\ispfpga\bin\nt64\scuba.exe -w -n PLL_57 -lang vhdl -synth synplify -arch xo2c00 -type pll -fin 25 -mdiv 2 -ndiv 1 -trimp 0 -phasep 0 -trimp_r -adiv 55 -trims 0 -phases 0 -trims_r -bdiv 12 -phase_cntl STATIC -fb_mode 1 
-    Circuit name     : PLL_57
+    Issued command   : C:\lscc\diamond\3.13\ispfpga\bin\nt64\scuba.exe -w -n PLL_48 -lang vhdl -synth lse -arch xo2c00 -type pll -fin 25 -mdiv 2 -ndiv 1 -trimp 0 -phasep 0 -trimp_r -adiv 39 -trims 0 -phases 0 -trims_r -bdiv 10 -phases2 270 -cdiv 10 -phase_cntl STATIC -fb_mode 1 
+    Circuit name     : PLL_48
     Module type      : pll
     Module Version   : 5.7
     Ports            : 
 	Inputs       : CLKI
-	Outputs      : CLKOP, CLKOS
+	Outputs      : CLKOP, CLKOS, CLKOS2
     I/O buffer       : not inserted
-    EDIF output      : PLL_57.edn
-    VHDL output      : PLL_57.vhd
-    VHDL template    : PLL_57_tmpl.vhd
+    EDIF output      : PLL_48.edn
+    VHDL output      : PLL_48.vhd
+    VHDL template    : PLL_48_tmpl.vhd
     VHDL purpose     : for synthesis and simulation
     Bus notation     : big endian
-    Report output    : PLL_57.srp
+    Report output    : PLL_48.srp
     Element Usage    :
         EHXPLLJ : 1
     Estimated Resource Usage:
