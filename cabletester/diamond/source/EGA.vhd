@@ -69,7 +69,7 @@ begin
 	    "00000000"
 	);
 
-	constant top:integer := 5;
+	constant top:integer := 7;
 	constant left:integer := 90;
 	variable phase:integer range 0 to 3;
 	variable x:integer range 0 to 1023;
@@ -128,7 +128,7 @@ begin
 			
 			if phase=0 then 
 				-- EGA output
-				D <= B(1) & G(1) & R(1) & R(0) & VS & (not HS) & B(0) & G(0);	
+				D <= B(1) & G(1) & R(1) & R(0) & (not VS) & (not HS) & B(0) & G(0);	
 				CP_next := "0001";
 			elsif phase=1 then
 			    -- spectrum, atari st
