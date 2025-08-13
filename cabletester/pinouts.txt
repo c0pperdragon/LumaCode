@@ -1,4 +1,4 @@
-Digital ports on cable tester
+Ports on cable tester
 
       EGA
       (DB9)              port           test rig
@@ -11,13 +11,22 @@ B0    7                  CP0.D1         3
 B1    5                  CP0.D7         9
 HS    8                  CP0.D2         4
 VS    9                  CP0.D3         5
+
+      CPC, BBC Micro, QL        
+      (6way DIN)         port           test rig
+R     1                  CP3.D1         38
+G     2                  CP3.D2         37
+B     3                  CP3.D4         35
+CS    4                  CP3.D6         33
+GND   5                  GND            31
                           
       Spectrum 
       (8way DIN)         port           test rig      
 GND   1                  GND            21                    
-R     7                  CP2.D2         27
-G     6                  CP2.D6         23
-B     8                  CP2.D4         25
+R     7                  CP2.D2 100Ohm  27
+G     6                  CP2.D6 100Ohm  23
+B     8                  CP2.D4 100Ohm  25
+I     3                  CP2.D0 100Ohm  29
 CS    4                  CP2.D7         22
 
       Atari ST
@@ -29,18 +38,5 @@ Mono   11                CP2.D3         26
 VS     12                CP2.D1         28
 GND    13                GND            20
 
-
-Analog port on cable tester
-
-      CPC, BBC Micro        
-      (6way DIN)         port           test rig
-R     1                  CP3.D0 (2k)    39
-                       + CP3.D1 (1k)    38
-G     2                  CP3.D2 (2k)    37
-                       + CP3.D3 (1k)    36
-B     3                  CP3.D4 (2k)    35
-                       + CP3.D5 (1k)    34
-CS    4                  CP3.D6         33
-GND   5                  GND            31
 
 

@@ -131,12 +131,12 @@ begin
 				D <= B(1) & G(1) & R(1) & R(0) & (not VS) & (not HS) & B(0) & G(0);	
 				CP_next := "0001";
 			elsif phase=1 then
-			    -- spectrum, atari st
-				D <= CS & G(1) & HS & B(1) & (R(0) or R(1) or G(0) or G(1) or B(0) or B(1)) & R(1) & VS & "0";
+			    -- 8-pin din, atari st
+				D <= CS & G(1) & HS & B(1) & (R(0) or R(1) or G(0) or G(1) or B(0) or B(1)) & R(1) & VS & (R(0) or G(0) or B(0));
 				CP_next := "0100";
             else		
-                -- analog port 			
-				D <= "0" & CS & B(1) &  B(0) & G(1) & G(0) & R(1) & R(0);
+                -- 6-pin din 			
+				D <= "0" & CS & "0" &  B(1) & "0" & G(1) & R(1) & "0";
 				CP_next := "1000";
 			end if;
 			
