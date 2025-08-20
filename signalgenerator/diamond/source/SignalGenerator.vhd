@@ -121,7 +121,7 @@ begin
 			when "0100" => FREQUENCY<=MHZ_21_281; w<=228; h<=312; samples<=6; x1<=49;  y1<=69; x2<=49+160; y2<=69+192; sw<=16; pattern<=Atari8;    synctype<=SERRATED; -- 50Hz Atari 8-bit
 			when "0101" => FREQUENCY<=MHZ_14_187; w<=228; h<=312; samples<=4; x1<=48;  y1<=65; x2<=48+160; y2<=65+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 50Hz Atari 2600 PAL speed
 			when "0110" => FREQUENCY<=MHZ_14_318; w<=228; h<=312; samples<=4; x1<=48;  y1<=65; x2<=48+160; y2<=65+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 50Hz Atari 2600 NTSC speed
-			when "0111" => FREQUENCY<=MHZ_21_477; w<=341; h<=313; samples<=4; x1<=18;  y1<=65; x2<=18+320; y2<=65+200; sw<=11; pattern<=Maria;     synctype<=SIMPLE;  -- 50Hz Atari 7800 
+			when "0111" => FREQUENCY<=MHZ_21_281; w<=341; h<=313; samples<=4; x1<=18;  y1<=65; x2<=18+320; y2<=65+200; sw<=11; pattern<=Maria;     synctype<=SIMPLE;  -- 50Hz Atari 7800 
 			when "1000" => FREQUENCY<=MHZ_10_738; w<=342; h<=313; samples<=2; x1<=60;  y1<=68; x2<=60+256; y2<=68+192; sw<=26; pattern<=TMS;       synctype<=SIMPLE;  -- 50Hz TMS99xxA
 			when "1001" => FREQUENCY<=MHZ_14_000; w<=448; h<=312; samples<=2; x1<=120; y1<=66; x2<=120+256; y2<=66+192;sw<=33; pattern<=Speccy;    synctype<=SERRATED;-- 50Hz ZX Spectrum
 			when "1010" => FREQUENCY<=MHZ_31_922; w<=341; h<=312; samples<=6; x1<=66;  y1<=42; x2<=66+256; y2<=42+240; sw<=25; pattern<=NES;       synctype<=SIMPLE;  -- 50Hz NES
