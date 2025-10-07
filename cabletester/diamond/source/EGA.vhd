@@ -81,7 +81,7 @@ begin
 	variable VS:std_logic;
 	variable CS:std_logic;
 	variable CP_next:std_logic_vector(3 downto 0);
-	begin
+	begin 
 		if rising_edge(CLK48) then
 			R := "00";
 			G := "00";

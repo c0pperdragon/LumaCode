@@ -22,3 +22,4 @@ calc(57.272724) # 4 times AppleIIGS(NTSC) clock
 calc(7.080000)  # 2 times G7000 clock
 calc(14.31818)  # MARIA clock
 calc(48.771)    # 3 times EGA clock
+calc(7.09379*3)    # 3 times Amiga clock
