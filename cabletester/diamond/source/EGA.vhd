@@ -69,7 +69,7 @@ begin
 	    "00000000"
 	);
 
-	constant top:integer := 7;
+	constant top:integer := 5;
 	constant left:integer := 90;
 	variable phase:integer range 0 to 3;
 	variable x:integer range 0 to 1023;
@@ -87,10 +87,10 @@ begin
 			G := "00";
 			B := "00";
 			HS := '1';
-			VS := '1';
+			VS := '0';
 			CS := '1';
 			if y<3 then
-				VS := '0';
+				VS := '1';
 			end if;
 			if x<65 then
 				HS := '0';

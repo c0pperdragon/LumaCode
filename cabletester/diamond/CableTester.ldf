@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<BaliProject version="3.2" title="CableTester" device="LCMXO2-1200HC-4SG32C" default_implementation="amiga">
+<BaliProject version="3.2" title="CableTester" device="LCMXO2-1200HC-4SG32C" default_implementation="impl1">
     <Options/>
     <Implementation title="amiga" dir="amiga" description="amiga" synthesis="synplify" default_strategy="Area">
         <Options def_top="Amiga" top="Amiga"/>
