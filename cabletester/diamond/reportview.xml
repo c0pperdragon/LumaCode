@@ -7,6 +7,12 @@
         <ToolReport id="toolpio" path="" status="0"/>
         <ToolReport id="toolsso" path="" status="0"/>
     </Implement>
+    <Implement name="apple_ii">
+        <ToolReport id="tooldec" path="" status="0"/>
+        <ToolReport id="toolhle_genhierarchy" path="C:/Users/reinh/Documents/GitHub_Lumacode/LumaCode/cabletester/diamond/apple_ii/hdla_gen_hierarchy.html" status="1"/>
+        <ToolReport id="toolpio" path="" status="0"/>
+        <ToolReport id="toolsso" path="" status="0"/>
+    </Implement>
     <Implement name="impl1">
         <ToolReport id="tooldec" path="" status="0"/>
         <ToolReport id="toolhle_genhierarchy" path="C:/Users/reinh/Documents/GitHub_Lumacode/LumaCode/cabletester/diamond/impl1/hdla_gen_hierarchy.html" status="1"/>
