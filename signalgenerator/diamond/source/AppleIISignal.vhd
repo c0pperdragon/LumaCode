@@ -43,45 +43,74 @@ begin
 	variable phase:integer range 0 to 1 :=0;
 	variable x:integer range 0 to 1023 := 0;
 	variable y:integer range 0 to 511 := 0;
-	variable CS:std_logic;
-	variable BURST:std_logic;
-	variable LUM:std_logic;
-	variable CS_DELAYED:std_logic;
+	variable level:integer range 0 to 7;
 	begin
 		if rising_edge(CLK28) then
-            CS := '1';
-			BURST := '0';
-			LUM := '0';
+			level := 2;
 			if x<68 or (y<3 and x<912-68) then
-				CS := '0';
-			elsif (x>=80 and x<120) and (x mod 4)>=2 and not (y>=top+160 and y<260) then
-				BURST := '1';
+				level := 0;
+			elsif (x>=80 and x<120) then
+				if y>=top+160 and y<top+192 then
+					if (x mod 4)>=2 then
+						level := 3;
+					else
+						level := 1;
+					end if;
+				else
+					if (x mod 4)>=2 then
+						level := 5;
+					end if;
+				end if;
 			end if;
 			if x>=left and x<left+560 and y>=top and y<top+192 then
 				if x>=left+1 and x<left+560-1 and y>=top+1 and y<top+192-1 then
-					if x>=left+50 and x<left+560-50 and y>=top+20 and y<top+192-20 then
-						if ((x+y)/4) mod 2 = 1 then
-							LUM := '1';
+					if x>=left+20 and x<left+560-20 and y>=top+10 and y<top+192-10 then
+						if ((x+y)/2) mod 2 = 1 then
+							level := 7;
 						end if;
 					end if;
 				else
-					LUM := '1';
+					level := 7;
 				end if;
 			end if;
 			
-			INV_CSYNC <= not CS;
-			if LUM='1' then
-				INV_LUM0 <= '0';
-				INV_LUM1 <= '0';
-			elsif BURST='1' then
-				INV_LUM0 <= '1';
-				INV_LUM1 <= '0';
-			else
-				INV_LUM0 <= '1';
-				INV_LUM1 <= '1';
-			end if;
-			CS_DELAYED := CS;
+			-- level := x mod 8;
 			
+			case level is
+			when 0 => 
+				INV_CSYNC <= '1';
+				INV_LUM1 <= '1';
+				INV_LUM0 <= '1';
+			when 1 =>
+				INV_CSYNC <= '1';
+				INV_LUM1 <= '1';
+				INV_LUM0 <= '0';
+			when 2 =>
+				INV_CSYNC <= '0';
+				INV_LUM1 <= '1';
+				INV_LUM0 <= '1';				
+			when 3 =>
+				INV_CSYNC <= '1';
+				INV_LUM1 <= '0';
+				INV_LUM0 <= '1';
+			when 4 =>
+				INV_CSYNC <= '0';
+				INV_LUM1 <= '1';
+				INV_LUM0 <= '0';
+			when 5 =>
+				INV_CSYNC <= '1';
+				INV_LUM1 <= '0';
+				INV_LUM0 <= '0';
+			when 6 =>
+				INV_CSYNC <= '0';
+				INV_LUM1 <= '0';
+				INV_LUM0 <= '1';
+			when 7 =>
+				INV_CSYNC <= '0';
+				INV_LUM1 <= '0';
+				INV_LUM0 <= '0';
+			end case;
+						
 			if phase<1 then
 				phase:=phase+1;
 			else
