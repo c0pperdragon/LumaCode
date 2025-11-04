@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<BaliProject version="3.2" title="CableTester" device="LCMXO2-1200HC-4SG32C" default_implementation="apple_ii">
+<BaliProject version="3.2" title="CableTester" device="LCMXO2-1200HC-4SG32C" default_implementation="mda">
     <Options/>
     <Implementation title="amiga" dir="amiga" description="amiga" synthesis="synplify" default_strategy="Area">
         <Options def_top="Amiga" top="Amiga"/>
@@ -25,12 +25,48 @@
             <Options/>
         </Source>
     </Implementation>
-    <Implementation title="impl1" dir="impl1" description="impl1" synthesis="lse" default_strategy="Strategy1">
-        <Options def_top="EGA"/>
-        <Source name="source/EGA.vhd" type="VHDL" type_short="VHDL">
-            <Options top_module="EGA"/>
+    <Implementation title="cga" dir="cga" description="cga" synthesis="lse" default_strategy="Area">
+        <Options def_top="CGA"/>
+        <Source name="source/CGA.vhd" type="VHDL" type_short="VHDL">
+            <Options top_module="CGA"/>
         </Source>
+        <Source name="PLL_14.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="CableTester.lpf" type="Logic Preference" type_short="LPF">
+            <Options/>
+        </Source>
+    </Implementation>
+    <Implementation title="ega40" dir="ega40" description="ega40" synthesis="lse" default_strategy="Area">
+        <Options def_top="EGA_40"/>
+        <Source name="source/EGA_40.vhd" type="VHDL" type_short="VHDL">
+            <Options top_module="EGA_40"/>
+        </Source>
+        <Source name="PLL_16.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="CableTester.lpf" type="Logic Preference" type_short="LPF">
+            <Options/>
+        </Source>
+    </Implementation>
+    <Implementation title="impl1" dir="impl1" description="impl1" synthesis="lse" default_strategy="Strategy1">
+        <Options def_top="EGA_80" top="EGA_80"/>
         <Source name="PLL_48.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="source/EGA_80.vhd" type="VHDL" type_short="VHDL">
+            <Options top_module="EGA_80"/>
+        </Source>
+        <Source name="CableTester.lpf" type="Logic Preference" type_short="LPF">
+            <Options/>
+        </Source>
+    </Implementation>
+    <Implementation title="mda" dir="mda" description="mda" synthesis="lse" default_strategy="Area">
+        <Options def_top="MDA"/>
+        <Source name="source/MDA.vhd" type="VHDL" type_short="VHDL">
+            <Options top_module="MDA"/>
+        </Source>
+        <Source name="PLL_16.vhd" type="VHDL" type_short="VHDL">
             <Options/>
         </Source>
         <Source name="CableTester.lpf" type="Logic Preference" type_short="LPF">

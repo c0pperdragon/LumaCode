@@ -4,7 +4,7 @@ use ieee.numeric_std.all;
 use ieee.std_logic_1164.all;
 use machxo2.all;
 
-entity EGA is	
+entity EGA_80 is	
 	port (
 	    CLK25     : in std_logic;
 		D         : out std_logic_vector(7 downto 0);
@@ -13,7 +13,7 @@ entity EGA is
 end entity;
 
 
-architecture immediate of EGA is
+architecture immediate of EGA_80 is
 
 component PLL_48 is
     port (
@@ -70,7 +70,7 @@ begin
 	);
 
 	constant top:integer := 5;
-	constant left:integer := 90;
+	constant left:integer := 100;
 	variable phase:integer range 0 to 3;
 	variable x:integer range 0 to 1023;
 	variable y:integer range 0 to 511;

@@ -13,10 +13,28 @@
         <ToolReport id="toolpio" path="" status="0"/>
         <ToolReport id="toolsso" path="" status="0"/>
     </Implement>
+    <Implement name="cga">
+        <ToolReport id="tooldec" path="" status="0"/>
+        <ToolReport id="toolhle_genhierarchy" path="C:/Users/reinh/Documents/GitHub_Lumacode/LumaCode/cabletester/diamond/cga/hdla_gen_hierarchy.html" status="1"/>
+        <ToolReport id="toolpio" path="" status="0"/>
+        <ToolReport id="toolsso" path="" status="0"/>
+    </Implement>
+    <Implement name="ega40">
+        <ToolReport id="tooldec" path="" status="0"/>
+        <ToolReport id="toolhle_genhierarchy" path="C:/Users/reinh/Documents/GitHub_Lumacode/LumaCode/cabletester/diamond/ega40/hdla_gen_hierarchy.html" status="1"/>
+        <ToolReport id="toolpio" path="" status="0"/>
+        <ToolReport id="toolsso" path="" status="0"/>
+    </Implement>
     <Implement name="impl1">
         <ToolReport id="tooldec" path="" status="0"/>
         <ToolReport id="toolhle_genhierarchy" path="C:/Users/reinh/Documents/GitHub_Lumacode/LumaCode/cabletester/diamond/impl1/hdla_gen_hierarchy.html" status="1"/>
         <ToolReport id="toolpio" path="" status="2"/>
         <ToolReport id="toolsso" path="" status="2"/>
+    </Implement>
+    <Implement name="mda">
+        <ToolReport id="tooldec" path="" status="0"/>
+        <ToolReport id="toolhle_genhierarchy" path="C:/Users/reinh/Documents/GitHub_Lumacode/LumaCode/cabletester/diamond/mda/hdla_gen_hierarchy.html" status="1"/>
+        <ToolReport id="toolpio" path="" status="0"/>
+        <ToolReport id="toolsso" path="" status="0"/>
     </Implement>
 </ReportView>

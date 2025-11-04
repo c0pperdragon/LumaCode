@@ -46,10 +46,8 @@ begin
 	variable level:integer range 0 to 7;
 	begin
 		if rising_edge(CLK28) then
-			level := 2;
-			if x<68 or (y<3 and x<912-68) then
-				level := 0;
-			elsif (x>=80 and x<120) then
+			-- simulate an apple II or apple IIe
+			if (x>=80 and x<120) then
 				if y>=top+160 and y<top+192 then
 					if (x mod 4)>=2 then
 						level := 3;
@@ -59,9 +57,22 @@ begin
 				else
 					if (x mod 4)>=2 then
 						level := 5;
+					else
+						level := 2;
 					end if;
 				end if;
 			end if;
+			-- optional override with applie IIc simulation
+			if y<top+160 then
+				level := 4;
+			else
+				level := 2;
+			end if;
+			-- sync pulses
+			if x<68 or (y<3 and x<912-68) then
+				level := 0;
+			end if;
+			-- visible area
 			if x>=left and x<left+560 and y>=top and y<top+192 then
 				if x>=left+1 and x<left+560-1 and y>=top+1 and y<top+192-1 then
 					if x>=left+20 and x<left+560-20 and y>=top+10 and y<top+192-10 then
