@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<BaliProject version="3.2" title="SignalGenerator" device="LCMXO2-1200HC-5SG32C" default_implementation="apple_ii">
+<BaliProject version="3.2" title="SignalGenerator" device="LCMXO2-1200HC-5SG32C" default_implementation="impl1">
     <Options/>
     <Implementation title="Lumacode270p" dir="Lumacode270p" description="Lumacode270p" synthesis="synplify" default_strategy="Area">
         <Options def_top="Lumacode270p"/>

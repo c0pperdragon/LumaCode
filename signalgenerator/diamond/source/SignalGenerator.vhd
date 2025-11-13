@@ -13,7 +13,9 @@ entity SignalGenerator is
 		-- generated lumacode signals
 		INV_CSYNC       : out std_logic;
 		INV_LUM0        : out std_logic;
-		INV_LUM1        : out std_logic
+		INV_LUM1        : out std_logic;
+		-- auxilary sync output
+		AUX_CSYNC       : out std_logic
 	);
 end entity;
 
@@ -318,8 +320,10 @@ begin
 			INV_LUM1 <= not outbuffer(2*(samples-1-s)+1);
 			if syncdelay=0 then
 				INV_CSYNC <= not csync; 
+				AUX_CSYNC <= csync;
 			else
 				INV_CSYNC <= not prev_csync;
+				AUX_CSYNC <= prev_csync;
 			end if;
 						
 			-- access the titles bitmap
