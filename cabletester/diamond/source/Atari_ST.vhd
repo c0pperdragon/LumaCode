@@ -43,7 +43,7 @@ begin
 	begin 
 		if rising_edge(CLK32) then
 			VI := '0';
-			HS := '0';
+			HS := '1';
 			VS := '1';
 			if y<3 then
 				VS := not VS;
