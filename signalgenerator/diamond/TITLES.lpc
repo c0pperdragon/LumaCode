@@ -16,8 +16,8 @@ CoreRevision=5.4
 ModuleName=TITLES
 SourceFormat=VHDL
 ParameterFileVersion=1.0
-Date=04/27/2025
-Time=12:51:50
+Date=02/01/2026
+Time=12:03:32
 
 [Parameters]
 Verilog=0
@@ -31,13 +31,13 @@ Address=256
 Data=96
 enByte=0
 ByteSize=8
-OutputEn=1
+OutputEn=0
 ClockEn=0
 Optimization=Speed
 Reset=Sync
 Reset1=Sync
 Init=0
-MemFile=c:/users/reinhard/documents/github_lumacode/lumacode/signalgenerator/diamond/source/titles.mem
+MemFile=c:/users/reinh/documents/github_lumacode/lumacode/signalgenerator/diamond/source/titles.mem
 MemFormat=bin
 EnECC=0
 Pipeline=0
@@ -46,7 +46,7 @@ init_data=0
 no_init=0
 
 [FilesGenerated]
-c:/users/reinhard/documents/github_lumacode/lumacode/signalgenerator/diamond/source/titles.mem=mem
+c:/users/reinh/documents/github_lumacode/lumacode/signalgenerator/diamond/source/titles.mem=mem
 
 [Command]
-cmd_line= -w -n TITLES -lang vhdl -synth synplify -bus_exp 7 -bb -arch xo2c00 -type romblk -device LCMXO2-1200HC -addr_width 8 -data_width 96 -num_words 256 -outdata REGISTERED -cascade -1 -resetmode SYNC -sync_reset -memfile "c:/users/reinhard/documents/github_lumacode/lumacode/signalgenerator/diamond/source/titles.mem" -memformat bin
+cmd_line= -w -n TITLES -lang vhdl -synth synplify -bus_exp 7 -bb -arch xo2c00 -type romblk -device LCMXO2-1200HC -addr_width 8 -data_width 96 -num_words 256 -cascade -1 -memfile "c:/users/reinh/documents/github_lumacode/lumacode/signalgenerator/diamond/source/titles.mem" -memformat bin

@@ -13,9 +13,7 @@ entity SignalGenerator is
 		-- generated lumacode signals
 		INV_CSYNC       : out std_logic;
 		INV_LUM0        : out std_logic;
-		INV_LUM1        : out std_logic;
-		-- auxilary sync output
-		AUX_CSYNC       : out std_logic
+		INV_LUM1        : out std_logic
 	);
 end entity;
 
@@ -65,7 +63,8 @@ constant NES:integer:=8;
 constant SMS:integer:=9;
 constant Intelli:integer:=10;
 constant G7000:integer:=11;
-constant LC270:integer:=12;
+constant MC:integer:=12;
+constant LC270:integer:=13;
 
 constant SERRATED:integer:=0;
 constant SIMPLE:integer:=1;
@@ -84,7 +83,7 @@ signal x1 : integer range 0 to 1023;
 signal y1 : integer range 0 to 511;
 signal x2 : integer range 0 to 1023;
 signal y2 : integer range 0 to 511;
-signal syncdelay : integer range 0 to 1;
+signal syncdelay : integer range 7 downto 0;
 signal synctype:integer range 0 to 3;
 signal pattern : integer range 0 to 15;
 
@@ -101,7 +100,7 @@ begin
 			when "0000" => FREQUENCY<=MHZ_16_363; w<=520; h<=263; samples<=2; x1<=129; y1<=41; x2<=129+320; y2<=41+200; sw<=37; pattern<=C64;       synctype<=SERRATED; syncdelay<=1; -- 60Hz C64/C128
 			when "0001" => FREQUENCY<=MHZ_16_363; w<=512; h<=262; samples<=2; x1<=129; y1<=41; x2<=129+320; y2<=41+200; sw<=37; pattern<=C64;       synctype<=SERRATED; syncdelay<=1; -- 60Hz C64 6567R56A
 			when "0010" => FREQUENCY<=MHZ_8_181;  w<=260; h<=261; samples<=2; x1<=43;  y1<=49; x2<=43+176;  y2<=49+183; sw<=16; pattern<=VIC20;     synctype<=SERRATED; --60Hz VIC 20
-			when "0011" => FREQUENCY<=MHZ_21_477; w<=456; h<=262; samples<=3; x1<=98;  y1<=40; x2<=98+320;  y2<=40+200; sw<=34; pattern<=C16;       synctype<=SERRATED; --60Hz C16
+			when "0011" => FREQUENCY<=MHZ_21_477; w<=196; h<=262; samples<=7; x1<=28;  y1<=40; x2<=28+160;  y2<=40+200; sw<=15; pattern<=C16;       synctype<=SERRATED; syncdelay<=2; --60Hz C16
 			when "0100" => FREQUENCY<=MHZ_21_477; w<=228; h<=262; samples<=6; x1<=49;  y1<=41; x2<=49+160;  y2<=41+192; sw<=16; pattern<=Atari8;    synctype<=SERRATED; -- 60Hz Atari 8-bit		
 			when "0101" => FREQUENCY<=MHZ_14_187; w<=228; h<=262; samples<=4; x1<=48;  y1<=42; x2<=48+160;  y2<=42+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 60Hz Atari 2600 PAL speed
 			when "0110" => FREQUENCY<=MHZ_14_318; w<=228; h<=262; samples<=4; x1<=48;  y1<=42; x2<=48+160;  y2<=42+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 60Hz Atari 2600 NTSC speed
@@ -109,17 +108,18 @@ begin
 			when "1000" => FREQUENCY<=MHZ_10_738; w<=342; h<=262; samples<=2; x1<=60;  y1<=43; x2<=60+256;  y2<=43+192; sw<=26; pattern<=TMS;       synctype<=SIMPLE;  -- 60Hz TMS99xxA			
 			when "1001" => FREQUENCY<=MHZ_14_110; w<=448; h<=264; samples<=2; x1<=120; y1<=40; x2<=120+256; y2<=40+192; sw<=33; pattern<=Speccy;    synctype<=SERRATED;-- 60Hz ZX Spectrum
 			when "1010" => FREQUENCY<=MHZ_32_216; w<=341; h<=262; samples<=6; x1<=66;  y1<=20; x2<=66+256;  y2<=20+240; sw<=25; pattern<=NES;       synctype<=SIMPLE;  -- 60Hz NES
-			when "1011" => FREQUENCY<=MHZ_16_108; w<=342; h<=262; samples<=3; x1<=73;  y1<=43; x2<=66+256;  y2<=43+192; sw<=26; pattern<=SMS;       synctype<=SIMPLE;  --  Master System 60Hz
-			when "1100" => FREQUENCY<=MHZ_7_159;  w<=228; h<=262; samples<=2; x1<=48;  y1<=42; x2<=48+160;  y2<=42+192; sw<=14; pattern<=Intelli;   synctype<=SIMPLE;  --  Intellivision 60Hz
-			when "1101" => FREQUENCY<=MHZ_7_159;  w<=228; h<=262; samples<=2; x1<=48;  y1<=42; x2<=48+160;  y2<=42+192; sw<=14; pattern<=G7000;    synctype<=SIMPLE;  --  Odyssey II 60Hz
-			when others => FREQUENCY<=MHZ_24_000; w<=513; h<=312; samples<=3; x1<=30;  y1<=40; x2<=30+480; y2<=40+270; sw<=24;  pattern<=LC270;    synctype<=SIMPLE;  -- Lumacode270p 50Hz 
+			when "1011" => FREQUENCY<=MHZ_16_108; w<=342; h<=262; samples<=3; x1<=64;  y1<=43; x2<=64+256;  y2<=43+192; sw<=26; pattern<=SMS;       synctype<=SIMPLE;  -- 60Hz Master System 
+			when "1100" => FREQUENCY<=MHZ_7_159;  w<=228; h<=262; samples<=2; x1<=48;  y1<=42; x2<=48+160;  y2<=42+192; sw<=14; pattern<=Intelli;   synctype<=SIMPLE;  -- 60Hz Intellivision 
+			when "1101" => FREQUENCY<=MHZ_7_159;  w<=228; h<=262; samples<=2; x1<=48;  y1<=42; x2<=48+160;  y2<=42+192; sw<=14; pattern<=G7000;    synctype<=SIMPLE;   -- 60Hz Odyssey II 
+			when "1110" => FREQUENCY<=MHZ_14_318; w<=456; h<=262; samples<=2; x1<=118; y1<=40; x2<=118+256; y2<=40+192; sw<=33; pattern<=MC;        synctype<=SIMPLE;   -- 50Hz MC6847
+			when others => FREQUENCY<=MHZ_24_000; w<=513; h<=312; samples<=3; x1<=30;  y1<=40; x2<=30+480; y2<=40+270; sw<=24;  pattern<=LC270;    synctype<=SIMPLE;   -- 50Hz Lumacode270p 
 			end case;
 		else
 			case SELECTION is 
 			when "0000" => FREQUENCY<=MHZ_15_763; w<=504; h<=312; samples<=2; x1<=128; y1<=65; x2<=128+320; y2<=65+200; sw<=37; pattern<=C64;      synctype<=SERRATED; syncdelay<=1; -- 50Hz C64/C128
 			when "0001" => FREQUENCY<=MHZ_15_763; w<=504; h<=312; samples<=2; x1<=128; y1<=65; x2<=128+320; y2<=65+200; sw<=37; pattern<=C64;      synctype<=SERRATED; syncdelay<=1; -- 50Hz C64/C128
 			when "0010" => FREQUENCY<=MHZ_8_867;  w<=284; h<=312; samples<=2; x1<=73;  y1<=75; x2<=73+176; y2<=75+183; sw<=16; pattern<=VIC20;     synctype<=SERRATED; syncdelay<=1; -- 50Hz VIC 20
-			when "0011" => FREQUENCY<=MHZ_21_281; w<=456; h<=312; samples<=3; x1<=98;  y1<=60; x2<=98+320; y2<=60+200; sw<=34; pattern<=C16;       synctype<=SERRATED; --50Hz C16
+			when "0011" => FREQUENCY<=MHZ_21_281; w<=196; h<=312; samples<=7; x1<=28;  y1<=66; x2<=28+160; y2<=66+200; sw<=15; pattern<=C16;       synctype<=SERRATED; syncdelay<=2;  --50Hz C16
 			when "0100" => FREQUENCY<=MHZ_21_281; w<=228; h<=312; samples<=6; x1<=49;  y1<=69; x2<=49+160; y2<=69+192; sw<=16; pattern<=Atari8;    synctype<=SERRATED; -- 50Hz Atari 8-bit
 			when "0101" => FREQUENCY<=MHZ_14_187; w<=228; h<=312; samples<=4; x1<=48;  y1<=65; x2<=48+160; y2<=65+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 50Hz Atari 2600 PAL speed
 			when "0110" => FREQUENCY<=MHZ_14_318; w<=228; h<=312; samples<=4; x1<=48;  y1<=65; x2<=48+160; y2<=65+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 50Hz Atari 2600 NTSC speed
@@ -127,10 +127,11 @@ begin
 			when "1000" => FREQUENCY<=MHZ_10_738; w<=342; h<=313; samples<=2; x1<=60;  y1<=68; x2<=60+256; y2<=68+192; sw<=26; pattern<=TMS;       synctype<=SIMPLE;  -- 50Hz TMS99xxA
 			when "1001" => FREQUENCY<=MHZ_14_000; w<=448; h<=312; samples<=2; x1<=120; y1<=66; x2<=120+256; y2<=66+192;sw<=33; pattern<=Speccy;    synctype<=SERRATED;-- 50Hz ZX Spectrum
 			when "1010" => FREQUENCY<=MHZ_31_922; w<=341; h<=312; samples<=6; x1<=66;  y1<=42; x2<=66+256; y2<=42+240; sw<=25; pattern<=NES;       synctype<=SIMPLE;  -- 50Hz NES
-			when "1011" => FREQUENCY<=MHZ_15_961; w<=342; h<=312; samples<=3; x1<=73;  y1<=43; x2<=66+256; y2<=43+224; sw<=26; pattern<=SMS;       synctype<=SIMPLE;  -- Master System 50Hz
-			when "1100" => FREQUENCY<=MHZ_8_000;  w<=256; h<=312; samples<=2; x1<=60;  y1<=66; x2<=60+160; y2<=66+192; sw<=17; pattern<=Intelli;  synctype<=SIMPLE;  --  Intellivision 50Hz
-			when "1101" => FREQUENCY<=MHZ_7_080;  w<=228; h<=312; samples<=2; x1<=60;  y1<=66; x2<=60+160; y2<=66+192; sw<=17; pattern<=G7000;    synctype<=SIMPLE;  --  G7000 50Hz
-			when others => FREQUENCY<=MHZ_24_000; w<=513; h<=312; samples<=3; x1<=30;  y1<=40; x2<=30+480; y2<=40+270; sw<=24;  pattern<=LC270;    synctype<=SIMPLE;  -- Lumacode270p 50Hz 
+			when "1011" => FREQUENCY<=MHZ_15_961; w<=342; h<=312; samples<=3; x1<=64;  y1<=43; x2<=64+256; y2<=43+224; sw<=26; pattern<=SMS;       synctype<=SIMPLE;  -- 50Hz  Master System
+			when "1100" => FREQUENCY<=MHZ_8_000;  w<=256; h<=312; samples<=2; x1<=60;  y1<=66; x2<=60+160; y2<=66+192; sw<=17; pattern<=Intelli;   synctype<=SIMPLE;   -- 50Hz Intellivision
+			when "1101" => FREQUENCY<=MHZ_7_080;  w<=228; h<=312; samples<=2; x1<=60;  y1<=66; x2<=60+160; y2<=66+192; sw<=17; pattern<=G7000;     synctype<=SIMPLE;   -- 50Hz G7000
+			when "1110" => FREQUENCY<=MHZ_14_187; w<=456; h<=312; samples<=2; x1<=118; y1<=64; x2<=118+256; y2<=64+192; sw<=33; pattern<=MC;        synctype<=SIMPLE;   -- 50Hz MC6847
+			when others => FREQUENCY<=MHZ_24_000; w<=513; h<=312; samples<=3; x1<=30;  y1<=40; x2<=30+480; y2<=40+270; sw<=24;  pattern<=LC270;    synctype<=SIMPLE;   -- Lumacode270p 50Hz 
 			end case;
 		end if;
 	end process;
@@ -141,7 +142,7 @@ begin
 	variable s:integer range 0 to 7 := 0;	
 	
 	variable csync : std_logic;
-	variable prev_csync: std_logic;
+	variable prev_csync: std_logic_vector(7 downto 1);
 	variable outbuffer: std_logic_vector(13 downto 0);
 	variable cx:integer range 0 to 1023;
 	variable cy:integer range 0 to 511;
@@ -158,6 +159,9 @@ begin
 	constant tmscolors  : lum_array := (
 		"0000","0100","1001","1010","0001","0110","0101","0111",
 	    "0010","0011","1101","1110","1000","1100","1011","1111");		
+	constant mccolors  : lum_array := (
+		"1100","1101","0110","0010","0111","1010","1001","1000",
+		"0001","0101","0100","0011","0000","0000","0000","0000");		
 	variable tmp_2bit : std_logic_vector(1 downto 0);
 	variable tmp_col:integer range 0 to 63;
 	begin
@@ -174,16 +178,30 @@ begin
 				or (cx>=8 and cx<8+96 and cy>=8 and cy<8+8 and titles_data(96+8-1-cx)='1') then
 					case pattern is
 					when C16 =>
-						outbuffer := "00000000110001";
+						if cx=0 and cy/=0 and cy/=y2-y1-1 then
+							outbuffer := "10110001000000";
+						elsif cx=x2-x1-1 and cy/=0 and cy/=y2-y1-1 then
+							outbuffer := "01000000110001";						
+						else
+							outbuffer := "11110001110001";
+						end if;
 					when Atari8 => 
-						outbuffer := "00000011111111";
+						if cx=0 and cy/=0 and cy/=y2-y1-1 then
+							outbuffer := "00000011110000";
+						elsif cx=x2-x1-1 and cy/=0 and cy/=y2-y1-1 then
+							outbuffer := "00000000001111";						
+						else
+							outbuffer := "00000011111111";
+						end if;
 					when Atari2600 => 
 						outbuffer := "00000000001111";
 					when Maria => 
 						outbuffer := "00000000001111";
 					when NES => 
-						outbuffer := "00111100001010"; -- 110010
+						outbuffer := "00111100001010";
 					when Intelli =>
+						outbuffer := "00000000000111";
+					when MC =>
 						outbuffer := "00000000000111";
 					when others =>
 						outbuffer := "11111111111111";
@@ -200,9 +218,12 @@ begin
 							outbuffer(3 downto 0) := c64colors((cy-40)/8);					
 						end if;
 					when C16 =>
-						if cx>=16 and cx<16+256 and cy>=56 and cy<56+128 then
-							outbuffer(5 downto 4) := std_logic_vector(to_unsigned( (cy-56)/32, 2 ));	
-							outbuffer(3 downto 0) := std_logic_vector(to_unsigned( (cx-16)/16, 4 ));	
+						if cx>=16 and cx<16+128 and cy>=56 and cy<56+128 then
+							outbuffer(6 downto 4) := std_logic_vector(to_unsigned( (cy-56)/16, 3 ));	
+							outbuffer(3 downto 0) := std_logic_vector(to_unsigned( (cx-16)/8, 4 ));	
+							outbuffer(13) := outbuffer(6);
+							outbuffer(12) := outbuffer(6);
+							outbuffer(11 downto 6) := outbuffer(5 downto 0);
 						end if;
 					when Speccy =>
 						if cx>=16 and cx<256-16 and cy>=48 and cy<48+128 then
@@ -266,6 +287,10 @@ begin
 						if cx>=16 and cx<160-16 and cy>=56 and cy<56+128 then
 							outbuffer(3 downto 0) := std_logic_vector(to_unsigned( ((cy-56)/8), 4));	
 						end if;
+					when MC =>
+						if cx>=16 and cx<256-16 and cy>=56 and cy<56+128 then
+							outbuffer(3 downto 0) := mccolors((cy-56)/8);	
+						end if;
 					when LC270 =>
 						if cx>=7 and cx<7+256 and cy>=7 and cy<7+256 then
 							outbuffer(5 downto 4) := std_logic_vector(to_unsigned( ((cx-7)/32) mod 4, 2));
@@ -284,7 +309,7 @@ begin
 			end if;
 			
 			-- generate csync
-			prev_csync := csync;
+			prev_csync := prev_csync(6 downto 1) & csync;
 			tmp_long := sw;
 			tmp_short := sw/2;
 			tmp_half := w/2;
@@ -320,10 +345,8 @@ begin
 			INV_LUM1 <= not outbuffer(2*(samples-1-s)+1);
 			if syncdelay=0 then
 				INV_CSYNC <= not csync; 
-				AUX_CSYNC <= csync;
 			else
-				INV_CSYNC <= not prev_csync;
-				AUX_CSYNC <= prev_csync;
+				INV_CSYNC <= not prev_csync(syncdelay);
 			end if;
 						
 			-- access the titles bitmap
@@ -336,6 +359,8 @@ begin
 				s:=4;
 			elsif pattern=Maria and s=0 and x=0 then -- skip half pixel every line for Maria
 				s:=3;
+			elsif pattern=C16 and s=0 and x=1 then  -- skip 4 sub-pixels every line for TED
+				s:=5;
 			elsif s+1 /= samples then
 				s := s+1;
 			else

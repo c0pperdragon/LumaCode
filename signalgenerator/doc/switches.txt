@@ -11,11 +11,12 @@ OFF   ON  OFF   ON    Atari 2600 PAL colors
 OFF   ON   ON  OFF    Atari 2600 NTSC colors
 OFF   ON   ON   ON    Atari 7800 
 ON   OFF  OFF  OFF    TMS99xxA
-ON   OFF  OFF   ON    ZX Spectrum (only 50Hz)
+ON   OFF  OFF   ON    ZX Spectrum
 ON   OFF   ON  OFF    NES
 ON   OFF   ON   ON    Sega Master System
 ON    ON  OFF  OFF    Intellivision
 ON    ON  OFF   ON    G7000 or Odyssey II
+ON    ON   ON   OFF   MC
 others                Lumacode 720p (only 50Hz)
 
 When jumper set: 50Hz
