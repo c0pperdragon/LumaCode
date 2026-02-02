@@ -17,7 +17,7 @@ ON   OFF   ON   ON    Sega Master System
 ON    ON  OFF  OFF    Intellivision
 ON    ON  OFF   ON    G7000 or Odyssey II
 ON    ON   ON   OFF   MC
-others                Lumacode 720p (only 50Hz)
+others                Lumacode 270p (only 50Hz)
 
 When jumper set: 50Hz
 When not set: 60Hz
