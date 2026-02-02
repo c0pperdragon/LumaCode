@@ -3,7 +3,7 @@
 A small device intended to generate various LumaCode signals. Its main purpose is for developing and
 testing decoding/upscaling equipment.
 
-![](doc/signalgenerator2.jpg)
+![](doc/signalgenerator.jpg)
 
 ## Usage
 
