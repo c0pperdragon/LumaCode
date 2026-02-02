@@ -13,11 +13,11 @@ Use the jumper link to select a 50Hz (when jumper closed) or 60Hz (when jumper o
 
 ## Signal possibilites 
 
-![](doc/signalgenerator2.jpg)
+![](doc/pattern_vdp.png)
 
 The following switch combinations are supported:
 
-1      2    3    4
+1   |  2  | 3   |4    | Signal
 --- | --- | --- | --- | -------------------------
 OFF | OFF | OFF | OFF | C64/C128
 OFF | OFF | OFF | ON  | C64 6567R56A (only 60Hz)
