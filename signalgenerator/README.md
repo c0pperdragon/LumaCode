@@ -33,7 +33,7 @@ ON  | OFF | ON  | OFF | NES
 ON  | OFF | ON  | ON  | Sega Master System
 ON  | ON  | OFF | OFF | Intellivision
 ON  | ON  | OFF | ON  | G7000 or Odyssey II
-ON  | ON  | ON  | OFF | MC
+ON  | ON  | ON  | OFF | MC6847
 ON  | ON  | ON  | ON  | Lumacode 270p (only 50Hz)
 
 The last option is not used in any actual hardware, but this is an experimental signal with a resolution 
