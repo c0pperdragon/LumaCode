@@ -44,7 +44,7 @@
         </Source>
     </Implementation>
     <Implementation title="impl1" dir="impl1" description="impl1" synthesis="synplify" default_strategy="Strategy1">
-        <Options def_top="SignalGenerator"/>
+        <Options/>
         <Source name="source/SignalGenerator.vhd" type="VHDL" type_short="VHDL">
             <Options top_module="SignalGenerator"/>
         </Source>
