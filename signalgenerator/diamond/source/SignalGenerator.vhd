@@ -100,7 +100,7 @@ begin
 			when "0000" => FREQUENCY<=MHZ_16_363; w<=520; h<=263; samples<=2; x1<=129; y1<=41; x2<=129+320; y2<=41+200; sw<=37; pattern<=C64;       synctype<=SERRATED; syncdelay<=1; -- 60Hz C64/C128
 			when "0001" => FREQUENCY<=MHZ_16_363; w<=512; h<=262; samples<=2; x1<=129; y1<=41; x2<=129+320; y2<=41+200; sw<=37; pattern<=C64;       synctype<=SERRATED; syncdelay<=1; -- 60Hz C64 6567R56A
 			when "0010" => FREQUENCY<=MHZ_8_181;  w<=260; h<=261; samples<=2; x1<=43;  y1<=49; x2<=43+176;  y2<=49+183; sw<=16; pattern<=VIC20;     synctype<=SERRATED; --60Hz VIC 20
-			when "0011" => FREQUENCY<=MHZ_21_477; w<=342; h<=262; samples<=4; x1<=13;  y1<=36; x2<=13+320+8; y2<=36+200+8; sw<=10; pattern<=C16;    synctype<=SERRATED; --60Hz C16
+			when "0011" => FREQUENCY<=MHZ_21_477; w<=342; h<=262; samples<=4; x1<=13;  y1<=36; x2<=13+320+8; y2<=36+200+8; sw<=9; pattern<=C16;    synctype<=SERRATED; --60Hz C16
 			when "0100" => FREQUENCY<=MHZ_21_477; w<=228; h<=262; samples<=6; x1<=49;  y1<=41; x2<=49+160;  y2<=41+192; sw<=16; pattern<=Atari8;    synctype<=SERRATED; -- 60Hz Atari 8-bit		
 			when "0101" => FREQUENCY<=MHZ_14_187; w<=228; h<=262; samples<=4; x1<=48;  y1<=42; x2<=48+160;  y2<=42+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 60Hz Atari 2600 PAL speed
 			when "0110" => FREQUENCY<=MHZ_14_318; w<=228; h<=262; samples<=4; x1<=48;  y1<=42; x2<=48+160;  y2<=42+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 60Hz Atari 2600 NTSC speed
@@ -119,7 +119,7 @@ begin
 			when "0000" => FREQUENCY<=MHZ_15_763; w<=504; h<=312; samples<=2; x1<=128; y1<=65; x2<=128+320; y2<=65+200; sw<=37; pattern<=C64;      synctype<=SERRATED; syncdelay<=1; -- 50Hz C64/C128
 			when "0001" => FREQUENCY<=MHZ_15_763; w<=504; h<=312; samples<=2; x1<=128; y1<=65; x2<=128+320; y2<=65+200; sw<=37; pattern<=C64;      synctype<=SERRATED; syncdelay<=1; -- 50Hz C64/C128
 			when "0010" => FREQUENCY<=MHZ_8_867;  w<=284; h<=312; samples<=2; x1<=73;  y1<=75; x2<=73+176; y2<=75+183; sw<=16; pattern<=VIC20;     synctype<=SERRATED; syncdelay<=1; -- 50Hz VIC 20
-			when "0011" => FREQUENCY<=MHZ_21_281; w<=342; h<=312; samples<=4; x1<=13;  y1<=62; x2<=13+320+8; y2<=62+200+8; sw<=10; pattern<=C16;   synctype<=SERRATED; --50Hz C16
+			when "0011" => FREQUENCY<=MHZ_21_281; w<=342; h<=312; samples<=4; x1<=13;  y1<=62; x2<=13+320+8; y2<=62+200+8; sw<=9; pattern<=C16;   synctype<=SERRATED; --50Hz C16
 			when "0100" => FREQUENCY<=MHZ_21_281; w<=228; h<=312; samples<=6; x1<=49;  y1<=69; x2<=49+160; y2<=69+192; sw<=16; pattern<=Atari8;    synctype<=SERRATED; -- 50Hz Atari 8-bit
 			when "0101" => FREQUENCY<=MHZ_14_187; w<=228; h<=312; samples<=4; x1<=48;  y1<=65; x2<=48+160; y2<=65+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 50Hz Atari 2600 PAL speed
 			when "0110" => FREQUENCY<=MHZ_14_318; w<=228; h<=312; samples<=4; x1<=48;  y1<=65; x2<=48+160; y2<=65+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 50Hz Atari 2600 NTSC speed
@@ -140,6 +140,7 @@ begin
 	variable x:integer range 0 to 1023 := 0;
 	variable y:integer range 0 to 512 := 0;
 	variable s:integer range 0 to 7 := 0;	
+	variable oddframe:boolean := false;
 	
 	variable csync : std_logic;
 	variable prev_csync: std_logic_vector(7 downto 1);
@@ -178,7 +179,7 @@ begin
 				or (cx>=8 and cx<8+96 and cy>=8 and cy<8+8 and titles_data(96+8-1-cx)='1') then
 					case pattern is
 					when C16 =>
-						outbuffer := "00000000011110";
+						outbuffer := "00000000010111";
 					when Atari8 => 
 						if cx=0 and cy/=0 and cy/=y2-y1-1 then
 							outbuffer := "00000011110000";
@@ -212,13 +213,19 @@ begin
 							outbuffer(3 downto 0) := c64colors((cy-40)/8);					
 						end if;
 					when C16 =>
-						if cx>=32 and cx<32+256 and cy>=56 and cy<56+128 then
-							outbuffer(7 downto 4) := std_logic_vector(to_unsigned( (cx-32)/16, 4 ));	
-							outbuffer(3 downto 1) := std_logic_vector(to_unsigned( (cy-56)/16, 3 ));	
+						if cx>=16 and cx<16+256 and cy>=56 and cy<56+128 then
+							outbuffer(7 downto 4) := std_logic_vector(to_unsigned( (cy-56)/8, 4 ));	
+							outbuffer(3 downto 0) := std_logic_vector(to_unsigned( (cx-16)/16, 4 ));	
+						elsif cx>=280 and cx<280+32 and cy>=64 and cy<64+16 then
+							if (oddframe and (cx-280) <= (cy-64)*2)
+                            or (not oddframe and (cx-280) <= (cy-64)*2+1)
+							then
+								outbuffer := "00000000010111";
+							end if;
 						elsif cx>=4 and cx<4+320 and cy>=4 and cy<4+200 then
                            -- not border
 						else
-							outbuffer(7 downto 0) := "01000110";
+							outbuffer(7 downto 0) := "01100011";
 						end if;
 					when Speccy =>
 						if cx>=16 and cx<256-16 and cy>=48 and cy<48+128 then
@@ -367,6 +374,7 @@ begin
 						y := y+1;
 					else
 						y := 0;
+						oddframe := not oddframe;
 					end if;
 				end if;
 			end if; 
