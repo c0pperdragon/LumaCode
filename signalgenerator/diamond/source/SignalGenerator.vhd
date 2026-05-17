@@ -66,9 +66,6 @@ constant G7000:integer:=11;
 constant MC:integer:=12;
 constant LC270:integer:=13;
 
-constant SERRATED:integer:=0;
-constant SIMPLE:integer:=1;
-
 signal FREQUENCY: t_Frequency;
 signal CLK:std_logic;
 
@@ -84,7 +81,7 @@ signal y1 : integer range 0 to 511;
 signal x2 : integer range 0 to 1023;
 signal y2 : integer range 0 to 511;
 signal syncdelay : integer range 7 downto 0;
-signal synctype:integer range 0 to 3;
+signal serratedsync:boolean;
 signal pattern : integer range 0 to 15;
 
 
@@ -97,41 +94,41 @@ begin
 		syncdelay <= 0;
 		if SEL50HZ='0' then
 			case SELECTION is 
-			when "0000" => FREQUENCY<=MHZ_16_363; w<=520; h<=263; samples<=2; x1<=129; y1<=41; x2<=129+320; y2<=41+200; sw<=37; pattern<=C64;       synctype<=SERRATED; syncdelay<=1; -- 60Hz C64/C128
-			when "0001" => FREQUENCY<=MHZ_16_363; w<=512; h<=262; samples<=2; x1<=129; y1<=41; x2<=129+320; y2<=41+200; sw<=37; pattern<=C64;       synctype<=SERRATED; syncdelay<=1; -- 60Hz C64 6567R56A
-			when "0010" => FREQUENCY<=MHZ_8_181;  w<=260; h<=261; samples<=2; x1<=43;  y1<=49; x2<=43+176;  y2<=49+183; sw<=16; pattern<=VIC20;     synctype<=SERRATED; --60Hz VIC 20
-			when "0011" => FREQUENCY<=MHZ_21_477; w<=342; h<=262; samples<=4; x1<=13;  y1<=36; x2<=13+320+8; y2<=36+200+8; sw<=9; pattern<=C16;    synctype<=SERRATED; --60Hz C16
-			when "0100" => FREQUENCY<=MHZ_21_477; w<=228; h<=262; samples<=6; x1<=49;  y1<=41; x2<=49+160;  y2<=41+192; sw<=16; pattern<=Atari8;    synctype<=SERRATED; -- 60Hz Atari 8-bit		
-			when "0101" => FREQUENCY<=MHZ_14_187; w<=228; h<=262; samples<=4; x1<=48;  y1<=42; x2<=48+160;  y2<=42+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 60Hz Atari 2600 PAL speed
-			when "0110" => FREQUENCY<=MHZ_14_318; w<=228; h<=262; samples<=4; x1<=48;  y1<=42; x2<=48+160;  y2<=42+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 60Hz Atari 2600 NTSC speed
-			when "0111" => FREQUENCY<=MHZ_21_477; w<=341; h<=263; samples<=4; x1<=18;  y1<=42; x2<=18+320;  y2<=42+200; sw<=11; pattern<=Maria;     synctype<=SIMPLE;  -- 60Hz Atari 7800
-			when "1000" => FREQUENCY<=MHZ_10_738; w<=342; h<=262; samples<=2; x1<=60;  y1<=43; x2<=60+256;  y2<=43+192; sw<=26; pattern<=TMS;       synctype<=SIMPLE;  -- 60Hz TMS99xxA			
-			when "1001" => FREQUENCY<=MHZ_14_110; w<=448; h<=264; samples<=2; x1<=120; y1<=40; x2<=120+256; y2<=40+192; sw<=33; pattern<=Speccy;    synctype<=SERRATED;-- 60Hz ZX Spectrum
-			when "1010" => FREQUENCY<=MHZ_32_216; w<=341; h<=262; samples<=6; x1<=66;  y1<=20; x2<=66+256;  y2<=20+240; sw<=25; pattern<=NES;       synctype<=SIMPLE;  -- 60Hz NES
-			when "1011" => FREQUENCY<=MHZ_16_108; w<=342; h<=262; samples<=3; x1<=64;  y1<=43; x2<=64+256;  y2<=43+192; sw<=26; pattern<=SMS;       synctype<=SIMPLE;  -- 60Hz Master System 
-			when "1100" => FREQUENCY<=MHZ_7_159;  w<=228; h<=262; samples<=2; x1<=48;  y1<=42; x2<=48+160;  y2<=42+192; sw<=14; pattern<=Intelli;   synctype<=SIMPLE;  -- 60Hz Intellivision 
-			when "1101" => FREQUENCY<=MHZ_7_159;  w<=228; h<=262; samples<=2; x1<=48;  y1<=42; x2<=48+160;  y2<=42+192; sw<=14; pattern<=G7000;    synctype<=SIMPLE;   -- 60Hz Odyssey II 
-			when "1110" => FREQUENCY<=MHZ_14_318; w<=456; h<=262; samples<=2; x1<=118; y1<=40; x2<=118+256; y2<=40+192; sw<=33; pattern<=MC;        synctype<=SIMPLE;   -- 50Hz MC6847
-			when others => FREQUENCY<=MHZ_24_000; w<=513; h<=312; samples<=3; x1<=30;  y1<=40; x2<=30+480; y2<=40+270; sw<=24;  pattern<=LC270;    synctype<=SIMPLE;   -- 50Hz Lumacode270p 
+			when "0000" => FREQUENCY<=MHZ_16_363; w<=520; h<=263; samples<=2; x1<=129; y1<=41; x2<=129+320; y2<=41+200; sw<=37; pattern<=C64;       serratedsync<=true; syncdelay<=1; -- 60Hz C64/C128
+			when "0001" => FREQUENCY<=MHZ_16_363; w<=512; h<=262; samples<=2; x1<=129; y1<=41; x2<=129+320; y2<=41+200; sw<=37; pattern<=C64;       serratedsync<=true; syncdelay<=1; -- 60Hz C64 6567R56A
+			when "0010" => FREQUENCY<=MHZ_8_181;  w<=260; h<=261; samples<=2; x1<=43;  y1<=49; x2<=43+176;  y2<=49+183; sw<=16; pattern<=VIC20;     serratedsync<=true; --60Hz VIC 20
+			when "0011" => FREQUENCY<=MHZ_21_477; w<=342; h<=262; samples<=4; x1<=13;  y1<=36; x2<=13+320+8; y2<=36+200+8; sw<=9; pattern<=C16;    serratedsync<=true; --60Hz C16
+			when "0100" => FREQUENCY<=MHZ_21_477; w<=228; h<=262; samples<=6; x1<=49;  y1<=41; x2<=49+160;  y2<=41+192; sw<=16; pattern<=Atari8;    serratedsync<=true; -- 60Hz Atari 8-bit		
+			when "0101" => FREQUENCY<=MHZ_14_187; w<=228; h<=262; samples<=4; x1<=48;  y1<=42; x2<=48+160;  y2<=42+200; sw<=14; pattern<=Atari2600; serratedsync<=false;  -- 60Hz Atari 2600 PAL speed
+			when "0110" => FREQUENCY<=MHZ_14_318; w<=228; h<=262; samples<=4; x1<=48;  y1<=42; x2<=48+160;  y2<=42+200; sw<=14; pattern<=Atari2600; serratedsync<=false;  -- 60Hz Atari 2600 NTSC speed
+			when "0111" => FREQUENCY<=MHZ_21_477; w<=341; h<=263; samples<=4; x1<=18;  y1<=42; x2<=18+320;  y2<=42+200; sw<=11; pattern<=Maria;     serratedsync<=false;  -- 60Hz Atari 7800
+			when "1000" => FREQUENCY<=MHZ_10_738; w<=342; h<=262; samples<=2; x1<=60;  y1<=43; x2<=60+256;  y2<=43+192; sw<=26; pattern<=TMS;       serratedsync<=false;  -- 60Hz TMS99xxA			
+			when "1001" => FREQUENCY<=MHZ_14_110; w<=448; h<=264; samples<=2; x1<=120; y1<=40; x2<=120+256; y2<=40+192; sw<=33; pattern<=Speccy;    serratedsync<=true;-- 60Hz ZX Spectrum
+			when "1010" => FREQUENCY<=MHZ_32_216; w<=341; h<=262; samples<=6; x1<=66;  y1<=20; x2<=66+256;  y2<=20+240; sw<=25; pattern<=NES;       serratedsync<=false;  -- 60Hz NES
+			when "1011" => FREQUENCY<=MHZ_16_108; w<=342; h<=262; samples<=3; x1<=64;  y1<=43; x2<=64+256;  y2<=43+192; sw<=26; pattern<=SMS;       serratedsync<=false;  -- 60Hz Master System 
+			when "1100" => FREQUENCY<=MHZ_7_159;  w<=228; h<=262; samples<=2; x1<=48;  y1<=42; x2<=48+160;  y2<=42+192; sw<=14; pattern<=Intelli;   serratedsync<=false;  -- 60Hz Intellivision 
+			when "1101" => FREQUENCY<=MHZ_7_159;  w<=228; h<=262; samples<=2; x1<=48;  y1<=42; x2<=48+160;  y2<=42+192; sw<=14; pattern<=G7000;    serratedsync<=false;   -- 60Hz Odyssey II 
+			when "1110" => FREQUENCY<=MHZ_14_318; w<=456; h<=262; samples<=2; x1<=118; y1<=40; x2<=118+256; y2<=40+192; sw<=33; pattern<=MC;        serratedsync<=false;   -- 60Hz MC6847
+			when others => FREQUENCY<=MHZ_24_000; w<=513; h<=312; samples<=3; x1<=30;  y1<=40; x2<=30+480; y2<=40+270; sw<=24;  pattern<=LC270;    serratedsync<=false;   -- 50Hz Lumacode270p 
 			end case;
 		else
 			case SELECTION is 
-			when "0000" => FREQUENCY<=MHZ_15_763; w<=504; h<=312; samples<=2; x1<=128; y1<=65; x2<=128+320; y2<=65+200; sw<=37; pattern<=C64;      synctype<=SERRATED; syncdelay<=1; -- 50Hz C64/C128
-			when "0001" => FREQUENCY<=MHZ_15_763; w<=504; h<=312; samples<=2; x1<=128; y1<=65; x2<=128+320; y2<=65+200; sw<=37; pattern<=C64;      synctype<=SERRATED; syncdelay<=1; -- 50Hz C64/C128
-			when "0010" => FREQUENCY<=MHZ_8_867;  w<=284; h<=312; samples<=2; x1<=73;  y1<=75; x2<=73+176; y2<=75+183; sw<=16; pattern<=VIC20;     synctype<=SERRATED; syncdelay<=1; -- 50Hz VIC 20
-			when "0011" => FREQUENCY<=MHZ_21_281; w<=342; h<=312; samples<=4; x1<=13;  y1<=62; x2<=13+320+8; y2<=62+200+8; sw<=9; pattern<=C16;   synctype<=SERRATED; --50Hz C16
-			when "0100" => FREQUENCY<=MHZ_21_281; w<=228; h<=312; samples<=6; x1<=49;  y1<=69; x2<=49+160; y2<=69+192; sw<=16; pattern<=Atari8;    synctype<=SERRATED; -- 50Hz Atari 8-bit
-			when "0101" => FREQUENCY<=MHZ_14_187; w<=228; h<=312; samples<=4; x1<=48;  y1<=65; x2<=48+160; y2<=65+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 50Hz Atari 2600 PAL speed
-			when "0110" => FREQUENCY<=MHZ_14_318; w<=228; h<=312; samples<=4; x1<=48;  y1<=65; x2<=48+160; y2<=65+200; sw<=14; pattern<=Atari2600; synctype<=SIMPLE;  -- 50Hz Atari 2600 NTSC speed
-			when "0111" => FREQUENCY<=MHZ_21_281; w<=341; h<=313; samples<=4; x1<=18;  y1<=65; x2<=18+320; y2<=65+200; sw<=11; pattern<=Maria;     synctype<=SIMPLE;  -- 50Hz Atari 7800 
-			when "1000" => FREQUENCY<=MHZ_10_738; w<=342; h<=313; samples<=2; x1<=60;  y1<=68; x2<=60+256; y2<=68+192; sw<=26; pattern<=TMS;       synctype<=SIMPLE;  -- 50Hz TMS99xxA
-			when "1001" => FREQUENCY<=MHZ_14_000; w<=448; h<=312; samples<=2; x1<=120; y1<=66; x2<=120+256; y2<=66+192;sw<=33; pattern<=Speccy;    synctype<=SERRATED;-- 50Hz ZX Spectrum
-			when "1010" => FREQUENCY<=MHZ_31_922; w<=341; h<=312; samples<=6; x1<=66;  y1<=42; x2<=66+256; y2<=42+240; sw<=25; pattern<=NES;       synctype<=SIMPLE;  -- 50Hz NES
-			when "1011" => FREQUENCY<=MHZ_15_961; w<=342; h<=312; samples<=3; x1<=64;  y1<=43; x2<=64+256; y2<=43+224; sw<=26; pattern<=SMS;       synctype<=SIMPLE;  -- 50Hz  Master System
-			when "1100" => FREQUENCY<=MHZ_8_000;  w<=256; h<=312; samples<=2; x1<=60;  y1<=66; x2<=60+160; y2<=66+192; sw<=17; pattern<=Intelli;   synctype<=SIMPLE;   -- 50Hz Intellivision
-			when "1101" => FREQUENCY<=MHZ_7_080;  w<=228; h<=312; samples<=2; x1<=60;  y1<=66; x2<=60+160; y2<=66+192; sw<=17; pattern<=G7000;     synctype<=SIMPLE;   -- 50Hz G7000
-			when "1110" => FREQUENCY<=MHZ_14_187; w<=456; h<=312; samples<=2; x1<=118; y1<=64; x2<=118+256; y2<=64+192; sw<=33; pattern<=MC;        synctype<=SIMPLE;   -- 50Hz MC6847
-			when others => FREQUENCY<=MHZ_24_000; w<=513; h<=312; samples<=3; x1<=30;  y1<=40; x2<=30+480; y2<=40+270; sw<=24;  pattern<=LC270;    synctype<=SIMPLE;   -- Lumacode270p 50Hz 
+			when "0000" => FREQUENCY<=MHZ_15_763; w<=504; h<=312; samples<=2; x1<=128; y1<=65; x2<=128+320; y2<=65+200; sw<=37; pattern<=C64;      serratedsync<=true; syncdelay<=1; -- 50Hz C64/C128
+			when "0001" => FREQUENCY<=MHZ_15_763; w<=504; h<=312; samples<=2; x1<=128; y1<=65; x2<=128+320; y2<=65+200; sw<=37; pattern<=C64;      serratedsync<=true; syncdelay<=1; -- 50Hz C64/C128
+			when "0010" => FREQUENCY<=MHZ_8_867;  w<=284; h<=312; samples<=2; x1<=73;  y1<=75; x2<=73+176; y2<=75+183; sw<=16; pattern<=VIC20;     serratedsync<=true; syncdelay<=1; -- 50Hz VIC 20
+			when "0011" => FREQUENCY<=MHZ_21_281; w<=342; h<=312; samples<=4; x1<=13;  y1<=62; x2<=13+320+8; y2<=62+200+8; sw<=9; pattern<=C16;   serratedsync<=true; --50Hz C16
+			when "0100" => FREQUENCY<=MHZ_21_281; w<=228; h<=312; samples<=6; x1<=49;  y1<=69; x2<=49+160; y2<=69+192; sw<=16; pattern<=Atari8;    serratedsync<=true; -- 50Hz Atari 8-bit
+			when "0101" => FREQUENCY<=MHZ_14_187; w<=228; h<=312; samples<=4; x1<=48;  y1<=65; x2<=48+160; y2<=65+200; sw<=14; pattern<=Atari2600; serratedsync<=false;  -- 50Hz Atari 2600 PAL speed
+			when "0110" => FREQUENCY<=MHZ_14_318; w<=228; h<=312; samples<=4; x1<=48;  y1<=65; x2<=48+160; y2<=65+200; sw<=14; pattern<=Atari2600; serratedsync<=false;  -- 50Hz Atari 2600 NTSC speed
+			when "0111" => FREQUENCY<=MHZ_21_281; w<=341; h<=313; samples<=4; x1<=18;  y1<=65; x2<=18+320; y2<=65+200; sw<=11; pattern<=Maria;     serratedsync<=false;  -- 50Hz Atari 7800 
+			when "1000" => FREQUENCY<=MHZ_10_738; w<=342; h<=313; samples<=2; x1<=60;  y1<=68; x2<=60+256; y2<=68+192; sw<=26; pattern<=TMS;       serratedsync<=false;  -- 50Hz TMS99xxA
+			when "1001" => FREQUENCY<=MHZ_14_000; w<=448; h<=312; samples<=2; x1<=120; y1<=66; x2<=120+256; y2<=66+192;sw<=33; pattern<=Speccy;    serratedsync<=true;-- 50Hz ZX Spectrum
+			when "1010" => FREQUENCY<=MHZ_31_922; w<=341; h<=312; samples<=6; x1<=66;  y1<=42; x2<=66+256; y2<=42+240; sw<=25; pattern<=NES;       serratedsync<=false;  -- 50Hz NES
+			when "1011" => FREQUENCY<=MHZ_15_961; w<=342; h<=312; samples<=3; x1<=64;  y1<=43; x2<=64+256; y2<=43+224; sw<=26; pattern<=SMS;       serratedsync<=false;  -- 50Hz  Master System
+			when "1100" => FREQUENCY<=MHZ_8_000;  w<=256; h<=312; samples<=2; x1<=60;  y1<=66; x2<=60+160; y2<=66+192; sw<=17; pattern<=Intelli;   serratedsync<=false;   -- 50Hz Intellivision
+			when "1101" => FREQUENCY<=MHZ_7_080;  w<=228; h<=312; samples<=2; x1<=60;  y1<=66; x2<=60+160; y2<=66+192; sw<=17; pattern<=G7000;     serratedsync<=false;   -- 50Hz G7000
+			when "1110" => FREQUENCY<=MHZ_14_187; w<=456; h<=312; samples<=2; x1<=118; y1<=64; x2<=118+256; y2<=64+192; sw<=33; pattern<=MC;       serratedsync<=false;   -- 50Hz MC6847
+			when others => FREQUENCY<=MHZ_24_000; w<=513; h<=312; samples<=3; x1<=30;  y1<=40; x2<=30+480; y2<=40+270; sw<=24;  pattern<=LC270;    serratedsync<=false;   -- Lumacode270p 50Hz 
 			end case;
 		end if;
 	end process;
@@ -317,7 +314,7 @@ begin
 			if pattern=C16 then tmp_short := sw; end if;
 			tmp_half := w/2;
 			csync := '1';
-			if synctype=SERRATED then
+			if serratedsync then
 				if (y=0) and (x<tmp_long or (x>=tmp_half and x<tmp_half+tmp_short)) then                   -- normal sync, short sync
 					csync := '0';
 				elsif (y=1 or y=2) and (x<tmp_short or (x>=tmp_half and x<tmp_half+tmp_short)) then       -- 2x 2 short syncs
@@ -342,7 +339,7 @@ begin
 					end if;
 				end if;
 			end if;
-			
+		
 			-- sequence out samples and sync
 			INV_LUM0 <= not outbuffer(2*(samples-1-s));
 			INV_LUM1 <= not outbuffer(2*(samples-1-s)+1);
