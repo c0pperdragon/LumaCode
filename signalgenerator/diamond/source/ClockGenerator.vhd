@@ -121,6 +121,7 @@ begin
 					when MHZ_7_159  => diva:=51; divb:=57;
 					when MHZ_8_000  => diva:=50; divb:=50;
 					when MHZ_8_181  => diva:=90; divb:=88;
+					when MHZ_8_388  => diva:=65; divb:=62;
 					when MHZ_8_867  => diva:=92; divb:=83;
 					when MHZ_10_738 => diva:=98; divb:=73;
 					when MHZ_14_000 => diva:=56; divb:=32;

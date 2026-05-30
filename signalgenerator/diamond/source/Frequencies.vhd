@@ -5,6 +5,7 @@ package Frequencies is
 	    MHZ_7_159,       -- NTSC Intellivion 2x pixel clock = 7.159088
 	    MHZ_8_000,       -- PAL Intellivion 2x pixel clock = 8.000000
 		MHZ_8_181,       -- NTSC VIC 20 2x pixel clock = 8.181817
+		MHZ_8_388,       -- double gameboy pixel clock
 		MHZ_8_867,       -- PAL VIC 20 2x pixel clock = 8.867236
 		MHZ_10_738,      -- PAL/NTSC TMS99xxA 2x pixel clock = 10.738635
 		MHZ_14_000,      -- PAL ZX Spectrum 2x pixel clock = 14.000000
