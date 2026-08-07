@@ -25,3 +25,4 @@ calc(48.771)    # 3 times EGA clock
 calc(16.257000) # EGA clock
 calc(7.09379*3) # 3 times Amiga clock
 calc(32.0)      # Atari ST high res
+calc(8.192)     # Twice gameboy clock
