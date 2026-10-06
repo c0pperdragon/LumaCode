@@ -102,7 +102,7 @@ begin
 			when "0001" => FREQUENCY<=MHZ_16_363; w<=512; h<=262; samples<=2; x1<=129; y1<=41; x2<=129+320; y2<=41+200; sw<=37; pattern<=C64;       serratedsync<=true; syncdelay<=1; -- 60Hz C64 6567R56A
 			when "0010" => FREQUENCY<=MHZ_8_181;  w<=260; h<=261; samples<=2; x1<=43;  y1<=49; x2<=43+176;  y2<=49+183; sw<=16; pattern<=VIC20;     serratedsync<=true; --60Hz VIC 20
 			when "0011" => FREQUENCY<=MHZ_21_477; w<=342; h<=262; samples<=4; x1<=13;  y1<=36; x2<=13+320+8; y2<=36+200+8; sw<=9; pattern<=C16;    serratedsync<=true; --60Hz C16
-			when "0100" => FREQUENCY<=MHZ_21_477; w<=228; h<=262; samples<=6; x1<=49;  y1<=41; x2<=49+160;  y2<=41+192; sw<=16; pattern<=Atari8;    serratedsync<=true; -- 60Hz Atari 8-bit		
+			when "0100" => FREQUENCY<=MHZ_21_477; w<=228; h<=262; samples<=6; x1<=49;  y1<=41; x2<=49+160;  y2<=41+192; sw<=16; pattern<=Atari8;                        -- 60Hz Atari 8-bit		
 			when "0101" => FREQUENCY<=MHZ_14_187; w<=228; h<=262; samples<=4; x1<=48;  y1<=42; x2<=48+160;  y2<=42+200; sw<=14; pattern<=Atari2600;                     -- 60Hz Atari 2600 PAL speed
 			when "0110" => FREQUENCY<=MHZ_14_318; w<=228; h<=262; samples<=4; x1<=48;  y1<=42; x2<=48+160;  y2<=42+200; sw<=14; pattern<=Atari2600;                     -- 60Hz Atari 2600 NTSC speed
 			when "0111" => FREQUENCY<=MHZ_21_477; w<=341; h<=263; samples<=4; x1<=18;  y1<=42; x2<=18+320;  y2<=42+200; sw<=11; pattern<=Maria;                         -- 60Hz Atari 7800
@@ -120,8 +120,8 @@ begin
 			when "0000" => FREQUENCY<=MHZ_15_763; w<=504; h<=312; samples<=2; x1<=128; y1<=65; x2<=128+320; y2<=65+200; sw<=37; pattern<=C64;      serratedsync<=true; syncdelay<=1; -- 50Hz C64/C128
 			when "0001" => FREQUENCY<=MHZ_15_763; w<=504; h<=312; samples<=2; x1<=128; y1<=65; x2<=128+320; y2<=65+200; sw<=37; pattern<=C64;      serratedsync<=true; syncdelay<=1; -- 50Hz C64/C128
 			when "0010" => FREQUENCY<=MHZ_8_867;  w<=284; h<=312; samples<=2; x1<=73;  y1<=75; x2<=73+176; y2<=75+183; sw<=16; pattern<=VIC20;     serratedsync<=true; syncdelay<=1; -- 50Hz VIC 20
-			when "0011" => FREQUENCY<=MHZ_21_281; w<=342; h<=312; samples<=4; x1<=13;  y1<=62; x2<=13+320+8; y2<=62+200+8; sw<=9; pattern<=C16;   serratedsync<=true; --50Hz C16
-			when "0100" => FREQUENCY<=MHZ_21_281; w<=228; h<=312; samples<=6; x1<=49;  y1<=69; x2<=49+160; y2<=69+192; sw<=16; pattern<=Atari8;    serratedsync<=true; -- 50Hz Atari 8-bit
+			when "0011" => FREQUENCY<=MHZ_21_281; w<=342; h<=312; samples<=4; x1<=13;  y1<=62; x2<=13+320+8; y2<=62+200+8; sw<=9; pattern<=C16;   serratedsync<=true;   --50Hz C16
+			when "0100" => FREQUENCY<=MHZ_21_281; w<=228; h<=312; samples<=6; x1<=49;  y1<=69; x2<=49+160; y2<=69+192; sw<=16; pattern<=Atari8;                         -- 50Hz Atari 8-bit
 			when "0101" => FREQUENCY<=MHZ_14_187; w<=228; h<=312; samples<=4; x1<=48;  y1<=65; x2<=48+160; y2<=65+200; sw<=14; pattern<=Atari2600;                      -- 50Hz Atari 2600 PAL speed
 			when "0110" => FREQUENCY<=MHZ_14_318; w<=228; h<=312; samples<=4; x1<=48;  y1<=65; x2<=48+160; y2<=65+200; sw<=14; pattern<=Atari2600;                      -- 50Hz Atari 2600 NTSC speed
 			when "0111" => FREQUENCY<=MHZ_21_281; w<=341; h<=313; samples<=4; x1<=18;  y1<=65; x2<=18+320; y2<=65+200; sw<=11; pattern<=Maria;                          -- 50Hz Atari 7800 
